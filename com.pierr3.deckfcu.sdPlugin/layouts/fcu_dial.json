@@ -1,0 +1,21 @@
+{
+	"id": "com.pierr3.deckfcu.fcu.layout",
+	"items": [
+	  {
+		"key": "title",
+		"type": "text",
+		"rect": [16, 10, 168, 24],
+		"font": { "size": 20, "weight": 600 },
+		"alignment": "left"
+	  },
+	  {
+		"key": "value",
+		"type": "text",
+		"rect": [16, 50, 168, 32],
+		"font": { "size": 32, "weight": 600 },
+		"alignment": "center"
+	  }
+	]
+  }
+  
+  
