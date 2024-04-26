@@ -1,39 +1,38 @@
-import { action, KeyDownEvent, SingletonAction, WillAppearEvent } from "@elgato/streamdeck";
-
-/**
- * An example action class that displays a count that increments by one each time the button is pressed.
- */
-@action({ UUID: "com.pierr3.deckfcu.aptwo" })
-export class IncrementCounter extends SingletonAction<CounterSettings> {
-	/**
-	 * The {@link SingletonAction.onWillAppear} event is useful for setting the visual representation of an action when it become visible. This could be due to the Stream Deck first
-	 * starting up, or the user navigating between pages / folders etc.. There is also an inverse of this event in the form of {@link streamDeck.client.onWillDisappear}. In this example,
-	 * we're setting the title to the "count" that is incremented in {@link IncrementCounter.onKeyDown}.
-	 */
+import {
+	action,
+	KeyDownEvent,
+	SingletonAction,
+	WillAppearEvent,
+  } from "@elgato/streamdeck";
+  import { xclient } from "../xplaneHandler";
+  import streamDeck from "@elgato/streamdeck";
+  
+  const dataRef = "sim/cockpit2/autopilot/servos2_on";
+  const command = "sim/autopilot/servos2_toggle";
+  @action({ UUID: "com.pierr3.deckfcu.aptwo" })
+  export class AutoPilotTwo extends SingletonAction<CounterSettings> {
 	onWillAppear(ev: WillAppearEvent<CounterSettings>): void | Promise<void> {
-		return ev.action.setTitle(`${ev.payload.settings.count ?? 0}`);
+	  xclient.requestDataRef(dataRef, 1, async (dataRef, value) => {
+		const set = await ev.action.getSettings();
+		// streamDeck.logger.debug("Autothrottle value: " + value);
+		set.isOn = value === 1 ? true : false;
+		await ev.action.setState(set.isOn ? 1 : 0);
+		await ev.action.setSettings(set);
+	  });
 	}
-
-	/**
-	 * Listens for the {@link SingletonAction.onKeyDown} event which is emitted by Stream Deck when an action is pressed. Stream Deck provides various events for tracking interaction
-	 * with devices including key down/up, dial rotations, and device connectivity, etc. When triggered, {@link ev} object contains information about the event including any payloads
-	 * and action information where applicable. In this example, our action will display a counter that increments by one each press. We track the current count on the action's persisted
-	 * settings using `setSettings` and `getSettings`.
-	 */
+  
 	async onKeyDown(ev: KeyDownEvent<CounterSettings>): Promise<void> {
-		// Determine the current count from the settings.
-		let count = ev.payload.settings.count ?? 0;
-		count++;
-
-		// Update the current count in the action's settings, and change the title.
-		await ev.action.setSettings({ count });
-		await ev.action.setTitle(`${count}`);
+	  const settings = await ev.action.getSettings();
+	  settings.isOn = !settings.isOn;
+	  await ev.action.setSettings(settings);
+	  xclient.sendCommand(command);
 	}
-}
-
-/**
- * Settings for {@link IncrementCounter}.
- */
-type CounterSettings = {
-	count: number;
-};
+  }
+  
+  /**
+   * Settings for {@link IncrementCounter}.
+   */
+  type CounterSettings = {
+	isOn: boolean;
+  };
+  

@@ -2,33 +2,51 @@ import streamDeck, {
   action,
   DialDownEvent,
   DialRotateEvent,
-  KeyDownEvent,
   SingletonAction,
+  TouchTapEvent,
   WillAppearEvent,
 } from "@elgato/streamdeck";
+import { xclient } from "../xplaneHandler";
+
+const dataref = "sim/cockpit/autopilot/heading_mag";
+const command = "sim/autopilot/heading";
+
+// "sim/autopilot/heading_hold" this is LNAV somehow
 
 @action({ UUID: "com.pierr3.deckfcu.heading" })
 export class HeadingDial extends SingletonAction<SpeedSettings> {
   onWillAppear(ev: WillAppearEvent<SpeedSettings>): void | Promise<void> {
+    xclient.requestDataRef(dataref, 10, async (dataRef, value) => {
+      const set = await ev.action.getSettings();
+      set.heading = value;
+	  ev.action.setFeedback({
+		value: Math.round(value).toString().padStart(3, "0"),
+	  });
+      await ev.action.setSettings(set);
+    });
+
     return ev.action.setFeedback({
       title: "HDG",
-	  value: "000"
+      value: "000",
     });
   }
-  
-  async onDialDown(ev: DialDownEvent<SpeedSettings>): Promise<void> {
-	
-  }
-  
-  async onDialRotate(ev: DialRotateEvent<SpeedSettings>): Promise<void> {
-	let newIas = ev.payload.settings.ias ?? 0;
-	newIas += ev.payload.ticks;
-	newIas = Math.max(0, newIas);
 
-	await ev.action.setSettings({ ias: newIas, mach: 0, isMach: false });
-	await ev.action.setFeedback({
-		value: newIas.toString().padStart(3, "0")
-	  });
+  async onTouchTap(ev: TouchTapEvent<SpeedSettings>): Promise<void> {
+  }
+
+  async onDialDown(ev: DialDownEvent<SpeedSettings>): Promise<void> {
+    xclient.sendCommand(command);
+  }
+
+  async onDialRotate(ev: DialRotateEvent<SpeedSettings>): Promise<void> {
+	const set = await ev.action.getSettings();
+	set.heading += ev.payload.ticks;
+	set.heading = Math.round(Math.max(0, set.heading)) % 360;
+	ev.action.setFeedback({
+	  value: Math.round(set.heading).toString().padStart(3, "0"),
+	});
+	await ev.action.setSettings(set);
+	xclient.setDataRef(dataref, set.heading);
   }
 }
 
@@ -36,7 +54,5 @@ export class HeadingDial extends SingletonAction<SpeedSettings> {
  * Settings for {@link IncrementCounter}.
  */
 type SpeedSettings = {
-  ias: number;
-  mach: number;
-  isMach: boolean;
+  heading: number;
 };

@@ -10,7 +10,7 @@ import streamDeck from "@elgato/streamdeck";
 const dataRef = "sim/cockpit2/autopilot/servos_on";
 const command = "sim/autopilot/servos_toggle";
 @action({ UUID: "com.pierr3.deckfcu.apone" })
-export class AutoPilotOne extends SingletonAction<CounterSettings> {
+export class LNAVToggle extends SingletonAction<CounterSettings> {
   onWillAppear(ev: WillAppearEvent<CounterSettings>): void | Promise<void> {
     xclient.requestDataRef(dataRef, 1, async (dataRef, value) => {
       const set = await ev.action.getSettings();

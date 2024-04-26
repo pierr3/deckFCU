@@ -4,21 +4,6 @@
 	"Author": "Pierre Ferran",
 	"Actions": [
 		{
-			"Name": "Counter",
-			"UUID": "com.pierr3.deckfcu.increment",
-			"Icon": "imgs/actions/counter/icon",
-			"Tooltip": "Displays a count, which increments by one on press.",
-			"Controllers": [
-				"Keypad"
-			],
-			"States": [
-				{
-					"Image": "imgs/actions/counter/key",
-					"TitleAlignment": "middle"
-				}
-			]
-		},
-		{
 			"Name": "Autopilot One",
 			"UUID": "com.pierr3.deckfcu.apone",
 			"Icon": "imgs/actions/ap/ap1off",
@@ -72,6 +57,44 @@
 				{
 					"Image": "imgs/actions/ap/athron",
 					"Name": "ATHR on"
+				}
+			]
+		},
+		{
+			"Name": "Approach Mode",
+			"UUID": "com.pierr3.deckfcu.appr",
+			"Icon": "imgs/actions/ap/approff",
+			"Tooltip": "Toggles the approach mode",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/ap/approff",
+					"Name": "APPR off"
+				},
+				{
+					"Image": "imgs/actions/ap/appron",
+					"Name": "APPR on"
+				}
+			]
+		},
+		{
+			"Name": "LNAV",
+			"UUID": "com.pierr3.deckfcu.lnav",
+			"Icon": "imgs/actions/ap/lnavoff",
+			"Tooltip": "Toggles the LNAV mode",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/ap/lnavoff",
+					"Name": "LNAV off"
+				},
+				{
+					"Image": "imgs/actions/ap/lnavon",
+					"Name": "LNAV on"
 				}
 			]
 		},

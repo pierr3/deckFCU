@@ -79,7 +79,9 @@ export class SpeedDial extends SingletonAction<SpeedSettings> {
     await ev.action.setSettings(settings);
   }
 
-  async onDialDown(ev: DialDownEvent<SpeedSettings>): Promise<void> {}
+  async onDialDown(ev: DialDownEvent<SpeedSettings>): Promise<void> {
+	xclient.sendCommand("sim/autopilot/autothrottle_toggle");
+  }
 
   async onDialRotate(ev: DialRotateEvent<SpeedSettings>): Promise<void> {
     const settings = await ev.action.getSettings();

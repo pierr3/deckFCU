@@ -2,41 +2,53 @@ import streamDeck, {
   action,
   DialDownEvent,
   DialRotateEvent,
-  KeyDownEvent,
   SingletonAction,
+  TouchTapEvent,
   WillAppearEvent,
 } from "@elgato/streamdeck";
+import { xclient } from "../xplaneHandler";
+
+const dataref = "sim/cockpit/autopilot/altitude";
+const command = "sim/autopilot/altitude_hold";
 
 @action({ UUID: "com.pierr3.deckfcu.altitude" })
-export class AltitudeDial extends SingletonAction<SpeedSettings> {
-  onWillAppear(ev: WillAppearEvent<SpeedSettings>): void | Promise<void> {
+export class AltitudeDial extends SingletonAction<AltitudeSettings> {
+  onWillAppear(ev: WillAppearEvent<AltitudeSettings>): void | Promise<void> {
+    xclient.requestDataRef(dataref, 10, async (dataRef, value) => {
+      const set = await ev.action.getSettings();
+      set.altitude = value;
+      ev.action.setFeedback({
+        value: Math.round(value).toString(),
+      });
+      await ev.action.setSettings(set);
+    });
+
     return ev.action.setFeedback({
       title: "ALT",
-	  value: "000"
+      value: "000",
     });
   }
-  
-  async onDialDown(ev: DialDownEvent<SpeedSettings>): Promise<void> {
-	
-  }
-  
-  async onDialRotate(ev: DialRotateEvent<SpeedSettings>): Promise<void> {
-	let newIas = ev.payload.settings.ias ?? 0;
-	newIas += ev.payload.ticks;
-	newIas = Math.max(0, newIas);
 
-	await ev.action.setSettings({ ias: newIas, mach: 0, isMach: false });
-	await ev.action.setFeedback({
-		value: newIas.toString().padStart(3, "0")
-	  });
+  async onTouchTap(ev: TouchTapEvent<AltitudeSettings>): Promise<void> {}
+
+  async onDialDown(ev: DialDownEvent<AltitudeSettings>): Promise<void> {
+    xclient.sendCommand(command);
+  }
+
+  async onDialRotate(ev: DialRotateEvent<AltitudeSettings>): Promise<void> {
+    const set = await ev.action.getSettings();
+    set.altitude += ev.payload.ticks*100;
+    ev.action.setFeedback({
+      value: Math.round(set.altitude).toString(),
+    });
+    await ev.action.setSettings(set);
+    xclient.setDataRef(dataref, set.altitude);
   }
 }
 
 /**
  * Settings for {@link IncrementCounter}.
  */
-type SpeedSettings = {
-  ias: number;
-  mach: number;
-  isMach: boolean;
+type AltitudeSettings = {
+  altitude: number;
 };

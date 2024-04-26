@@ -9,7 +9,7 @@ export class AutothrottleToggle extends SingletonAction<CounterSettings> {
 	onWillAppear(ev: WillAppearEvent<CounterSettings>): void | Promise<void> {
 		xclient.requestDataRef(dataRef, 1, async (dataRef, value) => {
 			const set = await ev.action.getSettings();
-			streamDeck.logger.debug("Autothrottle value: " + value);
+			// streamDeck.logger.debug("Autothrottle value: " + value);
 			set.isOn = value === -1 ? false : true;
 			await ev.action.setState(set.isOn ? 1 : 0);
 			await ev.action.setSettings(set);
