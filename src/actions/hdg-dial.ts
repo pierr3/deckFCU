@@ -25,6 +25,10 @@ export class HeadingDial extends SingletonAction<SpeedSettings> {
       await ev.action.setSettings(set);
     });
 
+	ev.action.setSettings({
+	  heading: 0,
+	});
+
     return ev.action.setFeedback({
       title: "HDG",
       value: "000",

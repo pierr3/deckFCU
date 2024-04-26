@@ -4,6 +4,20 @@
 	"Author": "Pierre Ferran",
 	"Actions": [
 		{
+			"Name": "Switch aircraft",
+			"UUID": "com.pierr3.deckfcu.aircraftselector",
+			"Icon": "imgs/actions/counter/key",
+			"Tooltip": "Toggles between aircraft types",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/counter/key"
+				}
+			]
+		},
+		{
 			"Name": "Autopilot One",
 			"UUID": "com.pierr3.deckfcu.apone",
 			"Icon": "imgs/actions/ap/ap1off",
@@ -95,6 +109,25 @@
 				{
 					"Image": "imgs/actions/ap/lnavon",
 					"Name": "LNAV on"
+				}
+			]
+		},
+		{
+			"Name": "VNAV",
+			"UUID": "com.pierr3.deckfcu.vnav",
+			"Icon": "imgs/actions/ap/vnavoff",
+			"Tooltip": "Toggles the VNAV mode",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/ap/vnavoff",
+					"Name": "VNAV off"
+				},
+				{
+					"Image": "imgs/actions/ap/vnavon",
+					"Name": "VNAV on"
 				}
 			]
 		},

@@ -23,6 +23,10 @@ export class AltitudeDial extends SingletonAction<AltitudeSettings> {
       await ev.action.setSettings(set);
     });
 
+    ev.action.setSettings({
+      altitude: 0,
+    });
+
     return ev.action.setFeedback({
       title: "ALT",
       value: "000",
@@ -37,7 +41,7 @@ export class AltitudeDial extends SingletonAction<AltitudeSettings> {
 
   async onDialRotate(ev: DialRotateEvent<AltitudeSettings>): Promise<void> {
     const set = await ev.action.getSettings();
-    set.altitude += ev.payload.ticks*100;
+    set.altitude += ev.payload.ticks * 100;
     ev.action.setFeedback({
       value: Math.round(set.altitude).toString(),
     });

@@ -23,6 +23,10 @@ export class VerticalSpeedDial extends SingletonAction<VerticalSpeedSettings> {
       await ev.action.setSettings(set);
     });
 
+	ev.action.setSettings({
+	  VerticalSpeed: 0,
+	});
+
     return ev.action.setFeedback({
       title: "VS",
       value: "0000",

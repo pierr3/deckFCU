@@ -117,6 +117,7 @@ export default class XPlaneClient {
     }
     buffer.write(dataRef, 9);
     buffer.writeInt8(0x00, 9 + dataRef.length);
+	streamDeck.logger.trace(`Setting dataref ${dataRef} to ${value}`);
     this._sendBuffer(buffer);
   }
 
@@ -137,7 +138,7 @@ export default class XPlaneClient {
         return;
       }
     } else {
-      streamDeck.logger.debug("XPlaneClient already initialized");
+      streamDeck.logger.trace("XPlaneClient already initialized");
       return;
     }
 
@@ -174,7 +175,7 @@ export default class XPlaneClient {
         for (let i = 0; i < numValues; i++) {
           const start = 5 + 8 * i;
           const end = 5 + 8 * (i + 1);
-          const drefInfo = msg.slice(start, end); // Extract the 8 byte segment
+          const drefInfo = msg.subarray(start, end); // Extract the 8 byte segment
 
           const index = drefInfo.readInt32LE(0);
           const value = drefInfo.readFloatLE(4);
