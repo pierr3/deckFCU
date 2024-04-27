@@ -133,6 +133,25 @@
 			]
 		},
 		{
+			"Name": "VORLOC",
+			"UUID": "com.pierr3.deckfcu.vorloc",
+			"Icon": "imgs/actions/ap/vorlocoff",
+			"Tooltip": "Toggles the VOR/LOC mode",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/ap/vorlocoff",
+					"Name": "VNAV off"
+				},
+				{
+					"Image": "imgs/actions/ap/vorlocon",
+					"Name": "VNAV on"
+				}
+			]
+		},
+		{
 			"Name": "Speed Dial",
 			"UUID": "com.pierr3.deckfcu.speed",
 			"Icon": "imgs/actions/counter/icon",

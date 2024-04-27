@@ -25,6 +25,8 @@ export enum DatarefsType {
   WRITE_LNAV,
   READ_VNAV,
   WRITE_VNAV,
+  READ_LOC,
+  WRITE_LOC,
 
   // Comms
   READ_COM1_ACTIVE,
@@ -241,6 +243,18 @@ export const datarefMap: DatarefMap = {
       onValue: 1,
       offValue: 0,
     },
+    [DatarefsType.READ_LOC]: {
+      isCommand: true,
+      value: "sim/cockpit2/autopilot/hnav_armed",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.WRITE_LOC]: {
+      isCommand: true,
+      value: "sim/autopilot/NAV",
+      onValue: 1,
+      offValue: 0,
+    },
   },
   //
   // Zibo configuration
@@ -290,7 +304,7 @@ export const datarefMap: DatarefMap = {
     },
     [DatarefsType.READ_WRITE_VERTICAL_SPEED]: {
       isCommand: false,
-      value: "sim/cockpit/autopilot/vertical_velocity",
+      value: "laminar/autopilot/ap_vvi_dial",
       onValue: 1,
       offValue: 0,
     },
@@ -302,7 +316,7 @@ export const datarefMap: DatarefMap = {
     },
     [DatarefsType.READ_AP_ONE]: {
       isCommand: false,
-      value: "laminar/B738/buttons/autopilot/cmd_a",
+      value: "laminar/B738/autopilot/cmd_a_status",
       onValue: 1,
       offValue: 0,
     },
@@ -314,7 +328,7 @@ export const datarefMap: DatarefMap = {
     },
     [DatarefsType.READ_AP_TWO]: {
       isCommand: false,
-      value: "laminar/B738/buttons/autopilot/cmd_b",
+      value: "laminar/B738/autopilot/cmd_b_status",
       onValue: 1,
       offValue: 0,
     },
@@ -338,7 +352,7 @@ export const datarefMap: DatarefMap = {
     },
     [DatarefsType.READ_APPR]: {
       isCommand: false,
-      value: "laminar/B738/buttons/autopilot/app",
+      value: "laminar/B738/autopilot/app_status",
       onValue: 1,
       offValue: 0,
     },
@@ -350,7 +364,7 @@ export const datarefMap: DatarefMap = {
     },
     [DatarefsType.READ_LNAV]: {
       isCommand: false,
-      value: "laminar/B738/buttons/autopilot/lnav",
+      value: "laminar/B738/autopilot/lnav_status",
       onValue: 1,
       offValue: 0,
     },
@@ -362,7 +376,7 @@ export const datarefMap: DatarefMap = {
     },
     [DatarefsType.READ_VNAV]: {
       isCommand: false,
-      value: "laminar/B738/buttons/autopilot/vnav",
+      value: "laminar/B738/autopilot/vnav_status1",
       onValue: 1,
       offValue: 0,
     },
@@ -429,6 +443,18 @@ export const datarefMap: DatarefMap = {
     [DatarefsType.READ_WRITE_COM2_VOLUME]: {
       isCommand: false,
       value: "sim/cockpit2/radios/actuators/audio_volume_com2",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_LOC]: {
+      isCommand: false,
+      value: "laminar/B738/autopilot/vorloc_status",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.WRITE_LOC]: {
+      isCommand: true,
+      value: "laminar/B738/autopilot/vorloc_press",
       onValue: 1,
       offValue: 0,
     },
