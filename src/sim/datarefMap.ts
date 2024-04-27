@@ -30,6 +30,14 @@ export enum DatarefsType {
   READ_COM1_ACTIVE,
   READ_WRITE_COM1_STANDBY,
   TOGGLE_COM1_STANDBY,
+  TOGGLE_COM1_MONITOR,
+  READ_WRITE_COM1_VOLUME,
+
+  READ_COM2_ACTIVE,
+  READ_WRITE_COM2_STANDBY,
+  TOGGLE_COM2_STANDBY,
+  TOGGLE_COM2_MONITOR,
+  READ_WRITE_COM2_VOLUME,
 }
 
 type DatarefMap = {
@@ -191,6 +199,48 @@ export const datarefMap: DatarefMap = {
       onValue: 1,
       offValue: 0,
     },
+    [DatarefsType.TOGGLE_COM1_MONITOR]: {
+      isCommand: true,
+      value: "sim/audio_panel/monitor_audio_com1",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_WRITE_COM1_VOLUME]: {
+      isCommand: false,
+      value: "sim/cockpit2/radios/actuators/audio_volume_com1",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_COM2_ACTIVE]: {
+      isCommand: false,
+      value: "sim/cockpit2/radios/actuators/com2_frequency_hz_833",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_WRITE_COM2_STANDBY]: {
+      isCommand: false,
+      value: "sim/cockpit2/radios/actuators/com2_standby_frequency_hz_833",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.TOGGLE_COM2_STANDBY]: {
+      isCommand: true,
+      value: "sim/radios/com2_standy_flip",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.TOGGLE_COM2_MONITOR]: {
+      isCommand: true,
+      value: "sim/audio_panel/monitor_audio_com2",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_WRITE_COM2_VOLUME]: {
+      isCommand: false,
+      value: "sim/cockpit2/radios/actuators/audio_volume_com2",
+      onValue: 1,
+      offValue: 0,
+    },
   },
   //
   // Zibo configuration
@@ -337,6 +387,48 @@ export const datarefMap: DatarefMap = {
     [DatarefsType.TOGGLE_COM1_STANDBY]: {
       isCommand: true,
       value: "sim/radios/com1_standy_flip",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.TOGGLE_COM1_MONITOR]: {
+      isCommand: true,
+      value: "sim/audio_panel/monitor_audio_com1",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_WRITE_COM1_VOLUME]: {
+      isCommand: false,
+      value: "sim/cockpit2/radios/actuators/audio_volume_com1",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_COM2_ACTIVE]: {
+      isCommand: false,
+      value: "sim/cockpit2/radios/actuators/com2_frequency_hz_833",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_WRITE_COM2_STANDBY]: {
+      isCommand: false,
+      value: "sim/cockpit2/radios/actuators/com2_standby_frequency_hz_833",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.TOGGLE_COM2_STANDBY]: {
+      isCommand: true,
+      value: "sim/radios/com2_standy_flip",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.TOGGLE_COM2_MONITOR]: {
+      isCommand: true,
+      value: "sim/audio_panel/monitor_audio_com2",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_WRITE_COM2_VOLUME]: {
+      isCommand: false,
+      value: "sim/cockpit2/radios/actuators/audio_volume_com2",
       onValue: 1,
       offValue: 0,
     },

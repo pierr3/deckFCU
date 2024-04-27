@@ -14,30 +14,39 @@ import {
 } from "../../helpers";
 
 
-@action({ UUID: "com.pierr3.deckfcu.com1standby" })
-export class Com1StandbyDial extends SingletonAction<AltitudeSettings> {
+@action({ UUID: "com.pierr3.deckfcu.com2active" })
+export class Com2ActiveDial extends SingletonAction<AltitudeSettings> {
   onWillAppear(ev: WillAppearEvent<AltitudeSettings>): void | Promise<void> {
     XPlaneComm.requestDataRef(
-      DatarefsType.READ_WRITE_COM1_STANDBY,
-      20,
+      DatarefsType.READ_COM2_ACTIVE,
+      10,
       async (dataRef, value) => {
         const set = await ev.action.getSettings();
         set.frequency = value;
         ev.action.setFeedback({
           value: hertzToHuman(value),
         });
+        await ev.action.setSettings(set);
+      }
+    );
 
+    XPlaneComm.requestDataRef(
+      DatarefsType.READ_WRITE_COM2_VOLUME,
+      10,
+      async (dataRef, value) => {
+        const set = await ev.action.getSettings();
+        set.volume = value;
         await ev.action.setSettings(set);
       }
     );
 
     ev.action.setSettings({
       frequency: 0,
-      doOnlyBigNumber: false,
+      volume: 0,
     });
 
     return ev.action.setFeedback({
-      title: "COM 1 STBY",
+      title: "COM 2",
       value: "118.000",
     });
   }
@@ -45,32 +54,24 @@ export class Com1StandbyDial extends SingletonAction<AltitudeSettings> {
   onWillDisappear(
     ev: WillDisappearEvent<AltitudeSettings>
   ): void | Promise<void> {
-    XPlaneComm.unsubscribeDataRef(DatarefsType.READ_WRITE_COM1_STANDBY);
+    XPlaneComm.unsubscribeDataRef(DatarefsType.READ_COM2_ACTIVE);
+    XPlaneComm.unsubscribeDataRef(DatarefsType.READ_WRITE_COM2_VOLUME);
   }
 
-  async onTouchTap(ev: TouchTapEvent<AltitudeSettings>): Promise<void> {
-    XPlaneComm.writeData(DatarefsType.TOGGLE_COM1_STANDBY);
-  }
+  async onTouchTap(ev: TouchTapEvent<AltitudeSettings>): Promise<void> {}
 
   async onDialDown(ev: DialDownEvent<AltitudeSettings>): Promise<void> {
-    ev.action.setSettings({
-      ...ev.payload.settings,
-      doOnlyBigNumber: !ev.payload.settings.doOnlyBigNumber,
-    });
+    XPlaneComm.writeData(DatarefsType.TOGGLE_COM2_MONITOR);
   }
 
   async onDialRotate(ev: DialRotateEvent<AltitudeSettings>): Promise<void> {
-    const set = await ev.action.getSettings();
-    if (!ev.payload.settings.doOnlyBigNumber) {
-      set.frequency += ev.payload.ticks * 1000;
-    } else {
-      set.frequency += ev.payload.ticks * 0.005 * 1000;
-    }
-    ev.action.setFeedback({
-      value: hertzToHuman(set.frequency),
-    });
-    await ev.action.setSettings(set);
-    XPlaneComm.writeData(DatarefsType.READ_WRITE_COM1_STANDBY, set.frequency);
+    const settings = await ev.action.getSettings();
+    settings.volume = Math.min(
+      1,
+      Math.max(0, settings.volume + ev.payload.ticks * 0.05)
+    );
+    XPlaneComm.writeData(DatarefsType.READ_WRITE_COM2_VOLUME, settings.volume);
+    await ev.action.setSettings(settings);
   }
 }
 
@@ -79,5 +80,5 @@ export class Com1StandbyDial extends SingletonAction<AltitudeSettings> {
  */
 type AltitudeSettings = {
   frequency: number;
-  doOnlyBigNumber: boolean;
+  volume: number;
 };

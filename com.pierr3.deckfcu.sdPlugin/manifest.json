@@ -245,6 +245,44 @@
 			"Encoder": {
 				"layout": "layouts/fcu_dial.json"
 			}
+		},
+		{
+			"Name": "COM 2 Active Dial",
+			"UUID": "com.pierr3.deckfcu.com2active",
+			"Icon": "imgs/actions/counter/icon",
+			"States": [
+				{
+					"Image": "imgs/actions/counter/key",
+					"TitleAlignment": "middle"
+				}
+			],
+			"Tooltip": "Displays and changes active com2 frequency",
+			"Controllers": [
+				"Keypad",
+				"Encoder"
+			],
+			"Encoder": {
+				"layout": "layouts/fcu_dial.json"
+			}
+		},
+		{
+			"Name": "COM 2 Standby Dial",
+			"UUID": "com.pierr3.deckfcu.com2standby",
+			"Icon": "imgs/actions/counter/icon",
+			"States": [
+				{
+					"Image": "imgs/actions/counter/key",
+					"TitleAlignment": "middle"
+				}
+			],
+			"Tooltip": "Displays and changes standby com2 frequency",
+			"Controllers": [
+				"Keypad",
+				"Encoder"
+			],
+			"Encoder": {
+				"layout": "layouts/fcu_dial.json"
+			}
 		}
 	],
 	"Category": "deckFCU",

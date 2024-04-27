@@ -13,12 +13,11 @@ import {
   hertzToHuman,
 } from "../../helpers";
 
-
-@action({ UUID: "com.pierr3.deckfcu.com1standby" })
-export class Com1StandbyDial extends SingletonAction<AltitudeSettings> {
+@action({ UUID: "com.pierr3.deckfcu.com2standby" })
+export class Com2StandbyDial extends SingletonAction<AltitudeSettings> {
   onWillAppear(ev: WillAppearEvent<AltitudeSettings>): void | Promise<void> {
     XPlaneComm.requestDataRef(
-      DatarefsType.READ_WRITE_COM1_STANDBY,
+      DatarefsType.READ_WRITE_COM2_STANDBY,
       20,
       async (dataRef, value) => {
         const set = await ev.action.getSettings();
@@ -37,7 +36,7 @@ export class Com1StandbyDial extends SingletonAction<AltitudeSettings> {
     });
 
     return ev.action.setFeedback({
-      title: "COM 1 STBY",
+      title: "COM 2 STBY",
       value: "118.000",
     });
   }
@@ -45,11 +44,11 @@ export class Com1StandbyDial extends SingletonAction<AltitudeSettings> {
   onWillDisappear(
     ev: WillDisappearEvent<AltitudeSettings>
   ): void | Promise<void> {
-    XPlaneComm.unsubscribeDataRef(DatarefsType.READ_WRITE_COM1_STANDBY);
+    XPlaneComm.unsubscribeDataRef(DatarefsType.READ_WRITE_COM2_STANDBY);
   }
 
   async onTouchTap(ev: TouchTapEvent<AltitudeSettings>): Promise<void> {
-    XPlaneComm.writeData(DatarefsType.TOGGLE_COM1_STANDBY);
+    XPlaneComm.writeData(DatarefsType.TOGGLE_COM2_STANDBY);
   }
 
   async onDialDown(ev: DialDownEvent<AltitudeSettings>): Promise<void> {
@@ -70,7 +69,7 @@ export class Com1StandbyDial extends SingletonAction<AltitudeSettings> {
       value: hertzToHuman(set.frequency),
     });
     await ev.action.setSettings(set);
-    XPlaneComm.writeData(DatarefsType.READ_WRITE_COM1_STANDBY, set.frequency);
+    XPlaneComm.writeData(DatarefsType.READ_WRITE_COM2_STANDBY, set.frequency);
   }
 }
 

@@ -9,14 +9,12 @@ import streamDeck, {
 } from "@elgato/streamdeck";
 import { XPlaneComm } from "../../xplaneHandler";
 import { DatarefsType } from "../../sim/datarefMap";
-import { hertzToHuman, roundToSecondDecimal, roundToThirdDecimal } from "../../helpers";
-
-const dataref = "sim/cockpit/autopilot/altitude";
-const command = "sim/autopilot/altitude_hold";
+import {
+  hertzToHuman,
+} from "../../helpers";
 
 @action({ UUID: "com.pierr3.deckfcu.com1active" })
 export class Com1ActiveDial extends SingletonAction<AltitudeSettings> {
-
   onWillAppear(ev: WillAppearEvent<AltitudeSettings>): void | Promise<void> {
     XPlaneComm.requestDataRef(
       DatarefsType.READ_COM1_ACTIVE,
@@ -31,8 +29,19 @@ export class Com1ActiveDial extends SingletonAction<AltitudeSettings> {
       }
     );
 
+    XPlaneComm.requestDataRef(
+      DatarefsType.READ_WRITE_COM1_VOLUME,
+      10,
+      async (dataRef, value) => {
+        const set = await ev.action.getSettings();
+        set.volume = value;
+        await ev.action.setSettings(set);
+      }
+    );
+
     ev.action.setSettings({
       frequency: 0,
+      volume: 0,
     });
 
     return ev.action.setFeedback({
@@ -45,21 +54,23 @@ export class Com1ActiveDial extends SingletonAction<AltitudeSettings> {
     ev: WillDisappearEvent<AltitudeSettings>
   ): void | Promise<void> {
     XPlaneComm.unsubscribeDataRef(DatarefsType.READ_COM1_ACTIVE);
+    XPlaneComm.unsubscribeDataRef(DatarefsType.READ_WRITE_COM1_VOLUME);
   }
 
   async onTouchTap(ev: TouchTapEvent<AltitudeSettings>): Promise<void> {}
 
   async onDialDown(ev: DialDownEvent<AltitudeSettings>): Promise<void> {
+    XPlaneComm.writeData(DatarefsType.TOGGLE_COM1_MONITOR);
   }
 
   async onDialRotate(ev: DialRotateEvent<AltitudeSettings>): Promise<void> {
-    // const set = await ev.action.getSettings();
-    // set.frequency += (ev.payload.ticks * 0.01) * 10000;
-    // ev.action.setFeedback({
-    //   value: hertzToHuman(set.frequency),
-    // });
-    // await ev.action.setSettings(set);
-    // XPlaneComm.writeData(DatarefsType.READ_WRITE_ALTITUDE, set.frequency);
+    const settings = await ev.action.getSettings();
+    settings.volume = Math.min(
+      1,
+      Math.max(0, settings.volume + ev.payload.ticks * 0.05)
+    );
+    XPlaneComm.writeData(DatarefsType.READ_WRITE_COM1_VOLUME, settings.volume);
+    await ev.action.setSettings(settings);
   }
 }
 
@@ -68,4 +79,5 @@ export class Com1ActiveDial extends SingletonAction<AltitudeSettings> {
  */
 type AltitudeSettings = {
   frequency: number;
+  volume: number;
 };
