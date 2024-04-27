@@ -7,6 +7,8 @@ import {
 } from "@elgato/streamdeck";
 import { XPlaneComm } from "../xplaneHandler";
 import { DatarefsType } from "../sim/datarefMap";
+import { get } from "http";
+import { getDataRefOnOffValue } from "../helpers";
 
 
 @action({ UUID: "com.pierr3.deckfcu.appr" })
@@ -14,7 +16,8 @@ export class ApprToggle extends SingletonAction<CounterSettings> {
   onWillAppear(ev: WillAppearEvent<CounterSettings>): void | Promise<void> {
     XPlaneComm.requestDataRef(DatarefsType.READ_APPR, 1, async (dataRef, value) => {
       const set = await ev.action.getSettings();
-      set.isOn = value === 0 ? false : true;
+	  const data = getDataRefOnOffValue(DatarefsType.READ_APPR);
+      set.isOn = value === data.on;
       await ev.action.setState(set.isOn ? 1 : 0);
       await ev.action.setSettings(set);
     });
@@ -28,7 +31,8 @@ export class ApprToggle extends SingletonAction<CounterSettings> {
     const settings = await ev.action.getSettings();
     settings.isOn = !settings.isOn;
     await ev.action.setSettings(settings);
-    XPlaneComm.writeData(DatarefsType.WRITE_APPR);
+	const data = getDataRefOnOffValue(DatarefsType.WRITE_APPR);
+    XPlaneComm.writeData(DatarefsType.WRITE_APPR, settings.isOn ? data.on : data.off);
   }
 }
 

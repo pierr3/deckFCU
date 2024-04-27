@@ -7,6 +7,7 @@ import {
 } from "@elgato/streamdeck";
 import { XPlaneComm } from "../xplaneHandler";
 import { DatarefsType } from "../sim/datarefMap";
+import { getDataRefOnOffValue } from "../helpers";
 
 @action({ UUID: "com.pierr3.deckfcu.apone" })
 export class AutoPilotOne extends SingletonAction<CounterSettings> {
@@ -16,7 +17,8 @@ export class AutoPilotOne extends SingletonAction<CounterSettings> {
       1,
       async (dataRef, value) => {
         const set = await ev.action.getSettings();
-        set.isOn = value === 1 ? true : false;
+		const data = getDataRefOnOffValue(DatarefsType.READ_AP_ONE);
+		set.isOn = value === data.on;
         await ev.action.setState(set.isOn ? 1 : 0);
         await ev.action.setSettings(set);
       }
@@ -33,7 +35,8 @@ export class AutoPilotOne extends SingletonAction<CounterSettings> {
     const settings = await ev.action.getSettings();
     settings.isOn = !settings.isOn;
     await ev.action.setSettings(settings);
-    XPlaneComm.writeData(DatarefsType.WRITE_AP_ONE);
+	const data = getDataRefOnOffValue(DatarefsType.WRITE_AP_ONE);
+	XPlaneComm.writeData(DatarefsType.WRITE_AP_ONE, settings.isOn ? data.on : data.off);
   }
 }
 

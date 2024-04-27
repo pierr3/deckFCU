@@ -9,6 +9,8 @@ import streamDeck, {
 } from "@elgato/streamdeck";
 import { XPlaneComm } from "../xplaneHandler";
 import { DatarefsType } from "../sim/datarefMap";
+import { get } from "http";
+import { getDataRefOnOffValue } from "../helpers";
 
 @action({ UUID: "com.pierr3.deckfcu.vs" })
 export class VerticalSpeedDial extends SingletonAction<VerticalSpeedSettings> {
@@ -30,6 +32,7 @@ export class VerticalSpeedDial extends SingletonAction<VerticalSpeedSettings> {
 
     ev.action.setSettings({
       VerticalSpeed: 0,
+      isVerticalSpeedSelect: false,
     });
 
     return ev.action.setFeedback({
@@ -47,7 +50,14 @@ export class VerticalSpeedDial extends SingletonAction<VerticalSpeedSettings> {
   async onTouchTap(ev: TouchTapEvent<VerticalSpeedSettings>): Promise<void> {}
 
   async onDialDown(ev: DialDownEvent<VerticalSpeedSettings>): Promise<void> {
-    XPlaneComm.writeData(DatarefsType.WRITE_VERTICAL_SPEED_SELECT);
+    const set = await ev.action.getSettings();
+    set.isVerticalSpeedSelect = !set.isVerticalSpeedSelect;
+    await ev.action.setSettings(set);
+    const data = getDataRefOnOffValue(DatarefsType.WRITE_VERTICAL_SPEED_SELECT);
+    XPlaneComm.writeData(
+      DatarefsType.WRITE_VERTICAL_SPEED_SELECT,
+      set.isVerticalSpeedSelect ? data.on : data.off
+    );
   }
 
   async onDialRotate(
@@ -71,4 +81,5 @@ export class VerticalSpeedDial extends SingletonAction<VerticalSpeedSettings> {
  */
 type VerticalSpeedSettings = {
   VerticalSpeed: number;
+  isVerticalSpeedSelect: boolean;
 };

@@ -9,27 +9,28 @@ import streamDeck, {
 } from "@elgato/streamdeck";
 import { XPlaneComm } from "../xplaneHandler";
 import { DatarefsType } from "../sim/datarefMap";
-
-const dataref = "sim/cockpit/autopilot/heading_mag";
-const command = "sim/autopilot/heading";
-
-// "sim/autopilot/heading_hold" this is LNAV somehow
+import { getDataRefOnOffValue } from "../helpers";
 
 @action({ UUID: "com.pierr3.deckfcu.heading" })
 export class HeadingDial extends SingletonAction<SpeedSettings> {
   onWillAppear(ev: WillAppearEvent<SpeedSettings>): void | Promise<void> {
-    XPlaneComm.requestDataRef(DatarefsType.READ_WRITE_HEADING, 10, async (dataRef, value) => {
-      const set = await ev.action.getSettings();
-      set.heading = value;
-	  ev.action.setFeedback({
-		value: Math.round(value).toString().padStart(3, "0"),
-	  });
-      await ev.action.setSettings(set);
-    });
+    XPlaneComm.requestDataRef(
+      DatarefsType.READ_WRITE_HEADING,
+      10,
+      async (dataRef, value) => {
+        const set = await ev.action.getSettings();
+        set.heading = value;
+        ev.action.setFeedback({
+          value: Math.round(value).toString().padStart(3, "0"),
+        });
+        await ev.action.setSettings(set);
+      }
+    );
 
-	ev.action.setSettings({
-	  heading: 0,
-	});
+    ev.action.setSettings({
+      heading: 0,
+      isHeadingSelect: false,
+    });
 
     return ev.action.setFeedback({
       title: "HDG",
@@ -38,25 +39,31 @@ export class HeadingDial extends SingletonAction<SpeedSettings> {
   }
 
   onWillDisappear(ev: WillDisappearEvent<SpeedSettings>): void | Promise<void> {
-	XPlaneComm.unsubscribeDataRef(DatarefsType.READ_WRITE_HEADING);
+    XPlaneComm.unsubscribeDataRef(DatarefsType.READ_WRITE_HEADING);
   }
 
-  async onTouchTap(ev: TouchTapEvent<SpeedSettings>): Promise<void> {
-  }
+  async onTouchTap(ev: TouchTapEvent<SpeedSettings>): Promise<void> {}
 
   async onDialDown(ev: DialDownEvent<SpeedSettings>): Promise<void> {
-    XPlaneComm.writeData(DatarefsType.WRITE_HEADING_SELECT);
+    const set = await ev.action.getSettings();
+    set.isHeadingSelect = !set.isHeadingSelect;
+    await ev.action.setSettings(set);
+    const data = getDataRefOnOffValue(DatarefsType.WRITE_HEADING_SELECT);
+    XPlaneComm.writeData(
+      DatarefsType.WRITE_HEADING_SELECT,
+      set.isHeadingSelect ? data.on : data.off
+    );
   }
 
   async onDialRotate(ev: DialRotateEvent<SpeedSettings>): Promise<void> {
-	const set = await ev.action.getSettings();
-	set.heading += ev.payload.ticks;
-	set.heading = Math.round(Math.max(0, set.heading)) % 360;
-	ev.action.setFeedback({
-	  value: Math.round(set.heading).toString().padStart(3, "0"),
-	});
-	await ev.action.setSettings(set);
-	XPlaneComm.writeData(DatarefsType.READ_WRITE_HEADING, set.heading);
+    const set = await ev.action.getSettings();
+    set.heading += ev.payload.ticks;
+    set.heading = Math.round(Math.max(0, set.heading)) % 360;
+    ev.action.setFeedback({
+      value: Math.round(set.heading).toString().padStart(3, "0"),
+    });
+    await ev.action.setSettings(set);
+    XPlaneComm.writeData(DatarefsType.READ_WRITE_HEADING, set.heading);
   }
 }
 
@@ -65,4 +72,5 @@ export class HeadingDial extends SingletonAction<SpeedSettings> {
  */
 type SpeedSettings = {
   heading: number;
+  isHeadingSelect: boolean;
 };

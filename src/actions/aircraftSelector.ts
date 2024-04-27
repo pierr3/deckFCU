@@ -21,10 +21,16 @@ export class AircraftSelectorAction extends SingletonAction<CounterSettings> {
   }
 
   async onKeyDown(ev: KeyDownEvent<CounterSettings>): Promise<void> {
-    const nextAircraft =
-      aircraftSelector.getSelectedAircraft() === SupportedAircraftType.Default
-        ? SupportedAircraftType.Zibo737
-        : SupportedAircraftType.Default;
+	let nextAircraft = SupportedAircraftType.Default;
+	if (aircraftSelector.getSelectedAircraft() === SupportedAircraftType.Default) {
+		nextAircraft = SupportedAircraftType.Zibo737;
+	}
+	if (aircraftSelector.getSelectedAircraft() === SupportedAircraftType.Zibo737) {
+		nextAircraft = SupportedAircraftType.FF757;
+	}
+	if (aircraftSelector.getSelectedAircraft() === SupportedAircraftType.FF757) {
+		nextAircraft = SupportedAircraftType.Default;
+	}
 
     XPlaneComm.switchSelectedAircraft(nextAircraft);
     await ev.action.setTitle(nextAircraft);

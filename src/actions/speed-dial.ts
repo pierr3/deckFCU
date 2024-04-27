@@ -72,6 +72,7 @@ export class SpeedDial extends SingletonAction<SpeedSettings> {
       mach: 0,
       isMach: false,
       justToggledMach: false,
+	  isSpeedSelect: false,
     });
 
     return ev.action.setFeedback({
@@ -107,7 +108,10 @@ export class SpeedDial extends SingletonAction<SpeedSettings> {
   }
 
   async onDialDown(ev: DialDownEvent<SpeedSettings>): Promise<void> {
-    XPlaneComm.writeData(DatarefsType.WRITE_ENABLE_IAS);
+	const settings = await ev.action.getSettings();
+	settings.isSpeedSelect = !settings.isSpeedSelect;
+	await ev.action.setSettings(settings);
+    XPlaneComm.writeData(DatarefsType.WRITE_ENABLE_IAS, settings.isSpeedSelect ? 1 : 0);
   }
 
   async onDialRotate(ev: DialRotateEvent<SpeedSettings>): Promise<void> {
@@ -136,4 +140,5 @@ type SpeedSettings = {
   mach: number;
   isMach: boolean;
   justToggledMach: boolean;
+  isSpeedSelect: boolean;
 };
