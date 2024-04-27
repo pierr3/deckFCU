@@ -1,33 +1,41 @@
-import { action, KeyDownEvent, SingletonAction, WillAppearEvent } from "@elgato/streamdeck";
-import { xclient } from "../xplaneHandler";
-import streamDeck from "@elgato/streamdeck";
-
-const dataRef = "sim/cockpit2/autopilot/autothrottle_enabled";
-@action({ UUID: "com.pierr3.deckfcu.athr" })
-export class AutothrottleToggle extends SingletonAction<CounterSettings> {
-
+import {
+	action,
+	KeyDownEvent,
+	SingletonAction,
+	WillAppearEvent,
+	WillDisappearEvent,
+  } from "@elgato/streamdeck";
+  import { XPlaneComm } from "../xplaneHandler";
+  import { DatarefsType } from "../sim/datarefMap";
+  
+  
+  @action({ UUID: "com.pierr3.deckfcu.athr" })
+  export class AutothrottleToggle extends SingletonAction<CounterSettings> {
 	onWillAppear(ev: WillAppearEvent<CounterSettings>): void | Promise<void> {
-		xclient.requestDataRef(dataRef, 1, async (dataRef, value) => {
-			const set = await ev.action.getSettings();
-			// streamDeck.logger.debug("Autothrottle value: " + value);
-			set.isOn = value === -1 ? false : true;
-			await ev.action.setState(set.isOn ? 1 : 0);
-			await ev.action.setSettings(set);
-		});
+	  XPlaneComm.requestDataRef(DatarefsType.READ_ATHR, 1, async (dataRef, value) => {
+		const set = await ev.action.getSettings();
+		set.isOn = value === 0 ? false : true;
+		await ev.action.setState(set.isOn ? 1 : 0);
+		await ev.action.setSettings(set);
+	  });
 	}
-
-
+  
+	onWillDisappear(ev: WillDisappearEvent<CounterSettings>): void | Promise<void> {
+	  XPlaneComm.unsubscribeDataRef(DatarefsType.READ_ATHR);
+	}
+  
 	async onKeyDown(ev: KeyDownEvent<CounterSettings>): Promise<void> {
-		const settings = await ev.action.getSettings();
-		settings.isOn = !settings.isOn;
-		await ev.action.setSettings(settings);
-		xclient.setDataRef(dataRef, settings.isOn ? 0 : -1);
+	  const settings = await ev.action.getSettings();
+	  settings.isOn = !settings.isOn;
+	  await ev.action.setSettings(settings);
+	  XPlaneComm.writeData(DatarefsType.WRITE_ATHR);
 	}
-}
-
-/**
- * Settings for {@link IncrementCounter}.
- */
-type CounterSettings = {
+  }
+  
+  /**
+   * Settings for {@link IncrementCounter}.
+   */
+  type CounterSettings = {
 	isOn: boolean;
-};
+  };
+  

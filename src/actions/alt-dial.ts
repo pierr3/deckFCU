@@ -5,8 +5,10 @@ import streamDeck, {
   SingletonAction,
   TouchTapEvent,
   WillAppearEvent,
+  WillDisappearEvent,
 } from "@elgato/streamdeck";
-import { xclient } from "../xplaneHandler";
+import { XPlaneComm } from "../xplaneHandler";
+import { DatarefsType } from "../sim/datarefMap";
 
 const dataref = "sim/cockpit/autopilot/altitude";
 const command = "sim/autopilot/altitude_hold";
@@ -14,7 +16,7 @@ const command = "sim/autopilot/altitude_hold";
 @action({ UUID: "com.pierr3.deckfcu.altitude" })
 export class AltitudeDial extends SingletonAction<AltitudeSettings> {
   onWillAppear(ev: WillAppearEvent<AltitudeSettings>): void | Promise<void> {
-    xclient.requestDataRef(dataref, 10, async (dataRef, value) => {
+    XPlaneComm.requestDataRef(DatarefsType.READ_WRITE_ALTITUDE, 10, async (dataRef, value) => {
       const set = await ev.action.getSettings();
       set.altitude = value;
       ev.action.setFeedback({
@@ -33,10 +35,14 @@ export class AltitudeDial extends SingletonAction<AltitudeSettings> {
     });
   }
 
+  onWillDisappear(ev: WillDisappearEvent<AltitudeSettings>): void | Promise<void> {
+	XPlaneComm.unsubscribeDataRef(DatarefsType.READ_WRITE_ALTITUDE);
+  }
+
   async onTouchTap(ev: TouchTapEvent<AltitudeSettings>): Promise<void> {}
 
   async onDialDown(ev: DialDownEvent<AltitudeSettings>): Promise<void> {
-    xclient.sendCommand(command);
+    XPlaneComm.writeData(DatarefsType.WRITE_ALTITUDE_SELECT);
   }
 
   async onDialRotate(ev: DialRotateEvent<AltitudeSettings>): Promise<void> {
@@ -46,7 +52,7 @@ export class AltitudeDial extends SingletonAction<AltitudeSettings> {
       value: Math.round(set.altitude).toString(),
     });
     await ev.action.setSettings(set);
-    xclient.setDataRef(dataref, set.altitude);
+    XPlaneComm.writeData(DatarefsType.READ_WRITE_ALTITUDE, set.altitude);
   }
 }
 

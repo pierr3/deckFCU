@@ -5,8 +5,10 @@ import streamDeck, {
   SingletonAction,
   TouchTapEvent,
   WillAppearEvent,
+  WillDisappearEvent,
 } from "@elgato/streamdeck";
-import { xclient } from "../xplaneHandler";
+import { XPlaneComm } from "../xplaneHandler";
+import { DatarefsType } from "../sim/datarefMap";
 
 const dataref = "sim/cockpit/autopilot/heading_mag";
 const command = "sim/autopilot/heading";
@@ -16,7 +18,7 @@ const command = "sim/autopilot/heading";
 @action({ UUID: "com.pierr3.deckfcu.heading" })
 export class HeadingDial extends SingletonAction<SpeedSettings> {
   onWillAppear(ev: WillAppearEvent<SpeedSettings>): void | Promise<void> {
-    xclient.requestDataRef(dataref, 10, async (dataRef, value) => {
+    XPlaneComm.requestDataRef(DatarefsType.READ_WRITE_HEADING, 10, async (dataRef, value) => {
       const set = await ev.action.getSettings();
       set.heading = value;
 	  ev.action.setFeedback({
@@ -35,11 +37,15 @@ export class HeadingDial extends SingletonAction<SpeedSettings> {
     });
   }
 
+  onWillDisappear(ev: WillDisappearEvent<SpeedSettings>): void | Promise<void> {
+	XPlaneComm.unsubscribeDataRef(DatarefsType.READ_WRITE_HEADING);
+  }
+
   async onTouchTap(ev: TouchTapEvent<SpeedSettings>): Promise<void> {
   }
 
   async onDialDown(ev: DialDownEvent<SpeedSettings>): Promise<void> {
-    xclient.sendCommand(command);
+    XPlaneComm.writeData(DatarefsType.WRITE_HEADING_SELECT);
   }
 
   async onDialRotate(ev: DialRotateEvent<SpeedSettings>): Promise<void> {
@@ -50,7 +56,7 @@ export class HeadingDial extends SingletonAction<SpeedSettings> {
 	  value: Math.round(set.heading).toString().padStart(3, "0"),
 	});
 	await ev.action.setSettings(set);
-	xclient.setDataRef(dataref, set.heading);
+	XPlaneComm.writeData(DatarefsType.READ_WRITE_HEADING, set.heading);
   }
 }
 

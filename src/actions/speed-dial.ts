@@ -16,8 +16,8 @@ import { aircraftSelector } from "../sim/aircraftSelector";
 export class SpeedDial extends SingletonAction<SpeedSettings> {
   onWillAppear(ev: WillAppearEvent<SpeedSettings>): void | Promise<void> {
     XPlaneComm.requestDataRef(
-      DatarefsType.READ_WRITE_IAS_MACH,
-      5,
+      DatarefsType.READ_WRITE_IS_MACH,
+      10,
       async (dataRef, value) => {
         const set = await ev.action.getSettings();
         if (value === 1 && (!set.isMach || set.justToggledMach)) {
@@ -45,7 +45,7 @@ export class SpeedDial extends SingletonAction<SpeedSettings> {
     );
 
     XPlaneComm.requestDataRef(
-      DatarefsType.READ_WRITE_IS_MACH,
+      DatarefsType.READ_WRITE_IAS_MACH,
       10,
       async (dataRef, value) => {
         const settings = await ev.action.getSettings();
