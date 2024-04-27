@@ -29,10 +29,10 @@ export function stopXPlaneComm() {
 }
 
 export namespace XPlaneComm {
-	let callbackDatabase: Record<DatarefsType, (dataRef: string, value: number) => void>;
+	let callbackDatabase: Record<string, (dataRef: string, value: number) => void> = {};
 
 	export function requestDataRef(
-		dataref: DatarefsType,
+		dataref: string,
 		frequency: number,
 		callback: (dataRef: string, value: number) => void
 	) {
@@ -46,7 +46,7 @@ export namespace XPlaneComm {
 		);
 	}
 
-	export function writeData(dataref: DatarefsType, value: number = 0) {
+	export function writeData(dataref: string, value: number = 0) {
 		if (datarefMap[aircraftSelector.getSelectedAircraft()][dataref].isCommand) {
 			xclient.sendCommand(
 				datarefMap[aircraftSelector.getSelectedAircraft()][dataref].value
@@ -61,7 +61,7 @@ export namespace XPlaneComm {
 	}
 
 	export function unsubscribeDataRef(
-		dataref: DatarefsType,
+		dataref: string,
 		deleteCallback = true
 	) {
 		if (datarefMap[aircraftSelector.getSelectedAircraft()][dataref].isCommand) {
