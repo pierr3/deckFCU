@@ -461,7 +461,7 @@ export const datarefMap: DatarefMap = {
     },
   },
   //
-  // Zibo configuration
+  // FF757/767 configuration
   //
   [SupportedAircraftType.FF757]: {
     [DatarefsType.READ_WRITE_IAS_MACH]: {
@@ -568,25 +568,25 @@ export const datarefMap: DatarefMap = {
     },
     [DatarefsType.READ_LNAV]: {
       isCommand: false,
-      value: "laminar/B738/autopilot/lnav_status",
+      value: "1-sim/AP/lnavButton",
       onValue: 1,
       offValue: 0,
     },
     [DatarefsType.WRITE_LNAV]: {
-      isCommand: true,
-      value: "laminar/B738/autopilot/lnav_press",
+      isCommand: false,
+      value: "1-sim/AP/lnavButton",
       onValue: 1,
       offValue: 0,
     },
     [DatarefsType.READ_VNAV]: {
       isCommand: false,
-      value: "laminar/B738/autopilot/vnav_status1",
+      value: "1-sim/AP/vnavButton",
       onValue: 1,
       offValue: 0,
     },
     [DatarefsType.WRITE_VNAV]: {
-      isCommand: true,
-      value: "laminar/B738/autopilot/vnav_press",
+      isCommand: false,
+      value: "1-sim/AP/vnavButton",
       onValue: 1,
       offValue: 0,
     },
