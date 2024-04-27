@@ -9,7 +9,7 @@ import { XPlaneComm } from "../xplaneHandler";
 import { DatarefsType } from "../sim/datarefMap";
 
 @action({ UUID: "com.pierr3.deckfcu.lnav" })
-export class VNAVToggle extends SingletonAction<CounterSettings> {
+export class LNAVToggle extends SingletonAction<CounterSettings> {
   onWillAppear(ev: WillAppearEvent<CounterSettings>): void | Promise<void> {
     XPlaneComm.requestDataRef(
       DatarefsType.READ_LNAV,

@@ -10,9 +10,6 @@ import streamDeck, {
 import { XPlaneComm } from "../xplaneHandler";
 import { DatarefsType } from "../sim/datarefMap";
 
-const dataref = "sim/cockpit/autopilot/altitude";
-const command = "sim/autopilot/altitude_hold";
-
 @action({ UUID: "com.pierr3.deckfcu.altitude" })
 export class AltitudeDial extends SingletonAction<AltitudeSettings> {
   onWillAppear(ev: WillAppearEvent<AltitudeSettings>): void | Promise<void> {

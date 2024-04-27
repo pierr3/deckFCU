@@ -12,6 +12,7 @@ import { ApprToggle } from "./actions/appr";
 import { VNAVToggle } from "./actions/vnav";
 import { LNAVToggle } from "./actions/lnav";
 import { AircraftSelectorAction } from "./actions/aircraftSelector";
+import { Com1ActiveDial } from "./actions/com/com1Active";
 
 // We can enable "trace" logging so that all messages between the Stream Deck, and the plugin are recorded. When storing sensitive information
 streamDeck.logger.setLevel(LogLevel.DEBUG);
@@ -29,6 +30,8 @@ streamDeck.actions.registerAction(new ApprToggle());
 streamDeck.actions.registerAction(new VNAVToggle());
 streamDeck.actions.registerAction(new LNAVToggle());
 streamDeck.actions.registerAction(new AircraftSelectorAction());
+
+streamDeck.actions.registerAction(new Com1ActiveDial());
 
 // Finally, connect to the Stream Deck.
 streamDeck.connect();

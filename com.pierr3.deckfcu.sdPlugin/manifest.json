@@ -199,7 +199,45 @@
 					"TitleAlignment": "middle"
 				}
 			],
-			"Tooltip": "Displays and changes the current airspeed/mach",
+			"Tooltip": "Displays and changes the current vertical speed",
+			"Controllers": [
+				"Keypad",
+				"Encoder"
+			],
+			"Encoder": {
+				"layout": "layouts/fcu_dial.json"
+			}
+		},
+		{
+			"Name": "COM 1 Active Dial",
+			"UUID": "com.pierr3.deckfcu.com1active",
+			"Icon": "imgs/actions/counter/icon",
+			"States": [
+				{
+					"Image": "imgs/actions/counter/key",
+					"TitleAlignment": "middle"
+				}
+			],
+			"Tooltip": "Displays and changes active com1 frequency",
+			"Controllers": [
+				"Keypad",
+				"Encoder"
+			],
+			"Encoder": {
+				"layout": "layouts/fcu_dial.json"
+			}
+		},
+		{
+			"Name": "COM 1 Standby Dial",
+			"UUID": "com.pierr3.deckfcu.com1standby",
+			"Icon": "imgs/actions/counter/icon",
+			"States": [
+				{
+					"Image": "imgs/actions/counter/key",
+					"TitleAlignment": "middle"
+				}
+			],
+			"Tooltip": "Displays and changes standby com1 frequency",
 			"Controllers": [
 				"Keypad",
 				"Encoder"
