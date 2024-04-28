@@ -19,6 +19,9 @@ export class AltitudeDial extends SingletonAction<AltitudeSettings> {
       10,
       async (dataRef, value) => {
         const set = await ev.action.getSettings();
+		if (set.altitude === value) {
+			return; // Cache to prevent aggressive refresh
+		}
         set.altitude = value;
         ev.action.setFeedback({
           value: Math.round(value).toString(),

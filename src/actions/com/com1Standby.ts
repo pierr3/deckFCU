@@ -19,11 +19,14 @@ export class Com1StandbyDial extends SingletonAction<AltitudeSettings> {
   onWillAppear(ev: WillAppearEvent<AltitudeSettings>): void | Promise<void> {
     XPlaneComm.requestDataRef(
       DatarefsType.READ_WRITE_COM1_STANDBY,
-      20,
+      10,
       async (dataRef, value) => {
         const set = await ev.action.getSettings();
+		if (set.frequency === value) {
+			return;
+		}
         set.frequency = value;
-        ev.action.setFeedback({
+        await ev.action.setFeedback({
           value: hertzToHuman(value),
         });
 
@@ -61,12 +64,12 @@ export class Com1StandbyDial extends SingletonAction<AltitudeSettings> {
 
   async onDialRotate(ev: DialRotateEvent<AltitudeSettings>): Promise<void> {
     const set = await ev.action.getSettings();
-    if (!ev.payload.settings.doOnlyBigNumber) {
+    if (ev.payload.settings.doOnlyBigNumber) {
       set.frequency += ev.payload.ticks * 1000;
     } else {
       set.frequency += ev.payload.ticks * 0.005 * 1000;
     }
-    ev.action.setFeedback({
+    await ev.action.setFeedback({
       value: hertzToHuman(set.frequency),
     });
     await ev.action.setSettings(set);

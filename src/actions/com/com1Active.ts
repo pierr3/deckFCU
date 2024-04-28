@@ -21,6 +21,9 @@ export class Com1ActiveDial extends SingletonAction<AltitudeSettings> {
       10,
       async (dataRef, value) => {
         const set = await ev.action.getSettings();
+		if (set.frequency === value) {
+			return;
+		}
         set.frequency = value;
         ev.action.setFeedback({
           value: hertzToHuman(value),
@@ -29,15 +32,15 @@ export class Com1ActiveDial extends SingletonAction<AltitudeSettings> {
       }
     );
 
-    XPlaneComm.requestDataRef(
-      DatarefsType.READ_WRITE_COM1_VOLUME,
-      10,
-      async (dataRef, value) => {
-        const set = await ev.action.getSettings();
-        set.volume = value;
-        await ev.action.setSettings(set);
-      }
-    );
+    // XPlaneComm.requestDataRef(
+    //   DatarefsType.READ_WRITE_COM1_VOLUME,
+    //   10,
+    //   async (dataRef, value) => {
+    //     const set = await ev.action.getSettings();
+    //     set.volume = value;
+    //     await ev.action.setSettings(set);
+    //   }
+    // );
 
     ev.action.setSettings({
       frequency: 0,
@@ -54,7 +57,7 @@ export class Com1ActiveDial extends SingletonAction<AltitudeSettings> {
     ev: WillDisappearEvent<AltitudeSettings>
   ): void | Promise<void> {
     XPlaneComm.unsubscribeDataRef(DatarefsType.READ_COM1_ACTIVE);
-    XPlaneComm.unsubscribeDataRef(DatarefsType.READ_WRITE_COM1_VOLUME);
+    // XPlaneComm.unsubscribeDataRef(DatarefsType.READ_WRITE_COM1_VOLUME);
   }
 
   async onTouchTap(ev: TouchTapEvent<AltitudeSettings>): Promise<void> {}
@@ -64,13 +67,13 @@ export class Com1ActiveDial extends SingletonAction<AltitudeSettings> {
   }
 
   async onDialRotate(ev: DialRotateEvent<AltitudeSettings>): Promise<void> {
-    const settings = await ev.action.getSettings();
-    settings.volume = Math.min(
-      1,
-      Math.max(0, settings.volume + ev.payload.ticks * 0.05)
-    );
-    XPlaneComm.writeData(DatarefsType.READ_WRITE_COM1_VOLUME, settings.volume);
-    await ev.action.setSettings(settings);
+    // const settings = await ev.action.getSettings();
+    // settings.volume = Math.min(
+    //   1,
+    //   Math.max(0, settings.volume + ev.payload.ticks * 0.05)
+    // );
+    // XPlaneComm.writeData(DatarefsType.READ_WRITE_COM1_VOLUME, settings.volume);
+    // await ev.action.setSettings(settings);
   }
 }
 

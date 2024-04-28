@@ -22,6 +22,9 @@ export class VerticalSpeedDial extends SingletonAction<VerticalSpeedSettings> {
       10,
       async (dataRef, value) => {
         const set = await ev.action.getSettings();
+		if (set.VerticalSpeed === value) {
+		  return; // Cache to prevent aggressive refresh
+		}
         set.VerticalSpeed = value;
         ev.action.setFeedback({
           value: Math.round(value).toString(),

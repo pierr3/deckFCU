@@ -17,7 +17,7 @@ export class SpeedDial extends SingletonAction<SpeedSettings> {
   onWillAppear(ev: WillAppearEvent<SpeedSettings>): void | Promise<void> {
     XPlaneComm.requestDataRef(
       DatarefsType.READ_WRITE_IS_MACH,
-      10,
+      5,
       async (dataRef, value) => {
         const set = await ev.action.getSettings();
         if (value === 1 && (!set.isMach || set.justToggledMach)) {
@@ -51,12 +51,18 @@ export class SpeedDial extends SingletonAction<SpeedSettings> {
         const settings = await ev.action.getSettings();
         let newValue = "000";
         if (settings.isMach) {
+          if (value === settings.mach) {
+            return; // Cache to prevent aggressive refresh
+          }
           if (value < 0.01 || value > 1) {
             value = 0.01;
           }
           settings.mach = roundToSecondDecimal(value);
           newValue = value.toFixed(2);
         } else {
+          if (value === settings.ias) {
+            return; // Cache to prevent aggressive refresh
+          }
           settings.ias = value;
           newValue = Math.round(value).toString().padStart(3, "0");
         }
@@ -72,7 +78,7 @@ export class SpeedDial extends SingletonAction<SpeedSettings> {
       mach: 0,
       isMach: false,
       justToggledMach: false,
-	  isSpeedSelect: false,
+      isSpeedSelect: false,
     });
 
     return ev.action.setFeedback({
@@ -108,10 +114,13 @@ export class SpeedDial extends SingletonAction<SpeedSettings> {
   }
 
   async onDialDown(ev: DialDownEvent<SpeedSettings>): Promise<void> {
-	const settings = await ev.action.getSettings();
-	settings.isSpeedSelect = !settings.isSpeedSelect;
-	await ev.action.setSettings(settings);
-    XPlaneComm.writeData(DatarefsType.WRITE_ENABLE_IAS, settings.isSpeedSelect ? 1 : 0);
+    const settings = await ev.action.getSettings();
+    settings.isSpeedSelect = !settings.isSpeedSelect;
+    await ev.action.setSettings(settings);
+    XPlaneComm.writeData(
+      DatarefsType.WRITE_ENABLE_IAS,
+      settings.isSpeedSelect ? 1 : 0
+    );
   }
 
   async onDialRotate(ev: DialRotateEvent<SpeedSettings>): Promise<void> {

@@ -19,6 +19,9 @@ export class HeadingDial extends SingletonAction<SpeedSettings> {
       10,
       async (dataRef, value) => {
         const set = await ev.action.getSettings();
+		if (set.heading === value) {
+			return; // Cache to prevent aggressive refresh
+		}
         set.heading = value;
         ev.action.setFeedback({
           value: Math.round(value).toString().padStart(3, "0"),
