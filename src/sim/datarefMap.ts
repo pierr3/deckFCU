@@ -40,6 +40,13 @@ export const DatarefsType = {
   TOGGLE_COM2_STANDBY: "TOGGLE_COM2_STANDBY",
   TOGGLE_COM2_MONITOR: "TOGGLE_COM2_MONITOR",
   READ_WRITE_COM2_VOLUME: "READ_WRITE_COM2_VOLUME",
+
+  READ_WRITE_HSI_RANGE: "READ_WRITE_HSI_RANGE",
+
+  READ_WRITE_IS_QNH: "READ_WRITE_IS_QNH",
+  READ_WRITE_IS_STD: "READ_WRITE_IS_STD",
+  READ_ALTIMETER_INHG: "READ_ALTIMETER_INHG",
+  READ_WRITE_ALTIMETER_SETTING: "READ_WRITE_ALTIMETER_SETTING",
 };
 
 type DatarefMap = {
@@ -54,6 +61,10 @@ type DatarefData = {
   onValue: number;
   offValue: number;
   writeValue?: string;
+  displayValueMap?: { [key: number]: string };
+  maxValue?: number;
+  minValue?: number;
+  valueMultiplier?: number;
 };
 
 export const datarefMap: DatarefMap = {
@@ -253,6 +264,36 @@ export const datarefMap: DatarefMap = {
     [DatarefsType.WRITE_LOC]: {
       isCommand: true,
       value: "sim/autopilot/NAV",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_WRITE_HSI_RANGE]: {
+      isCommand: false,
+      value: "NOTIMPLEMENTED",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_WRITE_IS_QNH]: {
+      isCommand: false,
+      value: "NOTIMPLEMENTED",
+      onValue: -1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_WRITE_IS_STD]: {
+      isCommand: false,
+      value: "NOTIMPLEMENTED",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_ALTIMETER_INHG]: {
+      isCommand: false,
+      value: "NOTIMPLEMENTED",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_WRITE_ALTIMETER_SETTING]: {
+      isCommand: false,
+      value: "NOTIMPLEMENTED",
       onValue: 1,
       offValue: 0,
     },
@@ -459,6 +500,36 @@ export const datarefMap: DatarefMap = {
       onValue: 1,
       offValue: 0,
     },
+    [DatarefsType.READ_WRITE_HSI_RANGE]: {
+      isCommand: false,
+      value: "NOTIMPLEMENTED",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_WRITE_IS_QNH]: {
+      isCommand: false,
+      value: "NOTIMPLEMENTED",
+      onValue: -1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_WRITE_IS_STD]: {
+      isCommand: false,
+      value: "NOTIMPLEMENTED",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_ALTIMETER_INHG]: {
+      isCommand: false,
+      value: "NOTIMPLEMENTED",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_WRITE_ALTIMETER_SETTING]: {
+      isCommand: false,
+      value: "NOTIMPLEMENTED",
+      onValue: 1,
+      offValue: 0,
+    },
   },
   //
   // FF757/767 configuration
@@ -473,14 +544,14 @@ export const datarefMap: DatarefMap = {
     [DatarefsType.READ_WRITE_IS_MACH]: {
       isCommand: false,
       value: "1-sim/AP/iasmach",
-      onValue: 0,
-      offValue: 1,
+      onValue: 1,
+      offValue: 0,
     },
     [DatarefsType.WRITE_ENABLE_IAS]: {
       isCommand: false,
       value: "1-sim/AP/spdButton",
-      onValue: 0,
-      offValue: 1,
+      onValue: 1,
+      offValue: 0,
     },
     [DatarefsType.READ_WRITE_HEADING]: {
       isCommand: false,
@@ -491,8 +562,8 @@ export const datarefMap: DatarefMap = {
     [DatarefsType.WRITE_HEADING_SELECT]: {
       isCommand: false,
       value: "1-sim/AP/hdgConfButton",
-      onValue: 0,
-      offValue: 1,
+      onValue: 1,
+      offValue: 0,
     },
     [DatarefsType.READ_WRITE_ALTITUDE]: {
       isCommand: false,
@@ -503,8 +574,8 @@ export const datarefMap: DatarefMap = {
     [DatarefsType.WRITE_ALTITUDE_SELECT]: {
       isCommand: false,
       value: "1-sim/AP/flchButton",
-      onValue: 0,
-      offValue: 1,
+      onValue: 1,
+      offValue: 0,
     },
     [DatarefsType.READ_WRITE_VERTICAL_SPEED]: {
       isCommand: false,
@@ -515,32 +586,32 @@ export const datarefMap: DatarefMap = {
     [DatarefsType.WRITE_VERTICAL_SPEED_SELECT]: {
       isCommand: false,
       value: "1-sim/AP/vviButton",
-      onValue: 0,
-      offValue: 1,
+      onValue: 1,
+      offValue: 0,
     },
     [DatarefsType.READ_AP_ONE]: {
       isCommand: false,
       value: "1-sim/AP/cmd_L_Button",
-      onValue: 0,
-      offValue: 1,
+      onValue: 1,
+      offValue: 0,
     },
     [DatarefsType.WRITE_AP_ONE]: {
       isCommand: false,
       value: "1-sim/AP/cmd_L_Button",
-      onValue: 0,
-      offValue: 1,
+      onValue: 1,
+      offValue: 0,
     },
     [DatarefsType.READ_AP_TWO]: {
       isCommand: false,
       value: "1-sim/AP/cmd_R_Button",
-      onValue: 0,
-      offValue: 1,
+      onValue: 1,
+      offValue: 0,
     },
     [DatarefsType.WRITE_AP_TWO]: {
       isCommand: false,
       value: "1-sim/AP/cmd_R_Button",
-      onValue: 0,
-      offValue: 1,
+      onValue: 1,
+      offValue: 0,
     },
     [DatarefsType.READ_ATHR]: {
       isCommand: false,
@@ -557,14 +628,14 @@ export const datarefMap: DatarefMap = {
     [DatarefsType.READ_APPR]: {
       isCommand: false,
       value: "1-sim/AP/appButton",
-      onValue: 0,
-      offValue: 1,
+      onValue: 1,
+      offValue: 0,
     },
     [DatarefsType.WRITE_APPR]: {
       isCommand: false,
       value: "1-sim/AP/appButton",
-      onValue: 0,
-      offValue: 1,
+      onValue: 1,
+      offValue: 0,
     },
     [DatarefsType.READ_LNAV]: {
       isCommand: false,
@@ -653,14 +724,56 @@ export const datarefMap: DatarefMap = {
     [DatarefsType.READ_LOC]: {
       isCommand: false,
       value: "1-sim/AP/locButton",
-      onValue: 0,
-      offValue: 1,
+      onValue: 1,
+      offValue: 0,
     },
     [DatarefsType.WRITE_LOC]: {
       isCommand: false,
       value: "1-sim/AP/locButton",
-      onValue: 0,
-      offValue: 1,
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_WRITE_HSI_RANGE]: {
+      isCommand: false,
+      value: "1-sim/ndpanel/1/hsiRangeRotary",
+      writeValue: "1-sim/ng/rangeL/anim",
+      onValue: 1,
+      offValue: 0,
+      valueMultiplier: 5,
+      displayValueMap: {
+        0: "5",
+        1: "10",
+        2: "20",
+        3: "40",
+        4: "80",
+        5: "160",
+        6: "320",
+      },
+    },
+    [DatarefsType.READ_WRITE_IS_QNH]: {
+      isCommand: false,
+      value: "1-sim/ng/baroLargeL/anim",
+      onValue: -1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_WRITE_IS_STD]: {
+      isCommand: false,
+      value: "1-sim/ng/baro/std/L",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_ALTIMETER_INHG]: {
+      isCommand: false,
+      value: "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot",
+      onValue: 1,
+      offValue: 0,
+    },
+    [DatarefsType.READ_WRITE_ALTIMETER_SETTING]: {
+      isCommand: false,
+      value: "1-sim/ng/baroSmallL/anim",
+      onValue: 1,
+      offValue: 0,
+      valueMultiplier: 5,
     },
   },
 };

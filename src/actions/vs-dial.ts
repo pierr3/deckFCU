@@ -70,7 +70,7 @@ export class VerticalSpeedDial extends SingletonAction<VerticalSpeedSettings> {
     });
     await ev.action.setSettings(set);
     XPlaneComm.writeData(
-      DatarefsType.WRITE_VERTICAL_SPEED_SELECT,
+      DatarefsType.READ_WRITE_VERTICAL_SPEED,
       set.VerticalSpeed
     );
   }

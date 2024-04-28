@@ -17,6 +17,8 @@ import { Com1StandbyDial } from "./actions/com/com1Standby";
 import { Com2StandbyDial } from "./actions/com/com2Standby";
 import { Com2ActiveDial } from "./actions/com/com2Active";
 import { VorLocToggle } from "./actions/vorloc";
+import { HsiRange } from "./actions/hsiRange";
+import { QnhSetting } from "./actions/qnh";
 
 // We can enable "trace" logging so that all messages between the Stream Deck, and the plugin are recorded. When storing sensitive information
 streamDeck.logger.setLevel(LogLevel.DEBUG);
@@ -26,6 +28,8 @@ streamDeck.actions.registerAction(new SpeedDial());
 streamDeck.actions.registerAction(new AltitudeDial());
 streamDeck.actions.registerAction(new HeadingDial());
 streamDeck.actions.registerAction(new VerticalSpeedDial());
+streamDeck.actions.registerAction(new HsiRange());
+streamDeck.actions.registerAction(new QnhSetting());
 
 streamDeck.actions.registerAction(new AutothrottleToggle());
 streamDeck.actions.registerAction(new AutoPilotOne());

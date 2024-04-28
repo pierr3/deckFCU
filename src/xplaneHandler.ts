@@ -39,11 +39,16 @@ export namespace XPlaneComm {
     frequency: number,
     callback: (dataRef: string, value: number) => void
   ) {
+    const dataRefValue =
+      datarefMap[aircraftSelector.getSelectedAircraft()][dataref].value;
+    if (dataRefValue === undefined || dataRefValue === "NOTIMPLEMENTED") {
+      return;
+    }
     callbackDatabase[dataref] = (dataref: string, value: number) => {
       callback(dataref, value);
     };
     xclient.requestDataRef(
-      datarefMap[aircraftSelector.getSelectedAircraft()][dataref].value,
+		dataRefValue,
       frequency,
       callbackDatabase[dataref]
     );
@@ -73,10 +78,12 @@ export namespace XPlaneComm {
     if (datarefMap[aircraftSelector.getSelectedAircraft()][dataref].isCommand) {
       return;
     }
-    xclient.requestDataRef(
-      datarefMap[aircraftSelector.getSelectedAircraft()][dataref].value,
-      0
-    );
+    const dataRefValue =
+      datarefMap[aircraftSelector.getSelectedAircraft()][dataref].value;
+    if (dataRefValue === undefined || dataRefValue === "NOTIMPLEMENTED") {
+      return;
+    }
+    xclient.requestDataRef(dataRefValue, 0);
     if (deleteCallback) {
       callbackDatabase[dataref] = (dataref: string, value: number) => {};
     }

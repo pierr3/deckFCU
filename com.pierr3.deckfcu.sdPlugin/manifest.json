@@ -302,6 +302,44 @@
 			"Encoder": {
 				"layout": "layouts/fcu_dial.json"
 			}
+		},
+		{
+			"Name": "HSI Range",
+			"UUID": "com.pierr3.deckfcu.hsirange",
+			"Icon": "imgs/actions/counter/icon",
+			"States": [
+				{
+					"Image": "imgs/actions/counter/key",
+					"TitleAlignment": "middle"
+				}
+			],
+			"Tooltip": "Changes the range of the main HSI (PFD) display",
+			"Controllers": [
+				"Keypad",
+				"Encoder"
+			],
+			"Encoder": {
+				"layout": "layouts/fcu_dial.json"
+			}
+		},
+		{
+			"Name": "Altimeter Setting",
+			"UUID": "com.pierr3.deckfcu.qnh",
+			"Icon": "imgs/actions/counter/icon",
+			"States": [
+				{
+					"Image": "imgs/actions/counter/key",
+					"TitleAlignment": "middle"
+				}
+			],
+			"Tooltip": "Changes the (left side) altimeter setting",
+			"Controllers": [
+				"Keypad",
+				"Encoder"
+			],
+			"Encoder": {
+				"layout": "layouts/fcu_dial.json"
+			}
 		}
 	],
 	"Category": "deckFCU",
