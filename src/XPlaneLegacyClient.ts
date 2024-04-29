@@ -1,3 +1,21 @@
+/*
+Copyright (c) 2020 Lianna Eeftinck <liannaee@gmail.com>
+
+Permission to use, copy, modify, and distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+Modified by Pierre Ferran to conver to typescript, and improve compatibility with X-Plane 12
+*/
+
 import * as dgram from "dgram";
 import streamDeck from "@elgato/streamdeck";
 
@@ -117,7 +135,7 @@ export default class XPlaneClient {
     }
     buffer.write(dataRef, 9);
     buffer.writeInt8(0x00, 9 + dataRef.length);
-	streamDeck.logger.trace(`Setting dataref ${dataRef} to ${value}`);
+    streamDeck.logger.trace(`Setting dataref ${dataRef} to ${value}`);
     this._sendBuffer(buffer);
   }
 
@@ -180,60 +198,17 @@ export default class XPlaneClient {
           const index = drefInfo.readInt32LE(0);
           const value = drefInfo.readFloatLE(4);
 
-		  const dataRef = this.dataRefs[index];
+          const dataRef = this.dataRefs[index];
           if (this.debug) {
             streamDeck.logger.debug(
-              `[${
-                i + 1
-              }/${index}] new value for dataRef ${index} is ${value}`
+              `[${i + 1}/${index}] new value for dataRef ${index} is ${value}`
             );
           }
 
           if (dataRef.callback !== undefined) {
             dataRef.callback(dataRef.dataRef, value);
           }
-          // Process the received dataref index and value as needed
         }
-        // const numrefs = (msg.length - 5) / 8;
-        // let offset = 5;
-
-        // for (let i = 0; i < numrefs; i += 1) {
-        //   const drefSenderIndex = BIG_ENDIAN
-        //     ? msg.readInt32BE(offset)
-        //     : msg.readInt32LE(offset);
-        //   const drefFltValue = BIG_ENDIAN
-        //     ? msg.readFloatBE(offset + 4)
-        //     : msg.readFloatLE(offset + 4);
-
-        //   if (this.dataRefs[drefSenderIndex]) {
-        //     const dataRef = this.dataRefs[drefSenderIndex];
-
-        //     if (dataRef.value !== drefFltValue) {
-        //       if (this.debug) {
-        //         streamDeck.logger.debug(
-        //           `[${i + 1}/${numrefs}] new value for dataRef ${
-        //             dataRef.dataRef
-        //           } is ${drefFltValue}`
-        //         );
-        //       }
-
-        //       dataRef.value = drefFltValue;
-
-        //       if (dataRef.callback !== undefined) {
-        //         streamDeck.logger.debug("calling callback");
-        //         dataRef.callback(dataRef.dataRef, drefFltValue);
-        //       }
-        //     }
-        //   } else if (this.debug) {
-        //     streamDeck.logger.debug(
-        //       `[${
-        //         i + 1
-        //       }/${numrefs}] value for unknown RREF index ${drefSenderIndex} is ${drefFltValue} (there must be a bug in the code somewhere!)`
-        //     );
-        //   }
-
-        //   offset += 8;
-        // }
       }
     });
   }
