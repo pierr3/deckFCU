@@ -20,9 +20,13 @@ import { VorLocToggle } from "./actions/vorloc";
 import { HsiRange } from "./actions/hsiRange";
 import { QnhSetting } from "./actions/qnh";
 import { simDataProvider } from "./sim/simDataProvider";
+import { SupportedAircraftType } from "./sim/aircraftSelector";
 
 // We can enable "trace" logging so that all messages between the Stream Deck, and the plugin are recorded. When storing sensitive information
 streamDeck.logger.setLevel(LogLevel.DEBUG);
+
+startXPlaneComm();
+simDataProvider.start();
 
 // Register the increment action.
 streamDeck.actions.registerAction(new SpeedDial());
@@ -50,5 +54,3 @@ streamDeck.actions.registerAction(new Com2StandbyDial());
 // Finally, connect to the Stream Deck.
 streamDeck.connect();
 
-startXPlaneComm();
-simDataProvider.start();
