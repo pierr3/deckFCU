@@ -10,30 +10,21 @@ import streamDeck, {
 import { XPlaneComm } from "../xplaneHandler";
 import { DatarefsType } from "../sim/datarefMap";
 import { getDataRefOnOffValue } from "../helpers";
+import { simDataProvider } from "../sim/simDataProvider";
+
+const UPDATE_INTERVAL = 100; // Update interval in milliseconds
+let intervalId: NodeJS.Timeout;
+
+async function updateData(context: WillAppearEvent<SpeedSettings>) {
+  context.action.setFeedback({
+    value: Math.round(simDataProvider.getDatarefValue(DatarefsType.READ_WRITE_HEADING)).toString().padStart(3, "0")
+  });
+}
 
 @action({ UUID: "com.pierr3.deckfcu.heading" })
 export class HeadingDial extends SingletonAction<SpeedSettings> {
   onWillAppear(ev: WillAppearEvent<SpeedSettings>): void | Promise<void> {
-    XPlaneComm.requestDataRef(
-      DatarefsType.READ_WRITE_HEADING,
-      10,
-      async (dataRef, value) => {
-        const set = await ev.action.getSettings();
-		if (set.heading === value) {
-			return; // Cache to prevent aggressive refresh
-		}
-        set.heading = value;
-        ev.action.setFeedback({
-          value: Math.round(value).toString().padStart(3, "0"),
-        });
-        await ev.action.setSettings(set);
-      }
-    );
-
-    ev.action.setSettings({
-      heading: 0,
-      isHeadingSelect: false,
-    });
+    intervalId = setInterval(() => updateData(ev), UPDATE_INTERVAL);
 
     return ev.action.setFeedback({
       title: "HDG",
@@ -42,7 +33,7 @@ export class HeadingDial extends SingletonAction<SpeedSettings> {
   }
 
   onWillDisappear(ev: WillDisappearEvent<SpeedSettings>): void | Promise<void> {
-    XPlaneComm.unsubscribeDataRef(DatarefsType.READ_WRITE_HEADING);
+    clearInterval(intervalId);
   }
 
   async onTouchTap(ev: TouchTapEvent<SpeedSettings>): Promise<void> {}
@@ -59,14 +50,14 @@ export class HeadingDial extends SingletonAction<SpeedSettings> {
   }
 
   async onDialRotate(ev: DialRotateEvent<SpeedSettings>): Promise<void> {
-    const set = await ev.action.getSettings();
-    set.heading += ev.payload.ticks;
-    set.heading = Math.round(Math.max(0, set.heading)) % 360;
-    ev.action.setFeedback({
-      value: Math.round(set.heading).toString().padStart(3, "0"),
-    });
-    await ev.action.setSettings(set);
-    XPlaneComm.writeData(DatarefsType.READ_WRITE_HEADING, set.heading);
+    let currentHdg = simDataProvider.getDatarefValue(
+      DatarefsType.READ_WRITE_HEADING
+    );
+    currentHdg = Math.round(Math.max(0, currentHdg + ev.payload.ticks)) % 360;
+    if (currentHdg === 0) {
+      currentHdg = 360;
+    }
+    XPlaneComm.writeData(DatarefsType.READ_WRITE_HEADING, currentHdg);
   }
 }
 

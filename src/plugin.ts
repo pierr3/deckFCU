@@ -19,6 +19,7 @@ import { Com2ActiveDial } from "./actions/com/com2Active";
 import { VorLocToggle } from "./actions/vorloc";
 import { HsiRange } from "./actions/hsiRange";
 import { QnhSetting } from "./actions/qnh";
+import { simDataProvider } from "./sim/simDataProvider";
 
 // We can enable "trace" logging so that all messages between the Stream Deck, and the plugin are recorded. When storing sensitive information
 streamDeck.logger.setLevel(LogLevel.DEBUG);
@@ -50,3 +51,4 @@ streamDeck.actions.registerAction(new Com2StandbyDial());
 streamDeck.connect();
 
 startXPlaneComm();
+simDataProvider.start();

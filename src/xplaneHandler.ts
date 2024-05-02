@@ -13,14 +13,14 @@ let intervalId: NodeJS.Timeout;
 export function startXPlaneComm() {
   streamDeck.logger.info("Starting XPlaneComm");
   xclient.checkConnection();
-  intervalId = setInterval(() => {
-    if (!xclient.isConnected()) {
-      streamDeck.logger.info(
-        "XPlaneClient is not connected, attempting to reconnect."
-      );
-      xclient.checkConnection();
-    }
-  }, 5000);
+  //   intervalId = setInterval(() => {
+  //     if (!xclient.isConnected()) {
+  //       streamDeck.logger.info(
+  //         "XPlaneClient is not connected, attempting to reconnect."
+  //       );
+  //       xclient.checkConnection();
+  //     }
+  //   }, 5000);
 }
 
 export function stopXPlaneComm() {
@@ -39,19 +39,18 @@ export namespace XPlaneComm {
     frequency: number,
     callback: (dataRef: string, value: number) => void
   ) {
-    const dataRefValue =
-      datarefMap[aircraftSelector.getSelectedAircraft()][dataref].value;
+	// If we have a raw dataref, we take that, otherwise we take the value from the datarefMap
+    const dataRefValue = dataref.includes("/")
+      ? dataref
+      : datarefMap[aircraftSelector.getSelectedAircraft()][dataref].value;
+	
     if (dataRefValue === undefined || dataRefValue === "NOTIMPLEMENTED") {
       return;
     }
     callbackDatabase[dataref] = (dataref: string, value: number) => {
       callback(dataref, value);
     };
-    xclient.requestDataRef(
-		dataRefValue,
-      frequency,
-      callbackDatabase[dataref]
-    );
+    xclient.requestDataRef(dataRefValue, frequency, callbackDatabase[dataref]);
   }
 
   export function writeData(dataref: string, value: number = 0) {

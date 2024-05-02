@@ -47,6 +47,8 @@ export const DatarefsType = {
   READ_WRITE_IS_STD: "READ_WRITE_IS_STD",
   READ_ALTIMETER_INHG: "READ_ALTIMETER_INHG",
   READ_WRITE_ALTIMETER_SETTING: "READ_WRITE_ALTIMETER_SETTING",
+
+  XPLANE_VERSION: "sim/version/xplane_internal_version"
 };
 
 type DatarefMap = {

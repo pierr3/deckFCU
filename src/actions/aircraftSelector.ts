@@ -10,6 +10,7 @@ import {
   SupportedAircraftType,
 } from "../sim/aircraftSelector";
 import { XPlaneComm } from "../xplaneHandler";
+import { simDataProvider } from "../sim/simDataProvider";
 
 @action({ UUID: "com.pierr3.deckfcu.aircraftselector" })
 export class AircraftSelectorAction extends SingletonAction<CounterSettings> {
@@ -33,6 +34,7 @@ export class AircraftSelectorAction extends SingletonAction<CounterSettings> {
 	}
 
     XPlaneComm.switchSelectedAircraft(nextAircraft);
+	simDataProvider.switchSelectedAircraft(nextAircraft);
     await ev.action.setTitle(nextAircraft);
     await ev.action.setSettings({ currentAircraft: nextAircraft });
   }
