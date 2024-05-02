@@ -7,7 +7,7 @@ import streamDeck, {
   WillAppearEvent,
   WillDisappearEvent,
 } from "@elgato/streamdeck";
-import { XPlaneComm } from "../xplaneHandler";
+import { XPlaneComm } from "../xplane/XPlaneComm";
 import { roundToSecondDecimal } from "../helpers";
 import { datarefMap, DatarefsType } from "../sim/datarefMap";
 import { aircraftSelector } from "../sim/aircraftSelector";

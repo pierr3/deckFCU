@@ -5,7 +5,7 @@ import {
   WillAppearEvent,
   WillDisappearEvent,
 } from "@elgato/streamdeck";
-import { XPlaneComm } from "../xplaneHandler";
+import { XPlaneComm } from "../xplane/XPlaneComm";
 import { DatarefsType } from "../sim/datarefMap";
 import {
   aircraftSelector,

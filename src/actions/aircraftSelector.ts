@@ -9,7 +9,7 @@ import {
   aircraftSelector,
   SupportedAircraftType,
 } from "../sim/aircraftSelector";
-import { XPlaneComm } from "../xplaneHandler";
+import { XPlaneComm } from "../xplane/XPlaneComm";
 import { simDataProvider } from "../sim/simDataProvider";
 
 @action({ UUID: "com.pierr3.deckfcu.aircraftselector" })

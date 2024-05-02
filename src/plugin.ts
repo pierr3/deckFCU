@@ -4,7 +4,7 @@ import { SpeedDial } from "./actions/speed-dial";
 import { AltitudeDial } from "./actions/alt-dial";
 import { HeadingDial } from "./actions/hdg-dial";
 import { VerticalSpeedDial } from "./actions/vs-dial";
-import { startXPlaneComm } from "./xplaneHandler";
+import { startXPlaneComm } from "./xplane/XPlaneComm";
 import { AutothrottleToggle } from "./actions/autothrottle";
 import { AutoPilotOne } from "./actions/autopilot-one";
 import { AutoPilotTwo } from "./actions/autopilot-two";

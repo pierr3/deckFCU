@@ -1,4 +1,4 @@
-import { XPlaneComm } from "../xplaneHandler";
+import { XPlaneComm } from "../xplane/XPlaneComm";
 import { SupportedAircraftType, aircraftSelector } from "./aircraftSelector";
 import { DatarefsType, datarefMap } from "./datarefMap";
 import streamDeck from "@elgato/streamdeck";
