@@ -12,7 +12,7 @@ import { DatarefsType } from "../sim/datarefMap";
 import { getDataRefOnOffValue } from "../helpers";
 import { simDataProvider } from "../sim/simDataProvider";
 
-const UPDATE_INTERVAL = 100; // Update interval in milliseconds
+const UPDATE_INTERVAL = 50; // Update interval in milliseconds
 let intervalId: NodeJS.Timeout;
 
 async function updateData(context: WillAppearEvent<SpeedSettings>) {
@@ -55,7 +55,7 @@ export class HeadingDial extends SingletonAction<SpeedSettings> {
     );
     currentHdg = Math.round(Math.max(0, currentHdg + ev.payload.ticks)) % 360;
     if (currentHdg === 0) {
-      currentHdg = 360;
+      currentHdg = 359;
     }
     XPlaneComm.writeData(DatarefsType.READ_WRITE_HEADING, currentHdg);
   }

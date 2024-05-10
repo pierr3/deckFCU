@@ -6,16 +6,16 @@
 		"offValue": 1
 	},
 	"READ_WRITE_IS_MACH": {
-		"isCommand": false,
-		"value": "1-sim/AP/iasmach",
+		"isCommand": true,
+		"value": "1-sim/command/AP/iasmach_button",
 		"onValue": 1,
 		"offValue": 0
 	},
 	"WRITE_ENABLE_IAS": {
 		"isCommand": false,
-		"value": "1-sim/AP/spdButton",
-		"onValue": 1,
-		"offValue": 0
+		"value": "1-sim/command/AP/spdButton_button",
+		"onValue": 0,
+		"offValue": 1
 	},
 	"READ_WRITE_HEADING": {
 		"isCommand": false,
@@ -24,8 +24,8 @@
 		"offValue": 1
 	},
 	"WRITE_HEADING_SELECT": {
-		"isCommand": false,
-		"value": "1-sim/AP/hdgConfButton",
+		"isCommand": true,
+		"value": "1-sim/command/AP/hdgConfButton_button",
 		"onValue": 1,
 		"offValue": 0
 	},
@@ -36,8 +36,8 @@
 		"offValue": 1
 	},
 	"WRITE_ALTITUDE_SELECT": {
-		"isCommand": false,
-		"value": "1-sim/AP/flchButton",
+		"isCommand": true,
+		"value": "1-sim/command/AP/flchButton_button",
 		"onValue": 1,
 		"offValue": 0
 	},
@@ -48,8 +48,8 @@
 		"offValue": 1
 	},
 	"WRITE_VERTICAL_SPEED_SELECT": {
-		"isCommand": false,
-		"value": "1-sim/AP/vviButton",
+		"isCommand": true,
+		"value": "1-sim/command/AP/vviButton_button",
 		"onValue": 1,
 		"offValue": 0
 	},
@@ -60,8 +60,8 @@
 		"offValue": 0
 	},
 	"WRITE_AP_ONE": {
-		"isCommand": false,
-		"value": "1-sim/AP/cmd_L_Button",
+		"isCommand": true,
+		"value": "1-sim/command/AP/cmd_L_Button_button",
 		"onValue": 1,
 		"offValue": 0
 	},
@@ -72,8 +72,8 @@
 		"offValue": 0
 	},
 	"WRITE_AP_TWO": {
-		"isCommand": false,
-		"value": "1-sim/AP/cmd_R_Button",
+		"isCommand": true,
+		"value": "1-sim/command/AP/cmd_R_Button_button",
 		"onValue": 1,
 		"offValue": 0
 	},
@@ -84,8 +84,8 @@
 		"offValue": 1
 	},
 	"WRITE_ATHR": {
-		"isCommand": false,
-		"value": "1-sim/AP/atSwitcher",
+		"isCommand": true,
+		"value": "1-sim/command/AP/atSwitcher_trigger",
 		"onValue": 0,
 		"offValue": 1
 	},
@@ -96,22 +96,22 @@
 		"offValue": 0
 	},
 	"WRITE_APPR": {
-		"isCommand": false,
-		"value": "1-sim/AP/appButton",
+		"isCommand": true,
+		"value": "1-sim/command/AP/appButton_button",
 		"onValue": 1,
 		"offValue": 0
 	},
 	"READ_LNAV": {
 		"isCommand": false,
 		"value": "1-sim/AP/lnavButton",
-		"onValue": 0,
-		"offValue": 1
+		"onValue": 1,
+		"offValue": 0
 	},
 	"WRITE_LNAV": {
-		"isCommand": false,
-		"value": "1-sim/AP/lnavButton",
-		"onValue": 0,
-		"offValue": 1
+		"isCommand": true,
+		"value": "1-sim/command/AP/lnavButton_button",
+		"onValue": 1,
+		"offValue": 0
 	},
 	"READ_VNAV": {
 		"isCommand": false,
@@ -120,8 +120,8 @@
 		"offValue": 1
 	},
 	"WRITE_VNAV": {
-		"isCommand": false,
-		"value": "1-sim/AP/vnavButton",
+		"isCommand": true,
+		"value": "1-sim/command/AP/vnavButton_button",
 		"onValue": 0,
 		"offValue": 1
 	},
@@ -192,8 +192,8 @@
 		"offValue": 0
 	},
 	"WRITE_LOC": {
-		"isCommand": false,
-		"value": "1-sim/AP/locButton",
+		"isCommand": true,
+		"value": "1-sim/command/AP/locButton_button",
 		"onValue": 1,
 		"offValue": 0
 	},

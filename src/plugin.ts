@@ -20,7 +20,6 @@ import { VorLocToggle } from "./actions/vorloc";
 import { HsiRange } from "./actions/hsiRange";
 import { QnhSetting } from "./actions/qnh";
 import { simDataProvider } from "./sim/simDataProvider";
-import { SupportedAircraftType } from "./sim/aircraftSelector";
 
 // We can enable "trace" logging so that all messages between the Stream Deck, and the plugin are recorded. When storing sensitive information
 streamDeck.logger.setLevel(LogLevel.DEBUG);

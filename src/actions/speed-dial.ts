@@ -8,70 +8,47 @@ import streamDeck, {
   WillDisappearEvent,
 } from "@elgato/streamdeck";
 import { XPlaneComm } from "../xplane/XPlaneComm";
-import { roundToSecondDecimal } from "../helpers";
+import { getDataRefOnOffValue, roundToSecondDecimal } from "../helpers";
 import { datarefMap, DatarefsType } from "../sim/datarefMap";
 import { aircraftSelector } from "../sim/aircraftSelector";
+import { simDataProvider } from "../sim/simDataProvider";
+
+const UPDATE_INTERVAL = 100; // Update interval in milliseconds
+let intervalId: NodeJS.Timeout;
+
+async function updateData(context: WillAppearEvent<SpeedSettings>) {
+  const isMachDataref = simDataProvider.getDatarefValue(
+    DatarefsType.READ_WRITE_IS_MACH
+  );
+  const isMachBool =
+    isMachDataref === getDataRefOnOffValue(DatarefsType.READ_WRITE_IS_MACH).on;
+
+  let value = simDataProvider.getDatarefValue(DatarefsType.READ_WRITE_IAS_MACH);
+
+  const valueTitle = isMachBool ? "MACH" : "SPD";
+
+  let newValue = "000";
+  if (isMachBool) {
+    if (value < 0.01 || value > 1) {
+      value = 0.01;
+    }
+    newValue = roundToSecondDecimal(value).toFixed(2);
+  } else {
+    newValue = Math.round(value).toString().padStart(3, "0");
+  }
+
+  context.action.setFeedback({
+    value: newValue.toString(),
+    title: {
+      value: valueTitle,
+    },
+  });
+}
 
 @action({ UUID: "com.pierr3.deckfcu.speed" })
 export class SpeedDial extends SingletonAction<SpeedSettings> {
   onWillAppear(ev: WillAppearEvent<SpeedSettings>): void | Promise<void> {
-    XPlaneComm.requestDataRef(
-      DatarefsType.READ_WRITE_IS_MACH,
-      5,
-      async (dataRef, value) => {
-        const set = await ev.action.getSettings();
-        if (value === 1 && (!set.isMach || set.justToggledMach)) {
-          set.isMach = true;
-          set.justToggledMach = false;
-          await ev.action.setSettings(set);
-          await ev.action.setFeedback({
-            title: {
-              value: "MACH",
-              alignment: "right",
-            },
-          });
-        } else if (value === 0 && (set.isMach || set.justToggledMach)) {
-          set.isMach = false;
-          set.justToggledMach = false;
-          await ev.action.setSettings(set);
-          ev.action.setFeedback({
-            title: {
-              value: "SPD",
-              alignment: "left",
-            },
-          });
-        }
-      }
-    );
-
-    XPlaneComm.requestDataRef(
-      DatarefsType.READ_WRITE_IAS_MACH,
-      10,
-      async (dataRef, value) => {
-        const settings = await ev.action.getSettings();
-        let newValue = "000";
-        if (settings.isMach) {
-          if (value === settings.mach) {
-            return; // Cache to prevent aggressive refresh
-          }
-          if (value < 0.01 || value > 1) {
-            value = 0.01;
-          }
-          settings.mach = roundToSecondDecimal(value);
-          newValue = value.toFixed(2);
-        } else {
-          if (value === settings.ias) {
-            return; // Cache to prevent aggressive refresh
-          }
-          settings.ias = value;
-          newValue = Math.round(value).toString().padStart(3, "0");
-        }
-        ev.action.setFeedback({
-          value: newValue,
-        });
-        ev.action.setSettings(settings);
-      }
-    );
+    intervalId = setInterval(() => updateData(ev), UPDATE_INTERVAL);
 
     ev.action.setSettings({
       ias: 0,
@@ -88,51 +65,49 @@ export class SpeedDial extends SingletonAction<SpeedSettings> {
   }
 
   onWillDisappear(ev: WillDisappearEvent<SpeedSettings>): void | Promise<void> {
-    XPlaneComm.unsubscribeDataRef(DatarefsType.READ_WRITE_IAS_MACH);
-    XPlaneComm.unsubscribeDataRef(DatarefsType.READ_WRITE_IS_MACH);
+    clearInterval(intervalId);
   }
 
   async onTouchTap(ev: TouchTapEvent<SpeedSettings>): Promise<void> {
-    const settings = await ev.action.getSettings();
-    settings.isMach = !settings.isMach;
-    settings.justToggledMach = true;
+    const isMachDataref = simDataProvider.getDatarefValue(
+      DatarefsType.READ_WRITE_IS_MACH
+    );
+    const isMachBool =
+      isMachDataref ===
+      getDataRefOnOffValue(DatarefsType.READ_WRITE_IS_MACH).on;
 
-    const onValue =
-      datarefMap[aircraftSelector.getSelectedAircraft()][
-        DatarefsType.READ_WRITE_IS_MACH
-      ].onValue;
-    const offValue =
-      datarefMap[aircraftSelector.getSelectedAircraft()][
-        DatarefsType.READ_WRITE_IS_MACH
-      ].offValue;
+    const data = getDataRefOnOffValue(DatarefsType.READ_WRITE_IS_MACH);
 
     XPlaneComm.writeData(
       DatarefsType.READ_WRITE_IS_MACH,
-      settings.isMach ? onValue : offValue
+      isMachBool ? data.off : data.on
     );
-    await ev.action.setSettings(settings);
   }
 
   async onDialDown(ev: DialDownEvent<SpeedSettings>): Promise<void> {
-    const settings = await ev.action.getSettings();
-    settings.isSpeedSelect = !settings.isSpeedSelect;
-    await ev.action.setSettings(settings);
-    XPlaneComm.writeData(
-      DatarefsType.WRITE_ENABLE_IAS,
-      settings.isSpeedSelect ? 1 : 0
-    );
+    const data = getDataRefOnOffValue(DatarefsType.WRITE_ENABLE_IAS);
+    XPlaneComm.writeData(DatarefsType.WRITE_ENABLE_IAS, data.on);
   }
 
   async onDialRotate(ev: DialRotateEvent<SpeedSettings>): Promise<void> {
-    const settings = await ev.action.getSettings();
-    if (settings.isMach) {
-      let newMach = ev.payload.settings.mach ?? 0.01;
+    const currentValue = simDataProvider.getDatarefValue(
+      DatarefsType.READ_WRITE_IAS_MACH
+    );
+    const isMachDataref = simDataProvider.getDatarefValue(
+      DatarefsType.READ_WRITE_IS_MACH
+    );
+    const isMachBool =
+      isMachDataref ===
+      getDataRefOnOffValue(DatarefsType.READ_WRITE_IS_MACH).on;
+
+    if (isMachBool) {
+      let newMach = roundToSecondDecimal(currentValue) ?? 0.01;
       newMach += ev.payload.ticks / 100;
       newMach = Math.max(0, newMach);
 
       XPlaneComm.writeData(DatarefsType.READ_WRITE_IAS_MACH, newMach);
     } else {
-      let newIas = Math.round(ev.payload.settings.ias) ?? 0;
+      let newIas = Math.round(currentValue) ?? 0;
       newIas += ev.payload.ticks;
       newIas = Math.max(0, newIas);
 
@@ -144,10 +119,4 @@ export class SpeedDial extends SingletonAction<SpeedSettings> {
 /**
  * Settings for {@link IncrementCounter}.
  */
-type SpeedSettings = {
-  ias: number;
-  mach: number;
-  isMach: boolean;
-  justToggledMach: boolean;
-  isSpeedSelect: boolean;
-};
+type SpeedSettings = {};
