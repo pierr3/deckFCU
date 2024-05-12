@@ -12,7 +12,7 @@
 		"offValue": 0
 	},
 	"WRITE_ENABLE_IAS": {
-		"isCommand": false,
+		"isCommand": true,
 		"value": "1-sim/command/AP/spdButton_button",
 		"onValue": 0,
 		"offValue": 1
@@ -116,8 +116,8 @@
 	"READ_VNAV": {
 		"isCommand": false,
 		"value": "1-sim/AP/vnavButton",
-		"onValue": 0,
-		"offValue": 1
+		"onValue": 1,
+		"offValue": 0
 	},
 	"WRITE_VNAV": {
 		"isCommand": true,

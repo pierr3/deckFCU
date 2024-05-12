@@ -15,17 +15,33 @@ import { getDataRefOnOffValue } from "../helpers";
 const UPDATE_INTERVAL = 50; // Update interval in milliseconds
 let intervalId: NodeJS.Timeout;
 
+let lastAltitude = 0;
+let shouldStopUpdating = false;
+
 async function updateData(context: WillAppearEvent<AltitudeSettings>) {
+  if (shouldStopUpdating) {
+    return;
+  }
+
+  const altitude = Math.round(
+    simDataProvider.getDatarefValue(DatarefsType.READ_WRITE_ALTITUDE)
+  );
+
+  if (lastAltitude === altitude) {
+    return;
+  }
+
+  lastAltitude = altitude;
+
   context.action.setFeedback({
-    value: Math.round(
-      simDataProvider.getDatarefValue(DatarefsType.READ_WRITE_ALTITUDE)
-    ).toString(),
+    value: altitude.toString(),
   });
 }
 
 @action({ UUID: "com.pierr3.deckfcu.altitude" })
 export class AltitudeDial extends SingletonAction<AltitudeSettings> {
   onWillAppear(ev: WillAppearEvent<AltitudeSettings>): void | Promise<void> {
+    shouldStopUpdating = false;
     intervalId = setInterval(() => updateData(ev), UPDATE_INTERVAL);
     return ev.action.setFeedback({
       title: "ALT",
@@ -36,6 +52,7 @@ export class AltitudeDial extends SingletonAction<AltitudeSettings> {
   onWillDisappear(
     ev: WillDisappearEvent<AltitudeSettings>
   ): void | Promise<void> {
+    shouldStopUpdating = true;
     clearInterval(intervalId);
   }
 

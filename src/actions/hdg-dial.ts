@@ -15,15 +15,33 @@ import { simDataProvider } from "../sim/simDataProvider";
 const UPDATE_INTERVAL = 50; // Update interval in milliseconds
 let intervalId: NodeJS.Timeout;
 
+let lastHeading = 0;
+let shouldStopUpdating = false;
+
 async function updateData(context: WillAppearEvent<SpeedSettings>) {
+  if (shouldStopUpdating) {
+    return;
+  }
+
+  const value = Math.round(
+    simDataProvider.getDatarefValue(DatarefsType.READ_WRITE_HEADING)
+  );
+
+  if (lastHeading === value) {
+    return;
+  }
+
+  lastHeading = value;
+
   context.action.setFeedback({
-    value: Math.round(simDataProvider.getDatarefValue(DatarefsType.READ_WRITE_HEADING)).toString().padStart(3, "0")
+    value: value.toString().padStart(3, "0"),
   });
 }
 
 @action({ UUID: "com.pierr3.deckfcu.heading" })
 export class HeadingDial extends SingletonAction<SpeedSettings> {
   onWillAppear(ev: WillAppearEvent<SpeedSettings>): void | Promise<void> {
+	shouldStopUpdating = false;
     intervalId = setInterval(() => updateData(ev), UPDATE_INTERVAL);
 
     return ev.action.setFeedback({
@@ -33,6 +51,7 @@ export class HeadingDial extends SingletonAction<SpeedSettings> {
   }
 
   onWillDisappear(ev: WillDisappearEvent<SpeedSettings>): void | Promise<void> {
+	shouldStopUpdating = true;
     clearInterval(intervalId);
   }
 

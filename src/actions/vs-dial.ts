@@ -15,11 +15,26 @@ import { simDataProvider } from "../sim/simDataProvider";
 const UPDATE_INTERVAL = 100; // Update interval in milliseconds
 let intervalId: NodeJS.Timeout;
 
+let lastVerticalSpeed = 0;
+let shouldStopUpdating = false;
+
 async function updateData(context: WillAppearEvent<VerticalSpeedSettings>) {
+  if (shouldStopUpdating) {
+    return;
+  }
+
+  const value = Math.round(
+    simDataProvider.getDatarefValue(DatarefsType.READ_WRITE_VERTICAL_SPEED)
+  );
+
+  if (lastVerticalSpeed === value) {
+    return;
+  }
+
+  lastVerticalSpeed = value;
+
   context.action.setFeedback({
-    value: Math.round(
-      simDataProvider.getDatarefValue(DatarefsType.READ_WRITE_VERTICAL_SPEED)
-    ).toString(),
+    value: (value > 0 ? "+" : "") + value.toString().padStart(4, "0"),
   });
 }
 
@@ -28,12 +43,8 @@ export class VerticalSpeedDial extends SingletonAction<VerticalSpeedSettings> {
   onWillAppear(
     ev: WillAppearEvent<VerticalSpeedSettings>
   ): void | Promise<void> {
+    shouldStopUpdating = false;
     intervalId = setInterval(() => updateData(ev), UPDATE_INTERVAL);
-
-    ev.action.setSettings({
-      VerticalSpeed: 0,
-      isVerticalSpeedSelect: false,
-    });
 
     return ev.action.setFeedback({
       title: "VS",
@@ -44,6 +55,7 @@ export class VerticalSpeedDial extends SingletonAction<VerticalSpeedSettings> {
   onWillDisappear(
     ev: WillDisappearEvent<VerticalSpeedSettings>
   ): void | Promise<void> {
+    shouldStopUpdating = true;
     clearInterval(intervalId);
   }
 

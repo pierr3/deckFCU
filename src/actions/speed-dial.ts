@@ -16,14 +16,28 @@ import { simDataProvider } from "../sim/simDataProvider";
 const UPDATE_INTERVAL = 100; // Update interval in milliseconds
 let intervalId: NodeJS.Timeout;
 
+let lastSpeed = 0;
+let lastIsMach = false;
+let shouldStopUpdating = false;
+
 async function updateData(context: WillAppearEvent<SpeedSettings>) {
+  if (shouldStopUpdating) {
+    return;
+  }
+
   const isMachDataref = simDataProvider.getDatarefValue(
     DatarefsType.READ_WRITE_IS_MACH
   );
   const isMachBool =
     isMachDataref === getDataRefOnOffValue(DatarefsType.READ_WRITE_IS_MACH).on;
-
   let value = simDataProvider.getDatarefValue(DatarefsType.READ_WRITE_IAS_MACH);
+
+  if (lastSpeed === value && lastIsMach === isMachBool) {
+    return;
+  }
+
+  lastSpeed = value;
+  lastIsMach = isMachBool;
 
   const valueTitle = isMachBool ? "MACH" : "SPD";
 
