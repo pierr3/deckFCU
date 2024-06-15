@@ -30,6 +30,9 @@ export class AircraftSelectorAction extends SingletonAction<CounterSettings> {
 		nextAircraft = SupportedAircraftType.FF757;
 	}
 	if (aircraftSelector.getSelectedAircraft() === SupportedAircraftType.FF757) {
+		nextAircraft = SupportedAircraftType.TOLISS;
+	}
+	if (aircraftSelector.getSelectedAircraft() === SupportedAircraftType.TOLISS) {
 		nextAircraft = SupportedAircraftType.Default;
 	}
 

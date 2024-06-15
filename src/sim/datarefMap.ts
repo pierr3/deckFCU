@@ -3,6 +3,7 @@ import streamDeck from "@elgato/streamdeck";
 import ff757Config from '../configs/ff757.json';
 import defaultConfig from '../configs/default.json';
 import zibo737Config from '../configs/zibo737.json';
+import tolissConfig from '../configs/tolissa321.json';
 
 export const DatarefsType = {
   // Dials
@@ -79,4 +80,5 @@ export let datarefMap: DatarefMap = {
   [SupportedAircraftType.Default]: defaultConfig as DatarefMap[SupportedAircraftType],
   [SupportedAircraftType.Zibo737]: zibo737Config as DatarefMap[SupportedAircraftType],
   [SupportedAircraftType.FF757]: ff757Config as DatarefMap[SupportedAircraftType],
+  [SupportedAircraftType.TOLISS]: tolissConfig as DatarefMap[SupportedAircraftType],
 };
