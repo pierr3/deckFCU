@@ -10,79 +10,62 @@ import streamDeck, {
 import { XPlaneComm } from "../xplane/XPlaneComm";
 import { datarefMap, DatarefsType } from "../sim/datarefMap";
 import { aircraftSelector } from "../sim/aircraftSelector";
-import { title } from "process";
+import { simDataProvider } from "../sim/simDataProvider";
+
+const UPDATE_INTERVAL = 100; // Update interval in milliseconds
+let intervalId: NodeJS.Timeout;
+
+let lastValue = 0;
+let shouldStopUpdating = false;
+
+let lastisStd = false;
+let lastisQnh = false;
+
+async function updateData(context: WillAppearEvent<QnhSettings>) {
+  if (shouldStopUpdating) {
+    return;
+  }
+
+  const value = simDataProvider.getDatarefValue(
+    DatarefsType.READ_WRITE_ALTIMETER_SETTING
+  );
+
+  const isQnh =
+    simDataProvider.getDatarefValue(DatarefsType.READ_WRITE_IS_QNH) ===
+    datarefMap[aircraftSelector.getSelectedAircraft()][
+      DatarefsType.READ_WRITE_IS_QNH
+    ].onValue;
+
+  const isStd =
+    simDataProvider.getDatarefValue(DatarefsType.READ_WRITE_IS_STD) ===
+    datarefMap[aircraftSelector.getSelectedAircraft()][
+      DatarefsType.READ_WRITE_IS_STD
+    ].onValue;
+
+  if (lastValue === value && lastisStd === isStd && lastisQnh === isQnh) {
+    return;
+  }
+
+  lastValue = value;
+  lastisStd = isStd;
+  lastisQnh = isQnh;
+
+  context.action.setFeedback({
+    title: isStd ? "ALT STD" : isQnh ? "ALT HPA" : "ALT INHG",
+    value: isStd
+      ? "STD"
+      : isQnh
+      ? Math.round(value * 33.8638)
+      : value.toFixed(2),
+  });
+}
 
 @action({ UUID: "com.pierr3.deckfcu.qnh" })
 export class QnhSetting extends SingletonAction<QnhSettings> {
   onWillAppear(ev: WillAppearEvent<QnhSettings>): void | Promise<void> {
-    XPlaneComm.requestDataRef(
-      DatarefsType.READ_ALTIMETER_INHG,
-      30,
-      async (dataRef, value) => {
-        const set = await ev.action.getSettings();
-        set.value = value;
-        set.qnhValue = Math.round(value * 33.8637526).toString();
-        ev.action.setFeedback({
-          title: set.isStd ? "ATL *STD" : set.isQnh ? "ALT HPA" : "ATL INHG",
-          value: set.isQnh ? set.qnhValue : set.value.toFixed(2),
-        });
-        await ev.action.setSettings(set);
-      }
-    );
-
-    XPlaneComm.requestDataRef(
-      DatarefsType.READ_WRITE_ALTIMETER_SETTING,
-      10,
-      async (dataRef, value) => {
-        const set = await ev.action.getSettings();
-        set.valueSetting = value;
-        await ev.action.setSettings(set);
-      }
-    );
-
-    XPlaneComm.requestDataRef(
-      DatarefsType.READ_WRITE_IS_STD,
-      2,
-      async (dataRef, value) => {
-        const set = await ev.action.getSettings();
-        const data =
-          datarefMap[aircraftSelector.getSelectedAircraft()][
-            DatarefsType.READ_WRITE_IS_STD
-          ];
-        set.isStd = value === data.onValue;
-        ev.action.setFeedback({
-          title: set.isStd ? "ATL *STD" : set.isQnh ? "ALT HPA" : "ATL INHG",
-          value: set.isQnh ? set.qnhValue : set.value.toFixed(2),
-        });
-        await ev.action.setSettings(set);
-      }
-    );
-
-    XPlaneComm.requestDataRef(
-      DatarefsType.READ_WRITE_IS_QNH,
-      2,
-      async (dataRef, value) => {
-        const set = await ev.action.getSettings();
-        const data =
-          datarefMap[aircraftSelector.getSelectedAircraft()][
-            DatarefsType.READ_WRITE_IS_QNH
-          ];
-        set.isQnh = value === data.onValue;
-        ev.action.setFeedback({
-          title: set.isStd ? "ATL *STD" : set.isQnh ? "ALT HPA" : "ATL INHG",
-          value: set.isQnh ? set.qnhValue : set.value.toFixed(2),
-        });
-        await ev.action.setSettings(set);
-      }
-    );
-
-    ev.action.setSettings({
-      value: 0,
-      isQnh: false,
-      valueSetting: 0,
-      qnhValue: "",
-      isStd: false,
-    });
+    shouldStopUpdating = false;
+	lastValue = -1;
+    intervalId = setInterval(() => updateData(ev), UPDATE_INTERVAL);
 
     return ev.action.setFeedback({
       title: "ALT INHG",
@@ -91,15 +74,11 @@ export class QnhSetting extends SingletonAction<QnhSettings> {
   }
 
   onWillDisappear(ev: WillDisappearEvent<QnhSettings>): void | Promise<void> {
-    XPlaneComm.unsubscribeDataRef(DatarefsType.READ_ALTIMETER_INHG);
-    XPlaneComm.unsubscribeDataRef(DatarefsType.READ_WRITE_IS_STD);
-    XPlaneComm.unsubscribeDataRef(DatarefsType.READ_WRITE_IS_QNH);
+    shouldStopUpdating = true;
+    clearInterval(intervalId);
   }
 
   async onTouchTap(ev: TouchTapEvent<QnhSettings>): Promise<void> {
-    const settings = await ev.action.getSettings();
-    settings.isStd = !settings.isStd;
-
     const onValue =
       datarefMap[aircraftSelector.getSelectedAircraft()][
         DatarefsType.READ_WRITE_IS_STD
@@ -111,15 +90,11 @@ export class QnhSetting extends SingletonAction<QnhSettings> {
 
     XPlaneComm.writeData(
       DatarefsType.READ_WRITE_IS_STD,
-      settings.isStd ? onValue : offValue
+      lastisStd ? offValue : onValue
     );
-    await ev.action.setSettings(settings);
   }
 
   async onDialDown(ev: DialDownEvent<QnhSettings>): Promise<void> {
-    const settings = await ev.action.getSettings();
-    settings.isQnh = !settings.isQnh;
-
     const onValue =
       datarefMap[aircraftSelector.getSelectedAircraft()][
         DatarefsType.READ_WRITE_IS_QNH
@@ -131,25 +106,25 @@ export class QnhSetting extends SingletonAction<QnhSettings> {
 
     XPlaneComm.writeData(
       DatarefsType.READ_WRITE_IS_QNH,
-      settings.isQnh ? onValue : offValue
+      lastisQnh ? offValue : onValue
     );
-    await ev.action.setSettings(settings);
   }
 
   async onDialRotate(ev: DialRotateEvent<QnhSettings>): Promise<void> {
-	if (ev.payload.settings.isStd) {
-		return;
-	}
-    const settings = await ev.action.getSettings();
+    if (lastisStd) {
+      return;
+    }
     const data =
       datarefMap[aircraftSelector.getSelectedAircraft()][
         DatarefsType.READ_WRITE_ALTIMETER_SETTING
       ];
-    settings.valueSetting += ev.payload.ticks * (data.valueMultiplier || 1);
-    XPlaneComm.writeData(
-      DatarefsType.READ_WRITE_ALTIMETER_SETTING,
-      settings.valueSetting
-    );
+    let newVal = lastValue;
+	if (lastisQnh) {
+		newVal += ev.payload.ticks * 0.03;
+	} else {
+		newVal += ev.payload.ticks * 0.01;
+	}
+    XPlaneComm.writeData(DatarefsType.READ_WRITE_ALTIMETER_SETTING, newVal);
   }
 }
 
@@ -159,7 +134,5 @@ export class QnhSetting extends SingletonAction<QnhSettings> {
 type QnhSettings = {
   isQnh: boolean;
   value: number;
-  valueSetting: number;
-  qnhValue: string;
   isStd: boolean;
 };

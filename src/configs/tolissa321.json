@@ -1,14 +1,14 @@
 {
 	"READ_WRITE_IAS_MACH": {
 		"isCommand": false,
-		"value": "sim/cockpit2/autopilot/airspeed_is_mach",
+		"value": "sim/cockpit2/gauges/actuators/airspeed_bug_deg",
 		"onValue": 1,
 		"offValue": 0
 	},
 	"READ_WRITE_IS_MACH": {
-		"isCommand": true,
+		"isCommand": false,
 		"value": "sim/cockpit2/autopilot/airspeed_is_mach",
-		"writeValue": "sim/autopilot/knots_mach_toggle",
+		"writeValue": "sim/cockpit2/autopilot/airspeed_is_mach",
 		"onValue": 1,
 		"offValue": 0
 	},
@@ -61,7 +61,7 @@
 		"offValue": 0
 	},
 	"WRITE_AP_ONE": {
-		"isCommand": true,
+		"isCommand": false,
 		"value": "AirbusFBW/AP1Engage",
 		"onValue": 1,
 		"offValue": 0
@@ -200,9 +200,17 @@
 	},
 	"READ_WRITE_HSI_RANGE": {
 		"isCommand": false,
-		"value": "AirbusFBW/NDrangeFO",
+		"value": "AirbusFBW/NDrangeCapt",
 		"onValue": 1,
-		"offValue": 0
+		"offValue": 0,
+		"displayValueMap": {
+			"0": "10",
+			"1": "20",
+			"2": "40",
+			"3": "80",
+			"4": "160",
+			"5": "320"
+		}
 	},
 	"READ_WRITE_IS_QNH": {
 		"isCommand": false,
@@ -211,7 +219,7 @@
 		"offValue": 0
 	},
 	"READ_WRITE_IS_STD": {
-		"isCommand": true,
+		"isCommand": false,
 		"value": "AirbusFBW/BaroStdCapt",
 		"onValue": 1,
 		"offValue": 0
