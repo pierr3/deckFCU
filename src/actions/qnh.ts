@@ -55,8 +55,8 @@ async function updateData(context: WillAppearEvent<QnhSettings>) {
     value: isStd
       ? "STD"
       : isQnh
-      ? Math.round(value * 33.8638)
-      : value.toFixed(2),
+      ? Math.round(value * 33.8638).toString().padStart(4, "0")
+      : value.toFixed(2).padStart(5, "0"),
   });
 }
 
@@ -69,7 +69,7 @@ export class QnhSetting extends SingletonAction<QnhSettings> {
 
     return ev.action.setFeedback({
       title: "ALT INHG",
-      value: "---",
+      value: "----",
     });
   }
 

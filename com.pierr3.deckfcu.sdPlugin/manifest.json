@@ -6,14 +6,14 @@
 		{
 			"Name": "Switch aircraft",
 			"UUID": "com.pierr3.deckfcu.aircraftselector",
-			"Icon": "imgs/actions/counter/key",
+			"Icon": "imgs/actions/general/settings",
 			"Tooltip": "Toggles between aircraft types",
 			"Controllers": [
 				"Keypad"
 			],
 			"States": [
 				{
-					"Image": "imgs/actions/counter/key",
+					"Image": "imgs/actions/general/settings",
 					"TitleAlignment": "middle"
 				}
 			]
@@ -154,10 +154,10 @@
 		{
 			"Name": "Speed Dial",
 			"UUID": "com.pierr3.deckfcu.speed",
-			"Icon": "imgs/actions/counter/icon",
+			"Icon": "imgs/actions/general/dial",
 			"States": [
 				{
-					"Image": "imgs/actions/counter/key",
+					"Image": "imgs/actions/general/dial",
 					"TitleAlignment": "middle"
 				}
 			],
@@ -173,10 +173,10 @@
 		{
 			"Name": "Heading Dial",
 			"UUID": "com.pierr3.deckfcu.heading",
-			"Icon": "imgs/actions/counter/icon",
+			"Icon": "imgs/actions/general/dial",
 			"States": [
 				{
-					"Image": "imgs/actions/counter/key",
+					"Image": "imgs/actions/general/dial",
 					"TitleAlignment": "middle"
 				}
 			],
@@ -192,10 +192,10 @@
 		{
 			"Name": "Altitude Dial",
 			"UUID": "com.pierr3.deckfcu.altitude",
-			"Icon": "imgs/actions/counter/icon",
+			"Icon": "imgs/actions/general/dial",
 			"States": [
 				{
-					"Image": "imgs/actions/counter/key",
+					"Image": "imgs/actions/general/dial",
 					"TitleAlignment": "middle"
 				}
 			],
@@ -211,10 +211,10 @@
 		{
 			"Name": "Vertical Speed Dial",
 			"UUID": "com.pierr3.deckfcu.vs",
-			"Icon": "imgs/actions/counter/icon",
+			"Icon": "imgs/actions/general/dial",
 			"States": [
 				{
-					"Image": "imgs/actions/counter/key",
+					"Image": "imgs/actions/general/dial",
 					"TitleAlignment": "middle"
 				}
 			],
@@ -230,10 +230,10 @@
 		{
 			"Name": "COM 1 Active Dial",
 			"UUID": "com.pierr3.deckfcu.com1active",
-			"Icon": "imgs/actions/counter/icon",
+			"Icon": "imgs/actions/general/dial",
 			"States": [
 				{
-					"Image": "imgs/actions/counter/key",
+					"Image": "imgs/actions/general/dial",
 					"TitleAlignment": "middle"
 				}
 			],
@@ -249,10 +249,10 @@
 		{
 			"Name": "COM 1 Standby Dial",
 			"UUID": "com.pierr3.deckfcu.com1standby",
-			"Icon": "imgs/actions/counter/icon",
+			"Icon": "imgs/actions/general/dial",
 			"States": [
 				{
-					"Image": "imgs/actions/counter/key",
+					"Image": "imgs/actions/general/dial",
 					"TitleAlignment": "middle"
 				}
 			],
@@ -268,10 +268,10 @@
 		{
 			"Name": "COM 2 Active Dial",
 			"UUID": "com.pierr3.deckfcu.com2active",
-			"Icon": "imgs/actions/counter/icon",
+			"Icon": "imgs/actions/general/dial",
 			"States": [
 				{
-					"Image": "imgs/actions/counter/key",
+					"Image": "imgs/actions/general/dial",
 					"TitleAlignment": "middle"
 				}
 			],
@@ -287,10 +287,10 @@
 		{
 			"Name": "COM 2 Standby Dial",
 			"UUID": "com.pierr3.deckfcu.com2standby",
-			"Icon": "imgs/actions/counter/icon",
+			"Icon": "imgs/actions/general/dial",
 			"States": [
 				{
-					"Image": "imgs/actions/counter/key",
+					"Image": "imgs/actions/general/dial",
 					"TitleAlignment": "middle"
 				}
 			],
@@ -306,10 +306,10 @@
 		{
 			"Name": "COM 1 Volume",
 			"UUID": "com.pierr3.deckfcu.com1volume",
-			"Icon": "imgs/actions/counter/icon",
+			"Icon": "imgs/actions/general/dial",
 			"States": [
 				{
-					"Image": "imgs/actions/counter/key",
+					"Image": "imgs/actions/general/dial",
 					"TitleAlignment": "middle"
 				}
 			],
@@ -325,10 +325,10 @@
 		{
 			"Name": "COM 2 Volume",
 			"UUID": "com.pierr3.deckfcu.com2volume",
-			"Icon": "imgs/actions/counter/icon",
+			"Icon": "imgs/actions/general/dial",
 			"States": [
 				{
-					"Image": "imgs/actions/counter/key",
+					"Image": "imgs/actions/general/dial",
 					"TitleAlignment": "middle"
 				}
 			],
@@ -344,10 +344,10 @@
 		{
 			"Name": "HSI Range",
 			"UUID": "com.pierr3.deckfcu.hsirange",
-			"Icon": "imgs/actions/counter/icon",
+			"Icon": "imgs/actions/general/dial",
 			"States": [
 				{
-					"Image": "imgs/actions/counter/key",
+					"Image": "imgs/actions/general/dial",
 					"TitleAlignment": "middle"
 				}
 			],
@@ -363,11 +363,14 @@
 		{
 			"Name": "Altimeter Setting",
 			"UUID": "com.pierr3.deckfcu.qnh",
-			"Icon": "imgs/actions/counter/icon",
+			"Icon": "imgs/actions/general/dial",
 			"States": [
 				{
-					"Image": "imgs/actions/counter/key",
-					"TitleAlignment": "middle"
+					"Image": "imgs/actions/general/dial",
+					"TitleAlignment": "middle",
+					"ShowTitle": true,
+					"Title": "Default",
+					"FontStyle": "bold"
 				}
 			],
 			"Tooltip": "Changes the (left side) altimeter setting",

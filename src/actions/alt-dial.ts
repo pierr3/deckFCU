@@ -34,7 +34,7 @@ async function updateData(context: WillAppearEvent<AltitudeSettings>) {
   lastAltitude = altitude;
 
   context.action.setFeedback({
-    value: altitude.toString(),
+    value: altitude.toString().padStart(4, "0"),
   });
 }
 
@@ -46,7 +46,7 @@ export class AltitudeDial extends SingletonAction<AltitudeSettings> {
     intervalId = setInterval(() => updateData(ev), UPDATE_INTERVAL);
     return ev.action.setFeedback({
       title: "ALT",
-      value: "000",
+      value: "0000",
     });
   }
 
