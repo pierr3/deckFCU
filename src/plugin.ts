@@ -20,6 +20,8 @@ import { VorLocToggle } from "./actions/vorloc";
 import { HsiRange } from "./actions/hsiRange";
 import { QnhSetting } from "./actions/qnh";
 import { simDataProvider } from "./sim/simDataProvider";
+import { Com1Volume } from "./actions/com/com1Volume";
+import { Com2Volume } from "./actions/com/com2Volume";
 
 // We can enable "trace" logging so that all messages between the Stream Deck, and the plugin are recorded. When storing sensitive information
 streamDeck.logger.setLevel(LogLevel.DEBUG);
@@ -50,6 +52,8 @@ streamDeck.actions.registerAction(new Com1StandbyDial());
 streamDeck.actions.registerAction(new Com2ActiveDial());
 streamDeck.actions.registerAction(new Com2StandbyDial());
 
+streamDeck.actions.registerAction(new Com1Volume());
+streamDeck.actions.registerAction(new Com2Volume());
+
 // Finally, connect to the Stream Deck.
 streamDeck.connect();
-

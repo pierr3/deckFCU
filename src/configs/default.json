@@ -220,5 +220,11 @@
 		"value": "NOTIMPLEMENTED",
 		"onValue": 1,
 		"offValue": 0
+	},
+	"WRITE_FLCH": {
+		"isCommand": true,
+		"value": "NOTIMPLEMENTED",
+		"onValue": 1,
+		"offValue": 0
 	}
 }

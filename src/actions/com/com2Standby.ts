@@ -9,9 +9,7 @@ import streamDeck, {
 } from "@elgato/streamdeck";
 import { XPlaneComm } from "../../xplane/XPlaneComm";
 import { DatarefsType } from "../../sim/datarefMap";
-import {
-  hertzToHuman,
-} from "../../helpers";
+import { hertzToHuman } from "../../helpers";
 
 @action({ UUID: "com.pierr3.deckfcu.com2standby" })
 export class Com2StandbyDial extends SingletonAction<AltitudeSettings> {
@@ -21,9 +19,9 @@ export class Com2StandbyDial extends SingletonAction<AltitudeSettings> {
       10,
       async (dataRef, value) => {
         const set = await ev.action.getSettings();
-		if (set.frequency === value) {
-			return;
-		}
+        if (set.frequency === value) {
+          return;
+        }
         set.frequency = value;
         await ev.action.setFeedback({
           value: hertzToHuman(value),
@@ -33,7 +31,7 @@ export class Com2StandbyDial extends SingletonAction<AltitudeSettings> {
       }
     );
 
-	ev.action.setSettings({
+    ev.action.setSettings({
       frequency: 0,
       doOnlyBigNumber: false,
     });

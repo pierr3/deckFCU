@@ -1,9 +1,9 @@
 import { SupportedAircraftType } from "./aircraftSelector";
 import streamDeck from "@elgato/streamdeck";
-import ff757Config from '../configs/ff757.json';
-import defaultConfig from '../configs/default.json';
-import zibo737Config from '../configs/zibo737.json';
-import tolissConfig from '../configs/tolissa321.json';
+import ff757Config from "../configs/ff757.json";
+import defaultConfig from "../configs/default.json";
+import zibo737Config from "../configs/zibo737.json";
+import tolissConfig from "../configs/tolissa321.json";
 
 export const DatarefsType = {
   // Dials
@@ -33,6 +33,8 @@ export const DatarefsType = {
   READ_LOC: "READ_LOC",
   WRITE_LOC: "WRITE_LOC",
 
+  WRITE_FLCH: "WRITE_FLCH",
+
   // Comms
   READ_COM1_ACTIVE: "READ_COM1_ACTIVE",
   READ_WRITE_COM1_STANDBY: "READ_WRITE_COM1_STANDBY",
@@ -52,7 +54,7 @@ export const DatarefsType = {
   READ_WRITE_IS_STD: "READ_WRITE_IS_STD",
   READ_WRITE_ALTIMETER_SETTING: "READ_WRITE_ALTIMETER_SETTING",
 
-  XPLANE_VERSION: "sim/version/xplane_internal_version"
+  XPLANE_VERSION: "sim/version/xplane_internal_version",
 };
 
 type DatarefMap = {
@@ -73,11 +75,13 @@ type DatarefData = {
   valueMultiplier?: number;
 };
 
-
-
 export let datarefMap: DatarefMap = {
-  [SupportedAircraftType.Default]: defaultConfig as DatarefMap[SupportedAircraftType],
-  [SupportedAircraftType.Zibo737]: zibo737Config as DatarefMap[SupportedAircraftType],
-  [SupportedAircraftType.FF757]: ff757Config as DatarefMap[SupportedAircraftType],
-  [SupportedAircraftType.TOLISS]: tolissConfig as DatarefMap[SupportedAircraftType],
+  [SupportedAircraftType.Default]:
+    defaultConfig as DatarefMap[SupportedAircraftType],
+  [SupportedAircraftType.Zibo737]:
+    zibo737Config as DatarefMap[SupportedAircraftType],
+  [SupportedAircraftType.FF757]:
+    ff757Config as DatarefMap[SupportedAircraftType],
+  [SupportedAircraftType.TOLISS]:
+    tolissConfig as DatarefMap[SupportedAircraftType],
 };

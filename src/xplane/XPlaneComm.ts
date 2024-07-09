@@ -31,11 +31,11 @@ export namespace XPlaneComm {
     frequency: number,
     callback: (dataRef: string, value: number) => void
   ) {
-	// If we have a raw dataref, we take that, otherwise we take the value from the datarefMap
+    // If we have a raw dataref, we take that, otherwise we take the value from the datarefMap
     const dataRefValue = dataref.includes("/")
       ? dataref
       : datarefMap[aircraftSelector.getSelectedAircraft()][dataref].value;
-	
+
     if (dataRefValue === undefined || dataRefValue === "NOTIMPLEMENTED") {
       return;
     }

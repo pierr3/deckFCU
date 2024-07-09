@@ -60,7 +60,11 @@ export class VerticalSpeedDial extends SingletonAction<VerticalSpeedSettings> {
     clearInterval(intervalId);
   }
 
-  async onTouchTap(ev: TouchTapEvent<VerticalSpeedSettings>): Promise<void> {}
+  async onTouchTap(ev: TouchTapEvent<VerticalSpeedSettings>): Promise<void> {
+    // Trigger FLCH
+    const data = getDataRefOnOffValue(DatarefsType.WRITE_FLCH);
+    XPlaneComm.writeData(DatarefsType.WRITE_FLCH, data.on);
+  }
 
   async onDialDown(ev: DialDownEvent<VerticalSpeedSettings>): Promise<void> {
     const data = getDataRefOnOffValue(DatarefsType.WRITE_VERTICAL_SPEED_SELECT);

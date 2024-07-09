@@ -233,5 +233,11 @@
 		"onValue": 1,
 		"offValue": 0,
 		"valueMultiplier": 5
+	},
+	"WRITE_FLCH": {
+		"isCommand": true,
+		"value": "AirbusFBW/PullAltitude",
+		"onValue": 1,
+		"offValue": 0
 	}
 }

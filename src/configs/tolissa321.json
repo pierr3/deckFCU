@@ -219,7 +219,7 @@
 		"offValue": 0
 	},
 	"READ_WRITE_IS_STD": {
-		"isCommand": false,
+		"isCommand": true,
 		"value": "AirbusFBW/BaroStdCapt",
 		"onValue": 1,
 		"offValue": 0
@@ -227,6 +227,12 @@
 	"READ_WRITE_ALTIMETER_SETTING": {
 		"isCommand": false,
 		"value": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot",
+		"onValue": 1,
+		"offValue": 0
+	},
+	"WRITE_FLCH": {
+		"isCommand": true,
+		"value": "AirbusFBW/PullAltitude",
 		"onValue": 1,
 		"offValue": 0
 	}

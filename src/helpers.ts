@@ -10,10 +10,16 @@ export function roundToThirdDecimal(number: number): number {
 }
 
 export function hertzToHuman(value: number): string {
-  return roundToThirdDecimal(value / 1e3).toFixed(3).toString();
+  return roundToThirdDecimal(value / 1e3)
+    .toFixed(3)
+    .toString();
 }
 
-export function getDataRefOnOffValue(dataref: string): {on: number, off: number} {
-  const datarefInfo = datarefMap[aircraftSelector.getSelectedAircraft()][dataref];
-  return {on: datarefInfo.onValue, off: datarefInfo.offValue};
+export function getDataRefOnOffValue(dataref: string): {
+  on: number;
+  off: number;
+} {
+  const datarefInfo =
+    datarefMap[aircraftSelector.getSelectedAircraft()][dataref];
+  return { on: datarefInfo.onValue, off: datarefInfo.offValue };
 }

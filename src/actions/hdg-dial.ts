@@ -56,16 +56,17 @@ export class HeadingDial extends SingletonAction<SpeedSettings> {
     clearInterval(intervalId);
   }
 
-  async onTouchTap(ev: TouchTapEvent<SpeedSettings>): Promise<void> {}
+  async onTouchTap(ev: TouchTapEvent<SpeedSettings>): Promise<void> {
+    // Trigger LNAV
+    const data = getDataRefOnOffValue(DatarefsType.WRITE_LNAV);
+    XPlaneComm.writeData(DatarefsType.WRITE_LNAV, data.on);
+  }
 
   async onDialDown(ev: DialDownEvent<SpeedSettings>): Promise<void> {
-    const set = await ev.action.getSettings();
-    set.isHeadingSelect = !set.isHeadingSelect;
-    await ev.action.setSettings(set);
     const data = getDataRefOnOffValue(DatarefsType.WRITE_HEADING_SELECT);
     XPlaneComm.writeData(
       DatarefsType.WRITE_HEADING_SELECT,
-      set.isHeadingSelect ? data.on : data.off
+      data.on
     );
   }
 

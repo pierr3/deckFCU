@@ -304,6 +304,44 @@
 			}
 		},
 		{
+			"Name": "COM 1 Volume",
+			"UUID": "com.pierr3.deckfcu.com1volume",
+			"Icon": "imgs/actions/counter/icon",
+			"States": [
+				{
+					"Image": "imgs/actions/counter/key",
+					"TitleAlignment": "middle"
+				}
+			],
+			"Tooltip": "Displays and changes com1 volume",
+			"Controllers": [
+				"Keypad",
+				"Encoder"
+			],
+			"Encoder": {
+				"layout": "layouts/fcu_dial.json"
+			}
+		},
+		{
+			"Name": "COM 2 Volume",
+			"UUID": "com.pierr3.deckfcu.com2volume",
+			"Icon": "imgs/actions/counter/icon",
+			"States": [
+				{
+					"Image": "imgs/actions/counter/key",
+					"TitleAlignment": "middle"
+				}
+			],
+			"Tooltip": "Displays and changes com2 volume",
+			"Controllers": [
+				"Keypad",
+				"Encoder"
+			],
+			"Encoder": {
+				"layout": "layouts/fcu_dial.json"
+			}
+		},
+		{
 			"Name": "HSI Range",
 			"UUID": "com.pierr3.deckfcu.hsirange",
 			"Icon": "imgs/actions/counter/icon",

@@ -12,11 +12,10 @@ let isConnectedToXplane: boolean = false;
 let lastPingFromXplaneTimestamp: Date = new Date();
 
 class SimDataProvider {
-  SimDataProvider() {
-  }
+  SimDataProvider() {}
 
   start() {
-	streamDeck.logger.debug("SimDataProvider constructor");
+    streamDeck.logger.debug("SimDataProvider constructor");
     setInterval(() => {
       this._verifyConnectionWithXplane();
     }, XPLANE_CHECK_INTERVAL);
@@ -29,10 +28,7 @@ class SimDataProvider {
       return;
     }
 
-    if (
-      new Date().getTime() - lastPingFromXplaneTimestamp.getTime() >
-      2000
-    ) {
+    if (new Date().getTime() - lastPingFromXplaneTimestamp.getTime() > 2000) {
       streamDeck.logger.info(
         "Lost connection to X-Plane, trying to reconnect..."
       );
@@ -41,13 +37,9 @@ class SimDataProvider {
   }
 
   _subscribeToXplaneVersionCheck(): void {
-    XPlaneComm.requestDataRef(
-      DatarefsType.XPLANE_VERSION,
-      1,
-      () => {
-		this._xplanePingCallback();
-	  }
-    );
+    XPlaneComm.requestDataRef(DatarefsType.XPLANE_VERSION, 1, () => {
+      this._xplanePingCallback();
+    });
   }
 
   _xplanePingCallback(): void {
@@ -122,4 +114,3 @@ class SimDataProvider {
 }
 
 export let simDataProvider: SimDataProvider = new SimDataProvider();
-

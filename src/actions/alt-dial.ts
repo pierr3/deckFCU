@@ -57,7 +57,11 @@ export class AltitudeDial extends SingletonAction<AltitudeSettings> {
     clearInterval(intervalId);
   }
 
-  async onTouchTap(ev: TouchTapEvent<AltitudeSettings>): Promise<void> {}
+  async onTouchTap(ev: TouchTapEvent<AltitudeSettings>): Promise<void> {
+    // Trigger VNAV
+    const data = getDataRefOnOffValue(DatarefsType.WRITE_VNAV);
+    XPlaneComm.writeData(DatarefsType.WRITE_VNAV, data.on);
+  }
 
   async onDialDown(ev: DialDownEvent<AltitudeSettings>): Promise<void> {
     const data = getDataRefOnOffValue(DatarefsType.WRITE_ALTITUDE_SELECT);
