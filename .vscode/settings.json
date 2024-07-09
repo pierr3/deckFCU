@@ -1,7 +1,4 @@
 {
-	/* Prefer tabs over spaces for accessibility */
-	"editor.insertSpaces": false,
-	"editor.detectIndentation": false,
 	/* Explorer */
 	"explorer.fileNesting.enabled": true,
 	"explorer.fileNesting.patterns": {

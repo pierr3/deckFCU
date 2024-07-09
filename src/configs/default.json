@@ -215,12 +215,6 @@
 		"onValue": 1,
 		"offValue": 0
 	},
-	"READ_ALTIMETER_INHG": {
-		"isCommand": false,
-		"value": "NOTIMPLEMENTED",
-		"onValue": 1,
-		"offValue": 0
-	},
 	"READ_WRITE_ALTIMETER_SETTING": {
 		"isCommand": false,
 		"value": "NOTIMPLEMENTED",

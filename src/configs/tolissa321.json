@@ -14,7 +14,7 @@
 	},
 	"WRITE_ENABLE_IAS": {
 		"isCommand": true,
-		"value": "AirbusFBW/PushSPDSel",
+		"value": "AirbusFBW/PullSPDSel",
 		"onValue": 1,
 		"offValue": 0
 	},
@@ -221,12 +221,6 @@
 	"READ_WRITE_IS_STD": {
 		"isCommand": false,
 		"value": "AirbusFBW/BaroStdCapt",
-		"onValue": 1,
-		"offValue": 0
-	},
-	"READ_ALTIMETER_INHG": {
-		"isCommand": false,
-		"value": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot",
 		"onValue": 1,
 		"offValue": 0
 	},

@@ -226,15 +226,10 @@
 		"onValue": 1,
 		"offValue": 0
 	},
-	"READ_ALTIMETER_INHG": {
-		"isCommand": false,
-		"value": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot",
-		"onValue": 1,
-		"offValue": 0
-	},
 	"READ_WRITE_ALTIMETER_SETTING": {
 		"isCommand": false,
-		"value": "1-sim/ng/baroSmallL/anim",
+		"value": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot",
+		"writeValue": "1-sim/ng/baroSmallL/anim",
 		"onValue": 1,
 		"offValue": 0,
 		"valueMultiplier": 5

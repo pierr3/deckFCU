@@ -62,6 +62,8 @@ async function updateData(context: WillAppearEvent<SpeedSettings>) {
 @action({ UUID: "com.pierr3.deckfcu.speed" })
 export class SpeedDial extends SingletonAction<SpeedSettings> {
   onWillAppear(ev: WillAppearEvent<SpeedSettings>): void | Promise<void> {
+    lastSpeed = -1;
+    shouldStopUpdating = false;
     intervalId = setInterval(() => updateData(ev), UPDATE_INTERVAL);
 
     ev.action.setSettings({

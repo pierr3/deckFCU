@@ -42,6 +42,7 @@ async function updateData(context: WillAppearEvent<AltitudeSettings>) {
 export class AltitudeDial extends SingletonAction<AltitudeSettings> {
   onWillAppear(ev: WillAppearEvent<AltitudeSettings>): void | Promise<void> {
     shouldStopUpdating = false;
+    lastAltitude = -1;
     intervalId = setInterval(() => updateData(ev), UPDATE_INTERVAL);
     return ev.action.setFeedback({
       title: "ALT",

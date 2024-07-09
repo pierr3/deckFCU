@@ -64,7 +64,7 @@ async function updateData(context: WillAppearEvent<QnhSettings>) {
 export class QnhSetting extends SingletonAction<QnhSettings> {
   onWillAppear(ev: WillAppearEvent<QnhSettings>): void | Promise<void> {
     shouldStopUpdating = false;
-	lastValue = -1;
+    lastValue = -1;
     intervalId = setInterval(() => updateData(ev), UPDATE_INTERVAL);
 
     return ev.action.setFeedback({
@@ -119,11 +119,11 @@ export class QnhSetting extends SingletonAction<QnhSettings> {
         DatarefsType.READ_WRITE_ALTIMETER_SETTING
       ];
     let newVal = lastValue;
-	if (lastisQnh) {
-		newVal += ev.payload.ticks * 0.03;
-	} else {
-		newVal += ev.payload.ticks * 0.01;
-	}
+    if (lastisQnh) {
+      newVal += ev.payload.ticks * 0.03;
+    } else {
+      newVal += ev.payload.ticks * 0.01;
+    }
     XPlaneComm.writeData(DatarefsType.READ_WRITE_ALTIMETER_SETTING, newVal);
   }
 }

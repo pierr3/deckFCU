@@ -44,6 +44,7 @@ export class VerticalSpeedDial extends SingletonAction<VerticalSpeedSettings> {
     ev: WillAppearEvent<VerticalSpeedSettings>
   ): void | Promise<void> {
     shouldStopUpdating = false;
+    lastVerticalSpeed = -1;
     intervalId = setInterval(() => updateData(ev), UPDATE_INTERVAL);
 
     return ev.action.setFeedback({

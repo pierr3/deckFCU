@@ -41,7 +41,8 @@ async function updateData(context: WillAppearEvent<SpeedSettings>) {
 @action({ UUID: "com.pierr3.deckfcu.heading" })
 export class HeadingDial extends SingletonAction<SpeedSettings> {
   onWillAppear(ev: WillAppearEvent<SpeedSettings>): void | Promise<void> {
-	shouldStopUpdating = false;
+    shouldStopUpdating = false;
+    lastHeading = -1;
     intervalId = setInterval(() => updateData(ev), UPDATE_INTERVAL);
 
     return ev.action.setFeedback({
@@ -51,7 +52,7 @@ export class HeadingDial extends SingletonAction<SpeedSettings> {
   }
 
   onWillDisappear(ev: WillDisappearEvent<SpeedSettings>): void | Promise<void> {
-	shouldStopUpdating = true;
+    shouldStopUpdating = true;
     clearInterval(intervalId);
   }
 
