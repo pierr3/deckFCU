@@ -2,6 +2,7 @@
 	"Name": "deckFCU",
 	"Version": "0.1.0",
 	"Author": "Pierre Ferran",
+	"URL": "https://github.com/pierr3/deckfcu",
 	"Actions": [
 		{
 			"Name": "Switch aircraft",
@@ -167,7 +168,12 @@
 				"Encoder"
 			],
 			"Encoder": {
-				"layout": "layouts/fcu_dial.json"
+				"layout": "layouts/fcu_dial.json",
+				"TriggerDescription": {
+					"Rotate": "Sets the desired speed",
+					"Push": "Activates IAS/Speed Intervene",
+					"Touch": "Toggles between IAS and MACH"
+				}
 			}
 		},
 		{
@@ -186,7 +192,12 @@
 				"Encoder"
 			],
 			"Encoder": {
-				"layout": "layouts/fcu_dial.json"
+				"layout": "layouts/fcu_dial.json",
+				"TriggerDescription": {
+					"Rotate": "Sets the desired heading",
+					"Push": "Activates heading select mode",
+					"Touch": "Activates LNAV mode"
+				}
 			}
 		},
 		{
@@ -205,7 +216,12 @@
 				"Encoder"
 			],
 			"Encoder": {
-				"layout": "layouts/fcu_dial.json"
+				"layout": "layouts/fcu_dial.json",
+				"TriggerDescription": {
+					"Rotate": "Sets desired altitude",
+					"Push": "Activates ALT SELECT",
+					"Touch": "Activates VNAV"
+				}
 			}
 		},
 		{
@@ -224,7 +240,12 @@
 				"Encoder"
 			],
 			"Encoder": {
-				"layout": "layouts/fcu_dial.json"
+				"layout": "layouts/fcu_dial.json",
+				"TriggerDescription": {
+					"Rotate": "Sets the desired vertical speed",
+					"Push": "Activates vertical speed mode",
+					"Touch": "Activates Flight Level Change / OP Descent mode"
+				}
 			}
 		},
 		{
@@ -243,7 +264,12 @@
 				"Encoder"
 			],
 			"Encoder": {
-				"layout": "layouts/fcu_dial.json"
+				"layout": "layouts/fcu_dial.json",
+				"TriggerDescription": {
+					"Rotate": "Does nothing, display only",
+					"Push": "Does nothing",
+					"Touch": "Does nothing"
+				}
 			}
 		},
 		{
@@ -262,7 +288,12 @@
 				"Encoder"
 			],
 			"Encoder": {
-				"layout": "layouts/fcu_dial.json"
+				"layout": "layouts/fcu_dial.json",
+				"TriggerDescription": {
+					"Rotate": "Sets the COM 1 standby frequency",
+					"Push": "Switches between changes the big numbers vs the decimals",
+					"Touch": "Toggles to COM 1 active"
+				}
 			}
 		},
 		{
@@ -300,7 +331,12 @@
 				"Encoder"
 			],
 			"Encoder": {
-				"layout": "layouts/fcu_dial.json"
+				"layout": "layouts/fcu_dial.json",
+				"TriggerDescription": {
+					"Rotate": "Sets the COM 2 standby frequency",
+					"Push": "Switches between changes the big numbers vs the decimals",
+					"Touch": "Toggles to COM 2 active"
+				}
 			}
 		},
 		{
@@ -357,7 +393,12 @@
 				"Encoder"
 			],
 			"Encoder": {
-				"layout": "layouts/fcu_dial.json"
+				"layout": "layouts/fcu_dial.json",
+				"TriggerDescription": {
+					"Rotate": "Sets the range on your PFD or HSI",
+					"Push": "Does nothing",
+					"Touch": "Does nothing"
+				}
 			}
 		},
 		{
@@ -386,7 +427,7 @@
 	"Category": "deckFCU",
 	"CategoryIcon": "imgs/plugin/category-icon",
 	"CodePath": "bin/plugin.js",
-	"Description": "XPlane interface for the SD plus",
+	"Description": "XPlane Flight Control Unit for the SD+",
 	"Icon": "imgs/plugin/marketplace",
 	"SDKVersion": 2,
 	"Software": {
