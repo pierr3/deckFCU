@@ -13,7 +13,7 @@
 	},
 	"WRITE_ENABLE_IAS": {
 		"isCommand": true,
-		"value": "1-sim/command/AP/spdButton_button",
+		"value": "1-sim/AP/spdConfButton",
 		"onValue": 0,
 		"offValue": 1
 	},
@@ -232,11 +232,17 @@
 		"writeValue": "1-sim/ng/baroSmallL/anim",
 		"onValue": 1,
 		"offValue": 0,
-		"valueMultiplier": 5
+		"valueMultiple": 5
+	},
+	"READ_757_HACK_ALTIMETER_SETTING": {
+		"isCommand": false,
+		"value": "1-sim/ng/baroSmallL/anim",
+		"onValue": 1,
+		"offValue": 0
 	},
 	"WRITE_FLCH": {
-		"isCommand": true,
-		"value": "AirbusFBW/PullAltitude",
+		"isCommand": false,
+		"value": "1-sim/command/AP/flchButton_button",
 		"onValue": 1,
 		"offValue": 0
 	}

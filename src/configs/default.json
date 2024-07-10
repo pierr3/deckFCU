@@ -226,5 +226,11 @@
 		"value": "NOTIMPLEMENTED",
 		"onValue": 1,
 		"offValue": 0
+	},
+	"READ_757_HACK_ALTIMETER_SETTING": {
+		"isCommand": false,
+		"value": "NOTIMPLEMENTED",
+		"onValue": 1,
+		"offValue": 0
 	}
 }

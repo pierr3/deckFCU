@@ -7,7 +7,7 @@ export enum SupportedAircraftType {
 }
 
 export class AircraftSelector {
-  selectedAirplane: SupportedAircraftType = SupportedAircraftType.TOLISS;
+  selectedAirplane: SupportedAircraftType = SupportedAircraftType.FF757;
 
   switchSelectedAircraft(aircraft: SupportedAircraftType) {
     this.selectedAirplane = aircraft;
