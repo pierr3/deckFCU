@@ -266,8 +266,8 @@
 			"Encoder": {
 				"layout": "layouts/fcu_dial.json",
 				"TriggerDescription": {
-					"Rotate": "Does nothing, display only",
-					"Push": "Does nothing",
+					"Rotate": "Sets the com1 volume",
+					"Push": "Toggles monitoring com 1",
 					"Touch": "Does nothing"
 				}
 			}
@@ -312,6 +312,11 @@
 				"Encoder"
 			],
 			"Encoder": {
+				"TriggerDescription": {
+					"Rotate": "Sets the com2 volume",
+					"Push": "Toggles monitoring com2",
+					"Touch": "Does nothing"
+				},
 				"layout": "layouts/fcu_dial.json"
 			}
 		},

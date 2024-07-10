@@ -23,3 +23,5 @@ export function getDataRefOnOffValue(dataref: string): {
     datarefMap[aircraftSelector.getSelectedAircraft()][dataref];
   return { on: datarefInfo.onValue, off: datarefInfo.offValue };
 }
+
+export type NullSettings = {};
