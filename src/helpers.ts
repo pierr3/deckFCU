@@ -21,7 +21,7 @@ export function getDataRefOnOffValue(dataref: string): {
 } {
   const datarefInfo =
     datarefMap[aircraftSelector.getSelectedAircraft()][dataref];
-  return { on: datarefInfo.onValue, off: datarefInfo.offValue };
+  return { on: datarefInfo.onValue ?? 1, off: datarefInfo.offValue ?? 0 };
 }
 
 export type NullSettings = {};

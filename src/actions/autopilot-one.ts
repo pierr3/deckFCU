@@ -10,28 +10,22 @@ import { DatarefsType } from "../sim/datarefMap";
 import { getDataRefOnOffValue } from "../helpers";
 
 @action({ UUID: "com.pierr3.deckfcu.apone" })
-export class AutoPilotOne extends SingletonAction<CounterSettings> {
-  onWillAppear(ev: WillAppearEvent<CounterSettings>): void | Promise<void> {
-    XPlaneComm.requestDataRef(
-      DatarefsType.READ_AP_ONE,
-      1,
-      async (dataRef, value) => {
-        const set = await ev.action.getSettings();
-        const data = getDataRefOnOffValue(DatarefsType.READ_AP_ONE);
-        set.isOn = value === data.on;
-        await ev.action.setState(set.isOn ? 1 : 0);
-        await ev.action.setSettings(set);
-      }
-    );
+export class AutoPilotOne extends SingletonAction<ApSettings> {
+  onWillAppear(ev: WillAppearEvent<ApSettings>): void | Promise<void> {
+    XPlaneComm.requestDataRef(DatarefsType.READ_AP_ONE, 1, async (_, value) => {
+      const set = await ev.action.getSettings();
+      const data = getDataRefOnOffValue(DatarefsType.READ_AP_ONE);
+      set.isOn = value === data.on;
+      await ev.action.setState(set.isOn ? 1 : 0);
+      await ev.action.setSettings(set);
+    });
   }
 
-  onWillDisappear(
-    ev: WillDisappearEvent<CounterSettings>
-  ): void | Promise<void> {
+  onWillDisappear(ev: WillDisappearEvent<ApSettings>): void | Promise<void> {
     XPlaneComm.unsubscribeDataRef(DatarefsType.READ_AP_ONE);
   }
 
-  async onKeyDown(ev: KeyDownEvent<CounterSettings>): Promise<void> {
+  async onKeyDown(ev: KeyDownEvent<ApSettings>): Promise<void> {
     const settings = await ev.action.getSettings();
     settings.isOn = !settings.isOn;
     await ev.action.setSettings(settings);
@@ -43,9 +37,6 @@ export class AutoPilotOne extends SingletonAction<CounterSettings> {
   }
 }
 
-/**
- * Settings for {@link IncrementCounter}.
- */
-type CounterSettings = {
+type ApSettings = {
   isOn: boolean;
 };

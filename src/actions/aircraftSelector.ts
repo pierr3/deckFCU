@@ -13,15 +13,15 @@ import { XPlaneComm } from "../xplane/XPlaneComm";
 import { simDataProvider } from "../sim/simDataProvider";
 
 @action({ UUID: "com.pierr3.deckfcu.aircraftselector" })
-export class AircraftSelectorAction extends SingletonAction<CounterSettings> {
-  onWillAppear(ev: WillAppearEvent<CounterSettings>): void | Promise<void> {
+export class AircraftSelectorAction extends SingletonAction<AircraftSelectorSetting> {
+  onWillAppear(ev: WillAppearEvent<AircraftSelectorSetting>): void | Promise<void> {
     ev.action.setSettings({
       currentAircraft: aircraftSelector.getSelectedAircraft(),
     });
     return ev.action.setTitle(ev.payload.settings.currentAircraft);
   }
 
-  async onKeyDown(ev: KeyDownEvent<CounterSettings>): Promise<void> {
+  async onKeyDown(ev: KeyDownEvent<AircraftSelectorSetting>): Promise<void> {
     let nextAircraft = SupportedAircraftType.Default;
     if (
       aircraftSelector.getSelectedAircraft() === SupportedAircraftType.Default
@@ -51,9 +51,7 @@ export class AircraftSelectorAction extends SingletonAction<CounterSettings> {
   }
 }
 
-/**
- * Settings for {@link IncrementCounter}.
- */
-type CounterSettings = {
+
+type AircraftSelectorSetting = {
   currentAircraft: string;
 };

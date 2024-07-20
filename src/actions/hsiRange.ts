@@ -12,8 +12,8 @@ import { datarefMap, DatarefsType } from "../sim/datarefMap";
 import { aircraftSelector } from "../sim/aircraftSelector";
 
 @action({ UUID: "com.pierr3.deckfcu.hsirange" })
-export class HsiRange extends SingletonAction<SpeedSettings> {
-  onWillAppear(ev: WillAppearEvent<SpeedSettings>): void | Promise<void> {
+export class HsiRange extends SingletonAction<HSISettings> {
+  onWillAppear(ev: WillAppearEvent<HSISettings>): void | Promise<void> {
     XPlaneComm.requestDataRef(
       DatarefsType.READ_WRITE_HSI_RANGE,
       5,
@@ -47,42 +47,11 @@ export class HsiRange extends SingletonAction<SpeedSettings> {
     });
   }
 
-  onWillDisappear(ev: WillDisappearEvent<SpeedSettings>): void | Promise<void> {
+  onWillDisappear(ev: WillDisappearEvent<HSISettings>): void | Promise<void> {
     XPlaneComm.unsubscribeDataRef(DatarefsType.READ_WRITE_HSI_RANGE);
   }
 
-  //   async onTouchTap(ev: TouchTapEvent<SpeedSettings>): Promise<void> {
-  //     const settings = await ev.action.getSettings();
-  //     settings.isMach = !settings.isMach;
-  //     settings.justToggledMach = true;
-
-  //     const onValue =
-  //       datarefMap[aircraftSelector.getSelectedAircraft()][
-  //         DatarefsType.READ_WRITE_IS_MACH
-  //       ].onValue;
-  //     const offValue =
-  //       datarefMap[aircraftSelector.getSelectedAircraft()][
-  //         DatarefsType.READ_WRITE_IS_MACH
-  //       ].offValue;
-
-  //     XPlaneComm.writeData(
-  //       DatarefsType.READ_WRITE_IS_MACH,
-  //       settings.isMach ? onValue : offValue
-  //     );
-  //     await ev.action.setSettings(settings);
-  //   }
-
-  //   async onDialDown(ev: DialDownEvent<SpeedSettings>): Promise<void> {
-  //     const settings = await ev.action.getSettings();
-  //     settings.isSpeedSelect = !settings.isSpeedSelect;
-  //     await ev.action.setSettings(settings);
-  //     XPlaneComm.writeData(
-  //       DatarefsType.WRITE_ENABLE_IAS,
-  //       settings.isSpeedSelect ? 1 : 0
-  //     );
-  //   }
-
-  async onDialRotate(ev: DialRotateEvent<SpeedSettings>): Promise<void> {
+  async onDialRotate(ev: DialRotateEvent<HSISettings>): Promise<void> {
     const settings = await ev.action.getSettings();
     const data =
       datarefMap[aircraftSelector.getSelectedAircraft()][
@@ -93,10 +62,8 @@ export class HsiRange extends SingletonAction<SpeedSettings> {
   }
 }
 
-/**
- * Settings for {@link IncrementCounter}.
- */
-type SpeedSettings = {
+
+type HSISettings = {
   value: number;
   displayValue: string;
 };

@@ -67,8 +67,8 @@ type DatarefMap = {
 type DatarefData = {
   isCommand: boolean;
   value: string;
-  onValue: number;
-  offValue: number;
+  onValue?: number;
+  offValue?: number;
   writeValue?: string;
   displayValueMap?: { [key: number]: string };
   maxValue?: number;

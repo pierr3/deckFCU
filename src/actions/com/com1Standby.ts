@@ -74,9 +74,7 @@ export class Com1StandbyDial extends SingletonAction<AltitudeSettings> {
   }
 }
 
-/**
- * Settings for {@link IncrementCounter}.
- */
+
 type AltitudeSettings = {
   frequency: number;
   doOnlyBigNumber: boolean;

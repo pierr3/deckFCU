@@ -18,7 +18,7 @@ let intervalId: NodeJS.Timeout;
 let lastHeading = 0;
 let shouldStopUpdating = false;
 
-async function updateData(context: WillAppearEvent<SpeedSettings>) {
+async function updateData(context: WillAppearEvent<HdgSettings>) {
   if (shouldStopUpdating) {
     return;
   }
@@ -39,8 +39,8 @@ async function updateData(context: WillAppearEvent<SpeedSettings>) {
 }
 
 @action({ UUID: "com.pierr3.deckfcu.heading" })
-export class HeadingDial extends SingletonAction<SpeedSettings> {
-  onWillAppear(ev: WillAppearEvent<SpeedSettings>): void | Promise<void> {
+export class HeadingDial extends SingletonAction<HdgSettings> {
+  onWillAppear(ev: WillAppearEvent<HdgSettings>): void | Promise<void> {
     shouldStopUpdating = false;
     lastHeading = -1;
     intervalId = setInterval(() => updateData(ev), UPDATE_INTERVAL);
@@ -51,18 +51,18 @@ export class HeadingDial extends SingletonAction<SpeedSettings> {
     });
   }
 
-  onWillDisappear(ev: WillDisappearEvent<SpeedSettings>): void | Promise<void> {
+  onWillDisappear(ev: WillDisappearEvent<HdgSettings>): void | Promise<void> {
     shouldStopUpdating = true;
     clearInterval(intervalId);
   }
 
-  async onTouchTap(ev: TouchTapEvent<SpeedSettings>): Promise<void> {
+  async onTouchTap(ev: TouchTapEvent<HdgSettings>): Promise<void> {
     // Trigger LNAV
     const data = getDataRefOnOffValue(DatarefsType.WRITE_LNAV);
     XPlaneComm.writeData(DatarefsType.WRITE_LNAV, data.on);
   }
 
-  async onDialDown(ev: DialDownEvent<SpeedSettings>): Promise<void> {
+  async onDialDown(ev: DialDownEvent<HdgSettings>): Promise<void> {
     const data = getDataRefOnOffValue(DatarefsType.WRITE_HEADING_SELECT);
     XPlaneComm.writeData(
       DatarefsType.WRITE_HEADING_SELECT,
@@ -70,7 +70,7 @@ export class HeadingDial extends SingletonAction<SpeedSettings> {
     );
   }
 
-  async onDialRotate(ev: DialRotateEvent<SpeedSettings>): Promise<void> {
+  async onDialRotate(ev: DialRotateEvent<HdgSettings>): Promise<void> {
     let currentHdg = simDataProvider.getDatarefValue(
       DatarefsType.READ_WRITE_HEADING
     );
@@ -82,10 +82,8 @@ export class HeadingDial extends SingletonAction<SpeedSettings> {
   }
 }
 
-/**
- * Settings for {@link IncrementCounter}.
- */
-type SpeedSettings = {
+
+type HdgSettings = {
   heading: number;
   isHeadingSelect: boolean;
 };

@@ -8,12 +8,11 @@
 	"READ_WRITE_IS_MACH": {
 		"isCommand": true,
 		"value": "1-sim/command/AP/iasmach_button",
-		"onValue": 1,
-		"offValue": 0
+		"writeValue": "1-sim/command/AP/iasmach_button"
 	},
 	"WRITE_ENABLE_IAS": {
 		"isCommand": true,
-		"value": "1-sim/AP/spdConfButton",
+		"value": "1-sim/command/AP/spdConfButton_button",
 		"onValue": 0,
 		"offValue": 1
 	},
@@ -25,9 +24,7 @@
 	},
 	"WRITE_HEADING_SELECT": {
 		"isCommand": true,
-		"value": "1-sim/command/AP/hdgConfButton_button",
-		"onValue": 1,
-		"offValue": 0
+		"value": "1-sim/command/AP/hdgConfButton_button"
 	},
 	"READ_WRITE_ALTITUDE": {
 		"isCommand": false,
@@ -37,9 +34,7 @@
 	},
 	"WRITE_ALTITUDE_SELECT": {
 		"isCommand": true,
-		"value": "1-sim/command/AP/flchButton_button",
-		"onValue": 1,
-		"offValue": 0
+		"value": "1-sim/command/AP/flchButton_button"
 	},
 	"READ_WRITE_VERTICAL_SPEED": {
 		"isCommand": false,
@@ -49,33 +44,23 @@
 	},
 	"WRITE_VERTICAL_SPEED_SELECT": {
 		"isCommand": true,
-		"value": "1-sim/command/AP/vviButton_button",
-		"onValue": 1,
-		"offValue": 0
+		"value": "1-sim/command/AP/vviButton_button"
 	},
 	"READ_AP_ONE": {
 		"isCommand": false,
-		"value": "1-sim/AP/cmd_L_Button",
-		"onValue": 1,
-		"offValue": 0
+		"value": "1-sim/AP/cmd_L_Button"
 	},
 	"WRITE_AP_ONE": {
 		"isCommand": true,
-		"value": "1-sim/command/AP/cmd_L_Button_button",
-		"onValue": 1,
-		"offValue": 0
+		"value": "1-sim/command/AP/cmd_L_Button_button"
 	},
 	"READ_AP_TWO": {
 		"isCommand": false,
-		"value": "1-sim/AP/cmd_R_Button",
-		"onValue": 1,
-		"offValue": 0
+		"value": "1-sim/AP/cmd_R_Button"
 	},
 	"WRITE_AP_TWO": {
 		"isCommand": true,
-		"value": "1-sim/command/AP/cmd_R_Button_button",
-		"onValue": 1,
-		"offValue": 0
+		"value": "1-sim/command/AP/cmd_R_Button_button"
 	},
 	"READ_ATHR": {
 		"isCommand": false,
@@ -91,33 +76,23 @@
 	},
 	"READ_APPR": {
 		"isCommand": false,
-		"value": "1-sim/AP/appButton",
-		"onValue": 1,
-		"offValue": 0
+		"value": "1-sim/AP/appButton"
 	},
 	"WRITE_APPR": {
 		"isCommand": true,
-		"value": "1-sim/command/AP/appButton_button",
-		"onValue": 1,
-		"offValue": 0
+		"value": "1-sim/command/AP/appButton_button"
 	},
 	"READ_LNAV": {
 		"isCommand": false,
-		"value": "1-sim/AP/lnavButton",
-		"onValue": 1,
-		"offValue": 0
+		"value": "1-sim/AP/lnavButton"
 	},
 	"WRITE_LNAV": {
 		"isCommand": true,
-		"value": "1-sim/command/AP/lnavButton_button",
-		"onValue": 1,
-		"offValue": 0
+		"value": "1-sim/command/AP/lnavButton_button"
 	},
 	"READ_VNAV": {
 		"isCommand": false,
-		"value": "1-sim/AP/vnavButton",
-		"onValue": 1,
-		"offValue": 0
+		"value": "1-sim/AP/vnavButton"
 	},
 	"WRITE_VNAV": {
 		"isCommand": true,
@@ -187,22 +162,16 @@
 	},
 	"READ_LOC": {
 		"isCommand": false,
-		"value": "1-sim/AP/locButton",
-		"onValue": 1,
-		"offValue": 0
+		"value": "1-sim/AP/locButton"
 	},
 	"WRITE_LOC": {
 		"isCommand": true,
-		"value": "1-sim/command/AP/locButton_button",
-		"onValue": 1,
-		"offValue": 0
+		"value": "1-sim/command/AP/locButton_button"
 	},
 	"READ_WRITE_HSI_RANGE": {
 		"isCommand": false,
 		"value": "1-sim/ndpanel/1/hsiRangeRotary",
 		"writeValue": "1-sim/ng/rangeL/anim",
-		"onValue": 1,
-		"offValue": 0,
 		"valueMultiplier": 5,
 		"displayValueMap": {
 			"0": "5",
@@ -222,28 +191,20 @@
 	},
 	"READ_WRITE_IS_STD": {
 		"isCommand": false,
-		"value": "1-sim/ng/baro/std/L",
-		"onValue": 1,
-		"offValue": 0
+		"value": "1-sim/ng/baro/std/L"
 	},
 	"READ_WRITE_ALTIMETER_SETTING": {
 		"isCommand": false,
 		"value": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot",
 		"writeValue": "1-sim/ng/baroSmallL/anim",
-		"onValue": 1,
-		"offValue": 0,
 		"valueMultiple": 5
 	},
 	"READ_757_HACK_ALTIMETER_SETTING": {
 		"isCommand": false,
-		"value": "1-sim/ng/baroSmallL/anim",
-		"onValue": 1,
-		"offValue": 0
+		"value": "1-sim/ng/baroSmallL/anim"
 	},
 	"WRITE_FLCH": {
-		"isCommand": false,
-		"value": "1-sim/command/AP/flchButton_button",
-		"onValue": 1,
-		"offValue": 0
+		"isCommand": true,
+		"value": "1-sim/command/AP/flchButton_button"
 	}
 }

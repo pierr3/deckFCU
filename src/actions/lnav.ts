@@ -10,8 +10,8 @@ import { DatarefsType } from "../sim/datarefMap";
 import { getDataRefOnOffValue } from "../helpers";
 
 @action({ UUID: "com.pierr3.deckfcu.lnav" })
-export class LNAVToggle extends SingletonAction<CounterSettings> {
-  onWillAppear(ev: WillAppearEvent<CounterSettings>): void | Promise<void> {
+export class LNAVToggle extends SingletonAction<LNAVSettings> {
+  onWillAppear(ev: WillAppearEvent<LNAVSettings>): void | Promise<void> {
     XPlaneComm.requestDataRef(
       DatarefsType.READ_LNAV,
       1,
@@ -26,12 +26,12 @@ export class LNAVToggle extends SingletonAction<CounterSettings> {
   }
 
   onWillDisappear(
-    ev: WillDisappearEvent<CounterSettings>
+    ev: WillDisappearEvent<LNAVSettings>
   ): void | Promise<void> {
     XPlaneComm.unsubscribeDataRef(DatarefsType.READ_LNAV);
   }
 
-  async onKeyDown(ev: KeyDownEvent<CounterSettings>): Promise<void> {
+  async onKeyDown(ev: KeyDownEvent<LNAVSettings>): Promise<void> {
     const settings = await ev.action.getSettings();
     settings.isOn = !settings.isOn;
     await ev.action.setSettings(settings);
@@ -43,9 +43,7 @@ export class LNAVToggle extends SingletonAction<CounterSettings> {
   }
 }
 
-/**
- * Settings for {@link IncrementCounter}.
- */
-type CounterSettings = {
+
+type LNAVSettings = {
   isOn: boolean;
 };

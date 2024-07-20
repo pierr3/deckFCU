@@ -44,9 +44,7 @@ export class ApprToggle extends SingletonAction<CounterSettings> {
   }
 }
 
-/**
- * Settings for {@link IncrementCounter}.
- */
+
 type CounterSettings = {
   isOn: boolean;
 };

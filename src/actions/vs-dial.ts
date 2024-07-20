@@ -9,7 +9,7 @@ import streamDeck, {
 } from "@elgato/streamdeck";
 import { XPlaneComm } from "../xplane/XPlaneComm";
 import { DatarefsType } from "../sim/datarefMap";
-import { getDataRefOnOffValue } from "../helpers";
+import { getDataRefOnOffValue, NullSettings } from "../helpers";
 import { simDataProvider } from "../sim/simDataProvider";
 
 const UPDATE_INTERVAL = 100; // Update interval in milliseconds
@@ -18,7 +18,7 @@ let intervalId: NodeJS.Timeout;
 let lastVerticalSpeed = 0;
 let shouldStopUpdating = false;
 
-async function updateData(context: WillAppearEvent<VerticalSpeedSettings>) {
+async function updateData(context: WillAppearEvent<NullSettings>) {
   if (shouldStopUpdating) {
     return;
   }
@@ -39,10 +39,8 @@ async function updateData(context: WillAppearEvent<VerticalSpeedSettings>) {
 }
 
 @action({ UUID: "com.pierr3.deckfcu.vs" })
-export class VerticalSpeedDial extends SingletonAction<VerticalSpeedSettings> {
-  onWillAppear(
-    ev: WillAppearEvent<VerticalSpeedSettings>
-  ): void | Promise<void> {
+export class VerticalSpeedDial extends SingletonAction<NullSettings> {
+  onWillAppear(ev: WillAppearEvent<NullSettings>): void | Promise<void> {
     shouldStopUpdating = false;
     lastVerticalSpeed = -1;
     intervalId = setInterval(() => updateData(ev), UPDATE_INTERVAL);
@@ -53,27 +51,23 @@ export class VerticalSpeedDial extends SingletonAction<VerticalSpeedSettings> {
     });
   }
 
-  onWillDisappear(
-    ev: WillDisappearEvent<VerticalSpeedSettings>
-  ): void | Promise<void> {
+  onWillDisappear(ev: WillDisappearEvent<NullSettings>): void | Promise<void> {
     shouldStopUpdating = true;
     clearInterval(intervalId);
   }
 
-  async onTouchTap(ev: TouchTapEvent<VerticalSpeedSettings>): Promise<void> {
+  async onTouchTap(ev: TouchTapEvent<NullSettings>): Promise<void> {
     // Trigger FLCH
     const data = getDataRefOnOffValue(DatarefsType.WRITE_FLCH);
     XPlaneComm.writeData(DatarefsType.WRITE_FLCH, data.on);
   }
 
-  async onDialDown(ev: DialDownEvent<VerticalSpeedSettings>): Promise<void> {
+  async onDialDown(ev: DialDownEvent<NullSettings>): Promise<void> {
     const data = getDataRefOnOffValue(DatarefsType.WRITE_VERTICAL_SPEED_SELECT);
     XPlaneComm.writeData(DatarefsType.WRITE_VERTICAL_SPEED_SELECT, data.on);
   }
 
-  async onDialRotate(
-    ev: DialRotateEvent<VerticalSpeedSettings>
-  ): Promise<void> {
+  async onDialRotate(ev: DialRotateEvent<NullSettings>): Promise<void> {
     let currentVs = simDataProvider.getDatarefValue(
       DatarefsType.READ_WRITE_VERTICAL_SPEED
     );
@@ -81,11 +75,3 @@ export class VerticalSpeedDial extends SingletonAction<VerticalSpeedSettings> {
     XPlaneComm.writeData(DatarefsType.READ_WRITE_VERTICAL_SPEED, currentVs);
   }
 }
-
-/**
- * Settings for {@link IncrementCounter}.
- */
-type VerticalSpeedSettings = {
-  VerticalSpeed: number;
-  isVerticalSpeedSelect: boolean;
-};

@@ -14,6 +14,8 @@ import {
   SupportedAircraftType,
 } from "../sim/aircraftSelector";
 import { simDataProvider } from "../sim/simDataProvider";
+import { getDataRefOnOffValue } from "../helpers";
+import { get } from "http";
 
 const UPDATE_INTERVAL = 100; // Update interval in milliseconds
 let intervalId: NodeJS.Timeout;
@@ -23,8 +25,6 @@ let shouldStopUpdating = false;
 
 let lastisStd = false;
 let lastisQnh = false;
-
-let valueSetting = 0; // Hack for the 757
 
 async function updateData(context: WillAppearEvent<QnhSettings>) {
   if (shouldStopUpdating) {
@@ -37,21 +37,11 @@ async function updateData(context: WillAppearEvent<QnhSettings>) {
 
   const isQnh =
     simDataProvider.getDatarefValue(DatarefsType.READ_WRITE_IS_QNH) ===
-    datarefMap[aircraftSelector.getSelectedAircraft()][
-      DatarefsType.READ_WRITE_IS_QNH
-    ].onValue;
+    getDataRefOnOffValue(DatarefsType.READ_WRITE_IS_QNH).on;
 
   const isStd =
     simDataProvider.getDatarefValue(DatarefsType.READ_WRITE_IS_STD) ===
-    datarefMap[aircraftSelector.getSelectedAircraft()][
-      DatarefsType.READ_WRITE_IS_STD
-    ].onValue;
-
-  if (aircraftSelector.getSelectedAircraft() == SupportedAircraftType.FF757) {
-    valueSetting = simDataProvider.getDatarefValue(
-      DatarefsType.READ_757_HACK_ALTIMETER_SETTING
-    );
-  }
+    getDataRefOnOffValue(DatarefsType.READ_WRITE_IS_STD).on;
 
   if (lastValue === value && lastisStd === isStd && lastisQnh === isQnh) {
     return;
@@ -92,14 +82,8 @@ export class QnhSetting extends SingletonAction<QnhSettings> {
   }
 
   async onTouchTap(ev: TouchTapEvent<QnhSettings>): Promise<void> {
-    const onValue =
-      datarefMap[aircraftSelector.getSelectedAircraft()][
-        DatarefsType.READ_WRITE_IS_STD
-      ].onValue;
-    const offValue =
-      datarefMap[aircraftSelector.getSelectedAircraft()][
-        DatarefsType.READ_WRITE_IS_STD
-      ].offValue;
+    const onValue = getDataRefOnOffValue(DatarefsType.READ_WRITE_IS_STD).on;
+    const offValue = getDataRefOnOffValue(DatarefsType.READ_WRITE_IS_STD).off;
 
     XPlaneComm.writeData(
       DatarefsType.READ_WRITE_IS_STD,
@@ -108,14 +92,8 @@ export class QnhSetting extends SingletonAction<QnhSettings> {
   }
 
   async onDialDown(ev: DialDownEvent<QnhSettings>): Promise<void> {
-    const onValue =
-      datarefMap[aircraftSelector.getSelectedAircraft()][
-        DatarefsType.READ_WRITE_IS_QNH
-      ].onValue;
-    const offValue =
-      datarefMap[aircraftSelector.getSelectedAircraft()][
-        DatarefsType.READ_WRITE_IS_QNH
-      ].offValue;
+    const onValue = getDataRefOnOffValue(DatarefsType.READ_WRITE_IS_QNH).on;
+    const offValue = getDataRefOnOffValue(DatarefsType.READ_WRITE_IS_QNH).off;
 
     XPlaneComm.writeData(
       DatarefsType.READ_WRITE_IS_QNH,
@@ -142,16 +120,17 @@ export class QnhSetting extends SingletonAction<QnhSettings> {
       data.valueMultiplier &&
       aircraftSelector.getSelectedAircraft() == SupportedAircraftType.FF757
     ) {
-      newVal = valueSetting + ev.payload.ticks * (data.valueMultiplier || 1);
+      newVal =
+        simDataProvider.getDatarefValue(
+          DatarefsType.READ_757_HACK_ALTIMETER_SETTING
+        ) +
+        ev.payload.ticks * (data.valueMultiplier || 1);
     }
 
     XPlaneComm.writeData(DatarefsType.READ_WRITE_ALTIMETER_SETTING, newVal);
   }
 }
 
-/**
- * Settings for {@link IncrementCounter}.
- */
 type QnhSettings = {
   isQnh: boolean;
   value: number;

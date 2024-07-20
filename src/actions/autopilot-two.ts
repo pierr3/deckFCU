@@ -10,8 +10,8 @@ import { DatarefsType } from "../sim/datarefMap";
 import { getDataRefOnOffValue } from "../helpers";
 
 @action({ UUID: "com.pierr3.deckfcu.aptwo" })
-export class AutoPilotTwo extends SingletonAction<CounterSettings> {
-  onWillAppear(ev: WillAppearEvent<CounterSettings>): void | Promise<void> {
+export class AutoPilotTwo extends SingletonAction<ApSettings> {
+  onWillAppear(ev: WillAppearEvent<ApSettings>): void | Promise<void> {
     XPlaneComm.requestDataRef(
       DatarefsType.READ_AP_TWO,
       1,
@@ -26,12 +26,12 @@ export class AutoPilotTwo extends SingletonAction<CounterSettings> {
   }
 
   onWillDisappear(
-    ev: WillDisappearEvent<CounterSettings>
+    ev: WillDisappearEvent<ApSettings>
   ): void | Promise<void> {
     XPlaneComm.unsubscribeDataRef(DatarefsType.READ_AP_TWO);
   }
 
-  async onKeyDown(ev: KeyDownEvent<CounterSettings>): Promise<void> {
+  async onKeyDown(ev: KeyDownEvent<ApSettings>): Promise<void> {
     const settings = await ev.action.getSettings();
     settings.isOn = !settings.isOn;
     await ev.action.setSettings(settings);
@@ -43,9 +43,7 @@ export class AutoPilotTwo extends SingletonAction<CounterSettings> {
   }
 }
 
-/**
- * Settings for {@link IncrementCounter}.
- */
-type CounterSettings = {
+
+type ApSettings = {
   isOn: boolean;
 };

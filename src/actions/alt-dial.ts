@@ -77,9 +77,7 @@ export class AltitudeDial extends SingletonAction<AltitudeSettings> {
   }
 }
 
-/**
- * Settings for {@link IncrementCounter}.
- */
+
 type AltitudeSettings = {
   altitude: number;
   isFlightLevelChange: boolean;

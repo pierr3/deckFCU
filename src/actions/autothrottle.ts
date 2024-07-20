@@ -14,8 +14,8 @@ import {
 import { getDataRefOnOffValue } from "../helpers";
 
 @action({ UUID: "com.pierr3.deckfcu.athr" })
-export class AutothrottleToggle extends SingletonAction<CounterSettings> {
-  onWillAppear(ev: WillAppearEvent<CounterSettings>): void | Promise<void> {
+export class AutothrottleToggle extends SingletonAction<ATHRSettings> {
+  onWillAppear(ev: WillAppearEvent<ATHRSettings>): void | Promise<void> {
     XPlaneComm.requestDataRef(
       DatarefsType.READ_ATHR,
       1,
@@ -30,12 +30,12 @@ export class AutothrottleToggle extends SingletonAction<CounterSettings> {
   }
 
   onWillDisappear(
-    ev: WillDisappearEvent<CounterSettings>
+    ev: WillDisappearEvent<ATHRSettings>
   ): void | Promise<void> {
     XPlaneComm.unsubscribeDataRef(DatarefsType.READ_ATHR);
   }
 
-  async onKeyDown(ev: KeyDownEvent<CounterSettings>): Promise<void> {
+  async onKeyDown(ev: KeyDownEvent<ATHRSettings>): Promise<void> {
     const data = getDataRefOnOffValue(DatarefsType.WRITE_ATHR);
     XPlaneComm.writeData(
       DatarefsType.WRITE_ATHR,
@@ -44,9 +44,7 @@ export class AutothrottleToggle extends SingletonAction<CounterSettings> {
   }
 }
 
-/**
- * Settings for {@link IncrementCounter}.
- */
-type CounterSettings = {
+
+type ATHRSettings = {
   isOn: boolean;
 };

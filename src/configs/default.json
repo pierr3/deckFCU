@@ -1,207 +1,139 @@
 {
 	"READ_WRITE_IAS_MACH": {
 		"isCommand": false,
-		"value": "sim/cockpit2/autopilot/airspeed_dial_kts_mach",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/cockpit2/autopilot/airspeed_dial_kts_mach"
 	},
 	"READ_WRITE_IS_MACH": {
 		"isCommand": false,
-		"value": "sim/cockpit/autopilot/airspeed_is_mach",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/cockpit/autopilot/airspeed_is_mach"
 	},
 	"WRITE_ENABLE_IAS": {
 		"isCommand": true,
-		"value": "sim/autopilot/autothrottle_toggle",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/autopilot/autothrottle_toggle"
 	},
 	"READ_WRITE_HEADING": {
 		"isCommand": false,
-		"value": "sim/cockpit/autopilot/heading_mag",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/cockpit/autopilot/heading_mag"
 	},
 	"WRITE_HEADING_SELECT": {
 		"isCommand": true,
-		"value": "sim/autopilot/heading",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/autopilot/heading"
 	},
 	"READ_WRITE_ALTITUDE": {
 		"isCommand": false,
-		"value": "sim/cockpit/autopilot/altitude",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/cockpit/autopilot/altitude"
 	},
 	"WRITE_ALTITUDE_SELECT": {
 		"isCommand": true,
-		"value": "sim/autopilot/altitude_hold",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/autopilot/altitude_hold"
 	},
 	"READ_WRITE_VERTICAL_SPEED": {
 		"isCommand": false,
-		"value": "sim/cockpit/autopilot/vertical_velocity",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/cockpit/autopilot/vertical_velocity"
 	},
 	"WRITE_VERTICAL_SPEED_SELECT": {
 		"isCommand": true,
-		"value": "sim/autopilot/vertical_speed_pre_sel",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/autopilot/vertical_speed_pre_sel"
 	},
 	"READ_AP_ONE": {
 		"isCommand": false,
-		"value": "sim/cockpit2/autopilot/servos_on",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/cockpit2/autopilot/servos_on"
 	},
 	"WRITE_AP_ONE": {
 		"isCommand": true,
-		"value": "sim/autopilot/servos_toggle",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/autopilot/servos_toggle"
 	},
 	"READ_AP_TWO": {
 		"isCommand": false,
-		"value": "sim/cockpit2/autopilot/servos2_on",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/cockpit2/autopilot/servos2_on"
 	},
 	"WRITE_AP_TWO": {
 		"isCommand": true,
-		"value": "sim/autopilot/servos2_toggle",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/autopilot/servos2_toggle"
 	},
 	"READ_ATHR": {
 		"isCommand": false,
-		"value": "sim/cockpit2/autopilot/autothrottle_enabled",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/cockpit2/autopilot/autothrottle_enabled"
 	},
 	"WRITE_ATHR": {
 		"isCommand": true,
-		"value": "sim/autopilot/autothrottle_arm",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/autopilot/autothrottle_arm"
 	},
 	"READ_APPR": {
 		"isCommand": false,
-		"value": "sim/cockpit2/autopilot/approach_status",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/cockpit2/autopilot/approach_status"
 	},
 	"WRITE_APPR": {
 		"isCommand": true,
-		"value": "sim/autopilot/approach",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/autopilot/approach"
 	},
 	"READ_LNAV": {
 		"isCommand": false,
-		"value": "sim/cockpit2/autopilot/heading_mode",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/cockpit2/autopilot/heading_mode"
 	},
 	"WRITE_LNAV": {
 		"isCommand": true,
-		"value": "sim/autopilot/hdg_nav",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/autopilot/hdg_nav"
 	},
 	"READ_VNAV": {
 		"isCommand": false,
-		"value": "sim/cockpit2/autopilot/fms_vnav",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/cockpit2/autopilot/fms_vnav"
 	},
 	"WRITE_VNAV": {
 		"isCommand": true,
-		"value": "sim/autopilot/vnav_spd",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/autopilot/vnav_spd"
 	},
 	"READ_COM1_ACTIVE": {
 		"isCommand": false,
-		"value": "sim/cockpit2/radios/actuators/com1_frequency_hz_833",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/cockpit2/radios/actuators/com1_frequency_hz_833"
 	},
 	"READ_WRITE_COM1_STANDBY": {
 		"isCommand": false,
-		"value": "sim/cockpit2/radios/actuators/com1_standby_frequency_hz_833",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/cockpit2/radios/actuators/com1_standby_frequency_hz_833"
 	},
 	"TOGGLE_COM1_STANDBY": {
 		"isCommand": true,
-		"value": "sim/radios/com1_standy_flip",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/radios/com1_standy_flip"
 	},
 	"TOGGLE_COM1_MONITOR": {
 		"isCommand": true,
-		"value": "sim/audio_panel/monitor_audio_com1",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/audio_panel/monitor_audio_com1"
 	},
 	"READ_WRITE_COM1_VOLUME": {
 		"isCommand": false,
-		"value": "sim/cockpit2/radios/actuators/audio_volume_com1",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/cockpit2/radios/actuators/audio_volume_com1"
 	},
 	"READ_COM2_ACTIVE": {
 		"isCommand": false,
-		"value": "sim/cockpit2/radios/actuators/com2_frequency_hz_833",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/cockpit2/radios/actuators/com2_frequency_hz_833"
 	},
 	"READ_WRITE_COM2_STANDBY": {
 		"isCommand": false,
-		"value": "sim/cockpit2/radios/actuators/com2_standby_frequency_hz_833",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/cockpit2/radios/actuators/com2_standby_frequency_hz_833"
 	},
 	"TOGGLE_COM2_STANDBY": {
 		"isCommand": true,
-		"value": "sim/radios/com2_standy_flip",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/radios/com2_standy_flip"
 	},
 	"TOGGLE_COM2_MONITOR": {
 		"isCommand": true,
-		"value": "sim/audio_panel/monitor_audio_com2",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/audio_panel/monitor_audio_com2"
 	},
 	"READ_WRITE_COM2_VOLUME": {
 		"isCommand": false,
-		"value": "sim/cockpit2/radios/actuators/audio_volume_com2",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/cockpit2/radios/actuators/audio_volume_com2"
 	},
 	"READ_LOC": {
 		"isCommand": true,
-		"value": "sim/cockpit2/autopilot/hnav_armed",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/cockpit2/autopilot/hnav_armed"
 	},
 	"WRITE_LOC": {
 		"isCommand": true,
-		"value": "sim/autopilot/NAV",
-		"onValue": 1,
-		"offValue": 0
+		"value": "sim/autopilot/NAV"
 	},
 	"READ_WRITE_HSI_RANGE": {
 		"isCommand": false,
-		"value": "NOTIMPLEMENTED",
-		"onValue": 1,
-		"offValue": 0
+		"value": "NOTIMPLEMENTED"
 	},
 	"READ_WRITE_IS_QNH": {
 		"isCommand": false,
@@ -211,26 +143,18 @@
 	},
 	"READ_WRITE_IS_STD": {
 		"isCommand": false,
-		"value": "NOTIMPLEMENTED",
-		"onValue": 1,
-		"offValue": 0
+		"value": "NOTIMPLEMENTED"
 	},
 	"READ_WRITE_ALTIMETER_SETTING": {
 		"isCommand": false,
-		"value": "NOTIMPLEMENTED",
-		"onValue": 1,
-		"offValue": 0
+		"value": "NOTIMPLEMENTED"
 	},
 	"WRITE_FLCH": {
 		"isCommand": true,
-		"value": "NOTIMPLEMENTED",
-		"onValue": 1,
-		"offValue": 0
+		"value": "NOTIMPLEMENTED"
 	},
 	"READ_757_HACK_ALTIMETER_SETTING": {
 		"isCommand": false,
-		"value": "NOTIMPLEMENTED",
-		"onValue": 1,
-		"offValue": 0
+		"value": "NOTIMPLEMENTED"
 	}
 }

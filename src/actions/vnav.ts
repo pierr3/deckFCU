@@ -10,8 +10,8 @@ import { DatarefsType } from "../sim/datarefMap";
 import { getDataRefOnOffValue } from "../helpers";
 
 @action({ UUID: "com.pierr3.deckfcu.vnav" })
-export class VNAVToggle extends SingletonAction<CounterSettings> {
-  onWillAppear(ev: WillAppearEvent<CounterSettings>): void | Promise<void> {
+export class VNAVToggle extends SingletonAction<VNAVSettings> {
+  onWillAppear(ev: WillAppearEvent<VNAVSettings>): void | Promise<void> {
     XPlaneComm.requestDataRef(
       DatarefsType.READ_VNAV,
       1,
@@ -26,12 +26,12 @@ export class VNAVToggle extends SingletonAction<CounterSettings> {
   }
 
   onWillDisappear(
-    ev: WillDisappearEvent<CounterSettings>
+    ev: WillDisappearEvent<VNAVSettings>
   ): void | Promise<void> {
     XPlaneComm.unsubscribeDataRef(DatarefsType.READ_VNAV);
   }
 
-  async onKeyDown(ev: KeyDownEvent<CounterSettings>): Promise<void> {
+  async onKeyDown(ev: KeyDownEvent<VNAVSettings>): Promise<void> {
     const settings = await ev.action.getSettings();
     settings.isOn = !settings.isOn;
     await ev.action.setSettings(settings);
@@ -43,9 +43,7 @@ export class VNAVToggle extends SingletonAction<CounterSettings> {
   }
 }
 
-/**
- * Settings for {@link IncrementCounter}.
- */
-type CounterSettings = {
+
+type VNAVSettings = {
   isOn: boolean;
 };

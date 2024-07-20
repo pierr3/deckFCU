@@ -71,9 +71,7 @@ export class Com2Volume extends SingletonAction<AltitudeSettings> {
   }
 }
 
-/**
- * Settings for {@link IncrementCounter}.
- */
+
 type AltitudeSettings = {
   frequency: number;
   doOnlyBigNumber: boolean;
