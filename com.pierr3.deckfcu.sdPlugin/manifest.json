@@ -36,7 +36,8 @@
 					"Image": "imgs/actions/ap/ap1on",
 					"Name": "AP 1 on"
 				}
-			]
+			],
+			"PropertyInspectorPath": "pi/ap.html"
 		},
 		{
 			"Name": "Autopilot Two",
@@ -55,7 +56,28 @@
 					"Image": "imgs/actions/ap/ap2on",
 					"Name": "AP 2 on"
 				}
-			]
+			],
+			"PropertyInspectorPath": "pi/ap.html"
+		},
+		{
+			"Name": "Autopilot Three",
+			"UUID": "com.pierr3.deckfcu.apthree",
+			"Icon": "imgs/actions/ap/ap2off",
+			"Tooltip": "Toggles the Autopilot Three",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/ap/ap2off",
+					"Name": "AP 2 off"
+				},
+				{
+					"Image": "imgs/actions/ap/ap2on",
+					"Name": "AP 2 on"
+				}
+			],
+			"PropertyInspectorPath": "pi/ap.html"
 		},
 		{
 			"Name": "Autothrottle",
@@ -290,9 +312,9 @@
 			"Encoder": {
 				"layout": "layouts/fcu_dial.json",
 				"TriggerDescription": {
-					"Rotate": "Sets the COM 1 standby frequency",
-					"Push": "Switches between changes the big numbers vs the decimals",
-					"Touch": "Toggles to COM 1 active"
+					"Rotate": "Sets COM 1 standby",
+					"Push": "Toggles between whole numbers and decimals",
+					"Touch": "Toggle COM 1 active"
 				}
 			}
 		},

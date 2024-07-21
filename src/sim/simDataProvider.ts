@@ -60,7 +60,7 @@ class SimDataProvider {
     for (const [datarefId, dataref] of Object.entries(
       datarefMap[this.currentSelectedAircraft]
     )) {
-      if (dataref.isCommand) {
+      if (dataref.isCommand && !dataref.writeValue) {
         continue;
       }
 
@@ -77,7 +77,7 @@ class SimDataProvider {
             return;
           }
 
-          this._dataMap[datarefId] = value;
+          this._dataMap[datarefId] = Math.round((value + Number.EPSILON) * 10) / 10; // Round to one decimal place
         }
       );
     }
@@ -87,7 +87,7 @@ class SimDataProvider {
     for (const [datarefId, dataref] of Object.entries(
       datarefMap[this.currentSelectedAircraft]
     )) {
-      if (dataref.isCommand) {
+      if (dataref.isCommand && !dataref.writeValue) {
         continue;
       }
 

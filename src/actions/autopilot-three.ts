@@ -19,8 +19,8 @@ let lastState = false;
 let shouldStopUpdating = false;
 
 let buttonStyle = SVGTypes.AirbusBtn;
-let apDataref = DatarefsType.READ_WRITE_AP_ONE;
-let buttonText = "AP 1";
+let apDataref = DatarefsType.READ_WRITE_AP_THREE;
+let buttonText = "AP3";
 
 async function updateData(context: WillAppearEvent<ApSettings>) {
   if (shouldStopUpdating) {
@@ -30,7 +30,6 @@ async function updateData(context: WillAppearEvent<ApSettings>) {
   const data = getDataRefOnOffValue(apDataref);
 
   const value = simDataProvider.getDatarefValue(apDataref) === data.on;
-  streamDeck.logger.debug(`AP1: ${simDataProvider.getDatarefValue(apDataref)} onValue: ${data.on} offValue: ${data.off}`);
 
   if (lastState === value) {
     return;
@@ -54,15 +53,15 @@ async function updateData(context: WillAppearEvent<ApSettings>) {
   );
 }
 
-@action({ UUID: "com.pierr3.deckfcu.apone" })
-export class AutoPilotOne extends SingletonAction<ApSettings> {
+@action({ UUID: "com.pierr3.deckfcu.apthree" })
+export class AutoPilotThree extends SingletonAction<ApSettings> {
   updateSettingsInformation = (settings: ApSettings): void => {
     if (settings.buttonStyle == "boeing") {
       buttonStyle = SVGTypes.BoeingBtn;
-      buttonText = "CMD L";
+      buttonText = "CMD R";
     } else if (settings.buttonStyle == "airbus") {
       buttonStyle = SVGTypes.AirbusBtn;
-      buttonText = "AP1";
+      buttonText = "AP3";
       
     }
     lastState = !lastState;

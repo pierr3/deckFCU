@@ -35,21 +35,13 @@
 		"isCommand": true,
 		"value": "laminar/B738/autopilot/vs_press"
 	},
-	"READ_AP_ONE": {
+	"READ_WRITE_AP_ONE": {
 		"isCommand": false,
 		"value": "laminar/B738/autopilot/cmd_a_status"
 	},
-	"WRITE_AP_ONE": {
+	"READ_WRITE_AP_TWO": {
 		"isCommand": true,
 		"value": "laminar/B738/autopilot/cmd_a_press"
-	},
-	"READ_AP_TWO": {
-		"isCommand": false,
-		"value": "laminar/B738/autopilot/cmd_b_status"
-	},
-	"WRITE_AP_TWO": {
-		"isCommand": true,
-		"value": "laminar/B738/autopilot/cmd_b_press"
 	},
 	"READ_ATHR": {
 		"isCommand": false,

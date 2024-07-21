@@ -17,3 +17,5 @@
 
 1-sim/command/AP/spdConfButton_button
 1-sim/command/AP/spdButton_button
+
+190,125,45

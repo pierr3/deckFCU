@@ -22,6 +22,7 @@ import { QnhSetting } from "./actions/qnh";
 import { simDataProvider } from "./sim/simDataProvider";
 import { Com1Volume } from "./actions/com/com1Volume";
 import { Com2Volume } from "./actions/com/com2Volume";
+import { AutoPilotThree } from "./actions/autopilot-three";
 
 // We can enable "trace" logging so that all messages between the Stream Deck, and the plugin are recorded. When storing sensitive information
 streamDeck.logger.setLevel(LogLevel.DEBUG);
@@ -40,6 +41,7 @@ streamDeck.actions.registerAction(new QnhSetting());
 streamDeck.actions.registerAction(new AutothrottleToggle());
 streamDeck.actions.registerAction(new AutoPilotOne());
 streamDeck.actions.registerAction(new AutoPilotTwo());
+streamDeck.actions.registerAction(new AutoPilotThree());
 streamDeck.actions.registerAction(new ApprToggle());
 streamDeck.actions.registerAction(new VNAVToggle());
 streamDeck.actions.registerAction(new LNAVToggle());

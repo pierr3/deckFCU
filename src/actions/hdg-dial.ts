@@ -64,24 +64,21 @@ export class HeadingDial extends SingletonAction<HdgSettings> {
 
   async onDialDown(ev: DialDownEvent<HdgSettings>): Promise<void> {
     const data = getDataRefOnOffValue(DatarefsType.WRITE_HEADING_SELECT);
-    XPlaneComm.writeData(
-      DatarefsType.WRITE_HEADING_SELECT,
-      data.on
-    );
+    XPlaneComm.writeData(DatarefsType.WRITE_HEADING_SELECT, data.on);
   }
 
   async onDialRotate(ev: DialRotateEvent<HdgSettings>): Promise<void> {
     let currentHdg = simDataProvider.getDatarefValue(
       DatarefsType.READ_WRITE_HEADING
     );
-    currentHdg = Math.round(Math.max(0, currentHdg + ev.payload.ticks)) % 360;
-    if (currentHdg === 0) {
-      currentHdg = 359;
+    currentHdg = Math.round( currentHdg + ev.payload.ticks) % 360;
+    if (currentHdg < 0) {
+      currentHdg = 360 + currentHdg;
     }
+
     XPlaneComm.writeData(DatarefsType.READ_WRITE_HEADING, currentHdg);
   }
 }
-
 
 type HdgSettings = {
   heading: number;

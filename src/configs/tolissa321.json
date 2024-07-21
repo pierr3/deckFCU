@@ -36,21 +36,15 @@
 		"isCommand": true,
 		"value": "AirbusFBW/PullVSSel"
 	},
-	"READ_AP_ONE": {
-		"isCommand": false,
-		"value": "AirbusFBW/AP1Engage"
-	},
-	"WRITE_AP_ONE": {
-		"isCommand": false,
-		"value": "AirbusFBW/AP1Engage"
-	},
-	"READ_AP_TWO": {
-		"isCommand": false,
-		"value": "AirbusFBW/AP2Engage"
-	},
-	"WRITE_AP_TWO": {
+	"READ_WRITE_AP_ONE": {
 		"isCommand": true,
-		"value": "AirbusFBW/AP2Engage"
+		"value": "AirbusFBW/AP1Engage",
+		"writeValue": "AirbusFBW/AP1Engage"
+	},
+	"READ_WRITE_AP_TWO": {
+		"isCommand": true,
+		"value": "AirbusFBW/AP2Engage",
+		"writeValue": "AirbusFBW/AP2Engage"
 	},
 	"READ_ATHR": {
 		"isCommand": false,

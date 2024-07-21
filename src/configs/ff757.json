@@ -46,21 +46,23 @@
 		"isCommand": true,
 		"value": "1-sim/command/AP/vviButton_button"
 	},
-	"READ_AP_ONE": {
-		"isCommand": false,
-		"value": "1-sim/AP/cmd_L_Button"
-	},
-	"WRITE_AP_ONE": {
+	"READ_WRITE_AP_ONE": {
 		"isCommand": true,
-		"value": "1-sim/command/AP/cmd_L_Button_button"
+		"value": "1-sim/AP/lamp/12",
+		"writeValue": "1-sim/command/AP/cmd_L_Button_button",
+		"onValue": 0.8
 	},
-	"READ_AP_TWO": {
-		"isCommand": false,
-		"value": "1-sim/AP/cmd_R_Button"
-	},
-	"WRITE_AP_TWO": {
+	"READ_WRITE_AP_TWO": {
 		"isCommand": true,
-		"value": "1-sim/command/AP/cmd_R_Button_button"
+		"value": "1-sim/AP/lamp/13",
+		"writeValue": "1-sim/command/AP/cmd_C_Button_button",
+		"onValue": 0.8
+	},
+	"READ_WRITE_AP_THREE": {
+		"isCommand": true,
+		"value": "1-sim/AP/lamp/14",
+		"writeValue": "1-sim/command/AP/cmd_R_Button_button",
+		"onValue": 0.8
 	},
 	"READ_ATHR": {
 		"isCommand": false,

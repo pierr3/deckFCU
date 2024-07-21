@@ -34,7 +34,8 @@ export namespace XPlaneComm {
     // If we have a raw dataref, we take that, otherwise we take the value from the datarefMap
     const dataRefValue = dataref.includes("/")
       ? dataref
-      : datarefMap[aircraftSelector.getSelectedAircraft()][dataref].value;
+      : datarefMap[aircraftSelector.getSelectedAircraft()][dataref]?.value ??
+        undefined;
 
     if (dataRefValue === undefined || dataRefValue === "NOTIMPLEMENTED") {
       return;
@@ -47,9 +48,17 @@ export namespace XPlaneComm {
 
   export function writeData(dataref: string, value: number = 0) {
     if (datarefMap[aircraftSelector.getSelectedAircraft()][dataref].isCommand) {
-      xclient.sendCommand(
-        datarefMap[aircraftSelector.getSelectedAircraft()][dataref].value
-      );
+      const writeDatarefValue =
+        datarefMap[aircraftSelector.getSelectedAircraft()][dataref]
+          .writeValue || "";
+      if (writeDatarefValue !== "") {
+        xclient.sendCommand(writeDatarefValue);
+      } else {
+        xclient.sendCommand(
+          datarefMap[aircraftSelector.getSelectedAircraft()][dataref].value
+        );
+      }
+
       return;
     }
     const writeDatarefValue =
