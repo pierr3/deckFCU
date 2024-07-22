@@ -1,6 +1,6 @@
 export enum SupportedAircraftType {
-  Default = "Default",
-  Zibo737 = "Zibo737",
+  // Default = "Default",
+  // Zibo737 = "Zibo737",
   FF757 = "FF757",
   TOLISS = "TOLISS",
   // ToLissAirbus

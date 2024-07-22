@@ -1,0 +1,16 @@
+{
+	"id": "com.pierr3.deckfcu.fcu.layout.svg",
+	"items": [
+		{
+			"key": "data",
+			"type": "pixmap",
+			"rect": [
+				0,
+				0,
+				200,
+				100
+			],
+			"value": ""
+		}
+	]
+}

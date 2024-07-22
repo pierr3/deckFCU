@@ -46,37 +46,35 @@
 		"value": "AirbusFBW/AP2Engage",
 		"writeValue": "AirbusFBW/AP2Engage"
 	},
-	"READ_ATHR": {
-		"isCommand": false,
-		"value": "sim/cockpit2/autopilot/autothrottle_enabled"
-	},
-	"WRITE_ATHR": {
+	"READ_WRITE_ATHR": {
 		"isCommand": true,
-		"value": "sim/autopilot/autothrottle_toggle"
+		"value": "sim/cockpit2/autopilot/autothrottle_enabled",
+		"writeValue": "sim/cockpit2/autopilot/autothrottle_enabled"
 	},
-	"READ_APPR": {
-		"isCommand": false,
-		"value": "sim/autopilot/approach"
-	},
-	"WRITE_APPR": {
+	"READ_WRITE_APPR": {
 		"isCommand": true,
-		"value": "AirbusFBW/APPRbutton"
+		"value": "sim/autopilot/approach",
+		"writeValue": "AirbusFBW/APPRbutton"
 	},
-	"READ_LNAV": {
-		"isCommand": false,
-		"value": "sim/autopilot/NAV"
-	},
-	"WRITE_LNAV": {
+	"READ_WRITE_LNAV": {
 		"isCommand": true,
-		"value": "AirbusFBW/PushHDGSel"
+		"value": "sim/autopilot/NAV",
+		"writeValue": "AirbusFBW/PushHDGSel"
 	},
-	"READ_VNAV": {
-		"isCommand": false,
-		"value": "sim/autopilot/vnav"
-	},
-	"WRITE_VNAV": {
+	"READ_WRITE_VNAV": {
 		"isCommand": true,
-		"value": "AirbusFBW/PushAltitude"
+		"value": "sim/autopilot/vnav",
+		"writeValue": "AirbusFBW/PushAltitude"
+	},
+	"READ_WRITE_LOC": {
+		"isCommand": true,
+		"value": "sim/cockpit2/autopilot/hnav_armed",
+		"writeValue": "AirbusFBW/LOCbutton"
+	},
+	"READ_WRITE_FLCH": {
+		"isCommand": true,
+		"value": "AirbusFBW/PullAltitude",
+		"writeValue": "AirbusFBW/PushAltitude"
 	},
 	"READ_COM1_ACTIVE": {
 		"isCommand": false,
@@ -118,14 +116,6 @@
 		"isCommand": false,
 		"value": "sim/cockpit2/radios/actuators/audio_volume_com2"
 	},
-	"READ_LOC": {
-		"isCommand": true,
-		"value": "sim/cockpit2/autopilot/hnav_armed"
-	},
-	"WRITE_LOC": {
-		"isCommand": true,
-		"value": "AirbusFBW/LOCbutton"
-	},
 	"READ_WRITE_HSI_RANGE": {
 		"isCommand": false,
 		"value": "AirbusFBW/NDrangeCapt",
@@ -150,9 +140,9 @@
 		"isCommand": false,
 		"value": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot"
 	},
-	"WRITE_FLCH": {
-		"isCommand": true,
-		"value": "AirbusFBW/PullAltitude"
+	"READ_WRITE_AP_THREE": {
+		"isCommand": false,
+		"value": "NOTIMPLEMENTED"
 	},
 	"READ_757_HACK_ALTIMETER_SETTING": {
 		"isCommand": false,

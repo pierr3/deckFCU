@@ -1,3 +1,4 @@
+import { roundToSecondDecimal } from "../helpers";
 import { XPlaneComm } from "../xplane/XPlaneComm";
 import { SupportedAircraftType, aircraftSelector } from "./aircraftSelector";
 import { DatarefsType, datarefMap } from "./datarefMap";
@@ -77,7 +78,7 @@ class SimDataProvider {
             return;
           }
 
-          this._dataMap[datarefId] = Math.round((value + Number.EPSILON) * 10) / 10; // Round to one decimal place
+          this._dataMap[datarefId] = value;
         }
       );
     }

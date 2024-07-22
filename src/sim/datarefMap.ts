@@ -1,8 +1,7 @@
 import { SupportedAircraftType } from "./aircraftSelector";
-import streamDeck from "@elgato/streamdeck";
 import ff757Config from "../configs/ff757.json";
-import defaultConfig from "../configs/default.json";
-import zibo737Config from "../configs/zibo737.json";
+// import defaultConfig from "../configs/default.json";
+// import zibo737Config from "../configs/zibo737.json";
 import tolissConfig from "../configs/tolissa321.json";
 
 export const DatarefsType = {
@@ -21,18 +20,15 @@ export const DatarefsType = {
   READ_WRITE_AP_ONE: "READ_WRITE_AP_ONE",
   READ_WRITE_AP_TWO: "READ_WRITE_AP_TWO",
   READ_WRITE_AP_THREE: "READ_WRITE_AP_THREE",
-  READ_ATHR: "READ_ATHR",
-  WRITE_ATHR: "WRITE_ATHR",
-  READ_APPR: "READ_APPR",
-  WRITE_APPR: "WRITE_APPR",
-  READ_LNAV: "READ_LNAV",
-  WRITE_LNAV: "WRITE_LNAV",
-  READ_VNAV: "READ_VNAV",
-  WRITE_VNAV: "WRITE_VNAV",
-  READ_LOC: "READ_LOC",
-  WRITE_LOC: "WRITE_LOC",
+  READ_WRITE_ATHR: "READ_WRITE_ATHR",
 
-  WRITE_FLCH: "WRITE_FLCH",
+  READ_WRITE_APPR: "READ_WRITE_APPR",
+
+  READ_WRITE_LNAV: "READ_WRITE_LNAV",
+  READ_WRITE_VNAV: "READ_WRITE_VNAV",
+  READ_WRITE_LOC: "READ_WRITE_LOC",
+
+  READ_WRITE_FLCH: "READ_WRITE_FLCH",
 
   // Comms
   READ_COM1_ACTIVE: "READ_COM1_ACTIVE",
@@ -76,10 +72,10 @@ type DatarefData = {
 };
 
 export let datarefMap: DatarefMap = {
-  [SupportedAircraftType.Default]:
-    defaultConfig as DatarefMap[SupportedAircraftType],
-  [SupportedAircraftType.Zibo737]:
-    zibo737Config as DatarefMap[SupportedAircraftType],
+  // [SupportedAircraftType.Default]:
+  //   defaultConfig as DatarefMap[SupportedAircraftType],
+  // [SupportedAircraftType.Zibo737]:
+    // zibo737Config as DatarefMap[SupportedAircraftType],
   [SupportedAircraftType.FF757]:
     ff757Config as DatarefMap[SupportedAircraftType],
   [SupportedAircraftType.TOLISS]:

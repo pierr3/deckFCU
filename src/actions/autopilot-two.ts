@@ -10,7 +10,7 @@ import { XPlaneComm } from "../xplane/XPlaneComm";
 import { DatarefsType } from "../sim/datarefMap";
 import { getDataRefOnOffValue } from "../helpers";
 import { simDataProvider } from "../sim/simDataProvider";
-import { ButtonColors, GetButtonImageBase64, SVGTypes } from "../svg/SVGHelper";
+import SVGHelper, { ButtonColors, SVGTypes } from "../svg/SVGHelper";
 
 const UPDATE_INTERVAL = 500; // Update interval in milliseconds
 let intervalId: NodeJS.Timeout;
@@ -21,6 +21,7 @@ let shouldStopUpdating = false;
 let buttonStyle = SVGTypes.AirbusBtn;
 let apDataref = DatarefsType.READ_WRITE_AP_TWO;
 let buttonText = "AP2";
+let forceUpdate = false;
 
 async function updateData(context: WillAppearEvent<ApSettings>) {
   if (shouldStopUpdating) {
@@ -29,13 +30,14 @@ async function updateData(context: WillAppearEvent<ApSettings>) {
 
   const data = getDataRefOnOffValue(apDataref);
 
-  const value = simDataProvider.getDatarefValue(apDataref) === data.on;
+  const value = simDataProvider.getDatarefValue(apDataref) !== data.off;
 
-  if (lastState === value) {
+  if (lastState === value && !forceUpdate) {
     return;
   }
 
   lastState = value;
+  forceUpdate = false;
 
   let fillColor = ButtonColors.Off;
   if (lastState) {
@@ -47,9 +49,14 @@ async function updateData(context: WillAppearEvent<ApSettings>) {
     }
   }
 
+  const image = SVGHelper.getButtonImageBase64(
+    buttonStyle,
+    buttonText,
+    fillColor
+  );
+  
   context.action.setImage(
-    "data:image/svg+xml;base64," +
-      GetButtonImageBase64(buttonStyle, buttonText, fillColor)
+    `data:image/png;base64,${image}`
   );
 }
 
@@ -62,9 +69,8 @@ export class AutoPilotTwo extends SingletonAction<ApSettings> {
     } else if (settings.buttonStyle == "airbus") {
       buttonStyle = SVGTypes.AirbusBtn;
       buttonText = "AP2";
-      
     }
-    lastState = !lastState;
+    forceUpdate = true;
   };
 
   onWillAppear(ev: WillAppearEvent<ApSettings>): void | Promise<void> {

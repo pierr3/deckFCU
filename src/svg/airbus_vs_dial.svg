@@ -1,0 +1,25 @@
+<svg width="100%" height="100%" viewBox="0 0 200 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="mach" transform="matrix(1,0,0,1,63.9476,-3.58582)">
+        <g transform="matrix(22,0,0,22,57.7256,23.7058)">
+        </g>
+        <text x="14.826px" y="23.706px" style="font-family:'B612Mono-Bold', 'B612 Mono', monospace;font-weight:700;font-size:22px;fill:rgb(209, 183, 77);">V/S</text>
+    </g>
+    <g id="mach1" serif:id="mach" transform="matrix(1,0,0,1,-21.4066,-3.58582)">
+        <g transform="matrix(22,0,0,22,57.7256,23.7058)">
+        </g>
+        <text x="14.826px" y="23.706px" style="font-family:'B612Mono-Bold', 'B612 Mono', monospace;font-weight:700;font-size:22px;fill:rgb(209, 183, 77);">/CH</text>
+    </g>
+    <g id="active_speed" transform="matrix(1,0,0,1,-8.41529,51.8215)">
+        <g transform="matrix(58,0,0,58,179.335,23.7058)">
+        </g>
+        <text x="14.826px" y="23.706px" style="font-family:'Digital-7 Mono';font-size:58px;fill:rgb(234,205,91);">{{main_value}}</text>
+    </g>
+    <g transform="matrix(-1,0,0,1,188.506,0)">
+        <g transform="matrix(1,0,0,6.29319,0,-183.838)">
+            <rect x="124.039" y="31.715" width="3.016" height="3.016" style="fill:rgb(209, 183, 77);"/>
+        </g>
+        <g transform="matrix(6.12323e-17,-1,8.52354,5.21916e-16,-146.303,142.824)">
+            <rect x="124.039" y="31.715" width="3.016" height="3.016" style="fill:rgb(209, 183, 77);"/>
+        </g>
+    </g>
+</svg>

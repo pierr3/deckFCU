@@ -25,3 +25,11 @@ export function getDataRefOnOffValue(dataref: string): {
 }
 
 export type NullSettings = {};
+
+export type ApButtonWithStyleSettings = {
+  buttonStyle: string;
+}
+
+export type DialWithStyleSettings = {
+  dialStyle: string;
+}

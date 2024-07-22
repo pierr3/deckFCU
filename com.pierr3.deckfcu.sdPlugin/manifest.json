@@ -22,19 +22,15 @@
 		{
 			"Name": "Autopilot One",
 			"UUID": "com.pierr3.deckfcu.apone",
-			"Icon": "imgs/actions/ap/ap1off",
+			"Icon": "imgs/actions/ap/ap_inactive",
 			"Tooltip": "Toggles the Autopilot one",
 			"Controllers": [
 				"Keypad"
 			],
 			"States": [
 				{
-					"Image": "imgs/actions/ap/ap1off",
-					"Name": "AP 1 off"
-				},
-				{
-					"Image": "imgs/actions/ap/ap1on",
-					"Name": "AP 1 on"
+					"Image": "imgs/actions/ap/ap_inactive",
+					"ShowTitle": false
 				}
 			],
 			"PropertyInspectorPath": "pi/ap.html"
@@ -42,19 +38,15 @@
 		{
 			"Name": "Autopilot Two",
 			"UUID": "com.pierr3.deckfcu.aptwo",
-			"Icon": "imgs/actions/ap/ap2off",
+			"Icon": "imgs/actions/ap/ap_inactive",
 			"Tooltip": "Toggles the Autopilot two",
 			"Controllers": [
 				"Keypad"
 			],
 			"States": [
 				{
-					"Image": "imgs/actions/ap/ap2off",
-					"Name": "AP 2 off"
-				},
-				{
-					"Image": "imgs/actions/ap/ap2on",
-					"Name": "AP 2 on"
+					"Image": "imgs/actions/ap/ap_inactive",
+					"ShowTitle": false
 				}
 			],
 			"PropertyInspectorPath": "pi/ap.html"
@@ -62,19 +54,15 @@
 		{
 			"Name": "Autopilot Three",
 			"UUID": "com.pierr3.deckfcu.apthree",
-			"Icon": "imgs/actions/ap/ap2off",
+			"Icon": "imgs/actions/ap/ap_inactive",
 			"Tooltip": "Toggles the Autopilot Three",
 			"Controllers": [
 				"Keypad"
 			],
 			"States": [
 				{
-					"Image": "imgs/actions/ap/ap2off",
-					"Name": "AP 2 off"
-				},
-				{
-					"Image": "imgs/actions/ap/ap2on",
-					"Name": "AP 2 on"
+					"Image": "imgs/actions/ap/ap_inactive",
+					"ShowTitle": false
 				}
 			],
 			"PropertyInspectorPath": "pi/ap.html"
@@ -82,97 +70,82 @@
 		{
 			"Name": "Autothrottle",
 			"UUID": "com.pierr3.deckfcu.athr",
-			"Icon": "imgs/actions/ap/athroff",
+			"Icon": "imgs/actions/ap/ap_inactive",
 			"Tooltip": "Toggles the autothrottle",
 			"Controllers": [
 				"Keypad"
 			],
 			"States": [
 				{
-					"Image": "imgs/actions/ap/athroff",
-					"Name": "ATHR off"
-				},
-				{
-					"Image": "imgs/actions/ap/athron",
-					"Name": "ATHR on"
+					"Image": "imgs/actions/ap/ap_inactive",
+					"ShowTitle": false
 				}
-			]
+			],
+			"PropertyInspectorPath": "pi/ap.html"
 		},
 		{
 			"Name": "Approach Mode",
 			"UUID": "com.pierr3.deckfcu.appr",
-			"Icon": "imgs/actions/ap/approff",
+			"Icon": "imgs/actions/ap/ap_inactive",
 			"Tooltip": "Toggles the approach mode",
 			"Controllers": [
 				"Keypad"
 			],
 			"States": [
 				{
-					"Image": "imgs/actions/ap/approff",
-					"Name": "APPR off"
-				},
-				{
-					"Image": "imgs/actions/ap/appron",
-					"Name": "APPR on"
+					"Image": "imgs/actions/ap/ap_inactive",
+					"ShowTitle": false
 				}
-			]
+			],
+			"PropertyInspectorPath": "pi/ap.html"
 		},
 		{
 			"Name": "LNAV",
 			"UUID": "com.pierr3.deckfcu.lnav",
-			"Icon": "imgs/actions/ap/lnavoff",
+			"Icon": "imgs/actions/ap/ap_inactive",
 			"Tooltip": "Toggles the LNAV mode",
 			"Controllers": [
 				"Keypad"
 			],
 			"States": [
 				{
-					"Image": "imgs/actions/ap/lnavoff",
-					"Name": "LNAV off"
-				},
-				{
-					"Image": "imgs/actions/ap/lnavon",
-					"Name": "LNAV on"
+					"Image": "imgs/actions/ap/ap_inactive",
+					"ShowTitle": false
 				}
-			]
+			],
+			"PropertyInspectorPath": "pi/ap.html"
 		},
 		{
 			"Name": "VNAV",
 			"UUID": "com.pierr3.deckfcu.vnav",
-			"Icon": "imgs/actions/ap/vnavoff",
+			"Icon": "imgs/actions/ap/ap_inactive",
 			"Tooltip": "Toggles the VNAV mode",
 			"Controllers": [
 				"Keypad"
 			],
 			"States": [
 				{
-					"Image": "imgs/actions/ap/vnavoff",
-					"Name": "VNAV off"
-				},
-				{
-					"Image": "imgs/actions/ap/vnavon",
-					"Name": "VNAV on"
+					"Image": "imgs/actions/ap/ap_inactive",
+					"ShowTitle": false
 				}
-			]
+			],
+			"PropertyInspectorPath": "pi/ap.html"
 		},
 		{
 			"Name": "VORLOC",
 			"UUID": "com.pierr3.deckfcu.vorloc",
-			"Icon": "imgs/actions/ap/vorlocoff",
+			"Icon": "imgs/actions/ap/ap_inactive",
 			"Tooltip": "Toggles the VOR/LOC mode",
 			"Controllers": [
 				"Keypad"
 			],
 			"States": [
 				{
-					"Image": "imgs/actions/ap/vorlocoff",
-					"Name": "VNAV off"
-				},
-				{
-					"Image": "imgs/actions/ap/vorlocon",
-					"Name": "VNAV on"
+					"Image": "imgs/actions/ap/ap_inactive",
+					"ShowTitle": false
 				}
-			]
+			],
+			"PropertyInspectorPath": "pi/ap.html"
 		},
 		{
 			"Name": "Speed Dial",
@@ -196,7 +169,8 @@
 					"Push": "Activates IAS/Speed Intervene",
 					"Touch": "Toggles between IAS and MACH"
 				}
-			}
+			},
+			"PropertyInspectorPath": "pi/dial.html"
 		},
 		{
 			"Name": "Heading Dial",
@@ -220,7 +194,8 @@
 					"Push": "Activates heading select mode",
 					"Touch": "Activates LNAV mode"
 				}
-			}
+			},
+			"PropertyInspectorPath": "pi/dial.html"
 		},
 		{
 			"Name": "Altitude Dial",
@@ -244,7 +219,8 @@
 					"Push": "Activates ALT SELECT",
 					"Touch": "Activates VNAV"
 				}
-			}
+			},
+			"PropertyInspectorPath": "pi/dial.html"
 		},
 		{
 			"Name": "Vertical Speed Dial",
@@ -268,7 +244,8 @@
 					"Push": "Activates vertical speed mode",
 					"Touch": "Activates Flight Level Change / OP Descent mode"
 				}
-			}
+			},
+			"PropertyInspectorPath": "pi/dial.html"
 		},
 		{
 			"Name": "COM 1 Active Dial",
@@ -292,7 +269,8 @@
 					"Push": "Toggles monitoring com 1",
 					"Touch": "Does nothing"
 				}
-			}
+			},
+			"PropertyInspectorPath": "pi/dial.html"
 		},
 		{
 			"Name": "COM 1 Standby Dial",
@@ -316,7 +294,8 @@
 					"Push": "Toggles between whole numbers and decimals",
 					"Touch": "Toggle COM 1 active"
 				}
-			}
+			},
+			"PropertyInspectorPath": "pi/dial.html"
 		},
 		{
 			"Name": "COM 2 Active Dial",
@@ -340,7 +319,8 @@
 					"Touch": "Does nothing"
 				},
 				"layout": "layouts/fcu_dial.json"
-			}
+			},
+			"PropertyInspectorPath": "pi/dial.html"
 		},
 		{
 			"Name": "COM 2 Standby Dial",
@@ -364,7 +344,8 @@
 					"Push": "Switches between changes the big numbers vs the decimals",
 					"Touch": "Toggles to COM 2 active"
 				}
-			}
+			},
+			"PropertyInspectorPath": "pi/dial.html"
 		},
 		{
 			"Name": "COM 1 Volume",

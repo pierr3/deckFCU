@@ -22,17 +22,12 @@ export class AircraftSelectorAction extends SingletonAction<AircraftSelectorSett
   }
 
   async onKeyDown(ev: KeyDownEvent<AircraftSelectorSetting>): Promise<void> {
-    let nextAircraft = SupportedAircraftType.Default;
-    if (
-      aircraftSelector.getSelectedAircraft() === SupportedAircraftType.Default
-    ) {
-      nextAircraft = SupportedAircraftType.Zibo737;
-    }
-    if (
-      aircraftSelector.getSelectedAircraft() === SupportedAircraftType.Zibo737
-    ) {
-      nextAircraft = SupportedAircraftType.FF757;
-    }
+    let nextAircraft = SupportedAircraftType.FF757;
+    // if (
+    //   aircraftSelector.getSelectedAircraft() === SupportedAircraftType.Default
+    // ) {
+    //   nextAircraft = SupportedAircraftType.Zibo737;
+    // }
     if (
       aircraftSelector.getSelectedAircraft() === SupportedAircraftType.FF757
     ) {
@@ -41,8 +36,13 @@ export class AircraftSelectorAction extends SingletonAction<AircraftSelectorSett
     if (
       aircraftSelector.getSelectedAircraft() === SupportedAircraftType.TOLISS
     ) {
-      nextAircraft = SupportedAircraftType.Default;
+      nextAircraft = SupportedAircraftType.FF757;
     }
+    // if (
+    //   aircraftSelector.getSelectedAircraft() === SupportedAircraftType.TOLISS
+    // ) {
+    //   nextAircraft = SupportedAircraftType.Default;
+    // }
 
     XPlaneComm.switchSelectedAircraft(nextAircraft);
     simDataProvider.switchSelectedAircraft(nextAircraft);

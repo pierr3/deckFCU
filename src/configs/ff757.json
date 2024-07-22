@@ -38,9 +38,8 @@
 	},
 	"READ_WRITE_VERTICAL_SPEED": {
 		"isCommand": false,
-		"value": "757Avionics/ap/vs_act",
-		"onValue": 0,
-		"offValue": 1
+		"value": "1-sim/AP/lamp/8",
+		"writeValue": "1-sim/command/AP/vvi$Button_button"
 	},
 	"WRITE_VERTICAL_SPEED_SELECT": {
 		"isCommand": true,
@@ -64,43 +63,37 @@
 		"writeValue": "1-sim/command/AP/cmd_R_Button_button",
 		"onValue": 0.8
 	},
-	"READ_ATHR": {
-		"isCommand": false,
+	"READ_WRITE_ATHR": {
+		"isCommand": true,
 		"value": "1-sim/AP/atSwitcher",
+		"writeValue": "1-sim/command/AP/atSwitcher_trigger",
 		"onValue": 0,
 		"offValue": 1
 	},
-	"WRITE_ATHR": {
+	"READ_WRITE_APPR": {
 		"isCommand": true,
-		"value": "1-sim/command/AP/atSwitcher_trigger",
-		"onValue": 0,
-		"offValue": 1
+		"value": "1-sim/AP/lamp/12",
+		"writeValue": "1-sim/command/AP/appButton_button"
 	},
-	"READ_APPR": {
+	"READ_WRITE_LNAV": {
 		"isCommand": false,
-		"value": "1-sim/AP/appButton"
+		"value": "1-sim/AP/lamp/3",
+		"writeValue": "1-sim/command/AP/lnavButton_button"
 	},
-	"WRITE_APPR": {
-		"isCommand": true,
-		"value": "1-sim/command/AP/appButton_button"
-	},
-	"READ_LNAV": {
+	"READ_WRITE_VNAV": {
 		"isCommand": false,
-		"value": "1-sim/AP/lnavButton"
+		"value": "1-sim/AP/lamp/4",
+		"writeValue": "1-sim/command/AP/vnavButton_button"
 	},
-	"WRITE_LNAV": {
+	"READ_WRITE_LOC": {
 		"isCommand": true,
-		"value": "1-sim/command/AP/lnavButton_button"
+		"value": "1-sim/AP/lamp/10",
+		"writeValue": "1-sim/command/AP/locButton_button"
 	},
-	"READ_VNAV": {
-		"isCommand": false,
-		"value": "1-sim/AP/vnavButton"
-	},
-	"WRITE_VNAV": {
+	"READ_WRITE_FLCH": {
 		"isCommand": true,
-		"value": "1-sim/command/AP/vnavButton_button",
-		"onValue": 0,
-		"offValue": 1
+		"value": "1-sim/command/AP/flchButton_button",
+		"writeValue": "1-sim/command/AP/flchButton_button"
 	},
 	"READ_COM1_ACTIVE": {
 		"isCommand": false,
@@ -162,14 +155,6 @@
 		"onValue": 0,
 		"offValue": 1
 	},
-	"READ_LOC": {
-		"isCommand": false,
-		"value": "1-sim/AP/locButton"
-	},
-	"WRITE_LOC": {
-		"isCommand": true,
-		"value": "1-sim/command/AP/locButton_button"
-	},
 	"READ_WRITE_HSI_RANGE": {
 		"isCommand": false,
 		"value": "1-sim/ndpanel/1/hsiRangeRotary",
@@ -204,9 +189,5 @@
 	"READ_757_HACK_ALTIMETER_SETTING": {
 		"isCommand": false,
 		"value": "1-sim/ng/baroSmallL/anim"
-	},
-	"WRITE_FLCH": {
-		"isCommand": true,
-		"value": "1-sim/command/AP/flchButton_button"
 	}
 }

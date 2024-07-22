@@ -31,61 +31,81 @@ export namespace XPlaneComm {
     frequency: number,
     callback: (dataRef: string, value: number) => void
   ) {
-    // If we have a raw dataref, we take that, otherwise we take the value from the datarefMap
-    const dataRefValue = dataref.includes("/")
-      ? dataref
-      : datarefMap[aircraftSelector.getSelectedAircraft()][dataref]?.value ??
-        undefined;
+    try {
+      // If we have a raw dataref, we take that, otherwise we take the value from the datarefMap
+      const dataRefValue = dataref.includes("/")
+        ? dataref
+        : datarefMap[aircraftSelector.getSelectedAircraft()][dataref]?.value ??
+          undefined;
 
-    if (dataRefValue === undefined || dataRefValue === "NOTIMPLEMENTED") {
-      return;
+      if (dataRefValue === undefined || dataRefValue === "NOTIMPLEMENTED") {
+        return;
+      }
+      callbackDatabase[dataref] = (dataref: string, value: number) => {
+        callback(dataref, value);
+      };
+      xclient.requestDataRef(
+        dataRefValue,
+        frequency,
+        callbackDatabase[dataref]
+      );
+    } catch (e) {
+      streamDeck.logger.error(`Error requesting dataref ${dataref}: ${e}`);
     }
-    callbackDatabase[dataref] = (dataref: string, value: number) => {
-      callback(dataref, value);
-    };
-    xclient.requestDataRef(dataRefValue, frequency, callbackDatabase[dataref]);
   }
 
   export function writeData(dataref: string, value: number = 0) {
-    if (datarefMap[aircraftSelector.getSelectedAircraft()][dataref].isCommand) {
+    try {
+      if (
+        datarefMap[aircraftSelector.getSelectedAircraft()][dataref].isCommand
+      ) {
+        const writeDatarefValue =
+          datarefMap[aircraftSelector.getSelectedAircraft()][dataref]
+            .writeValue || "";
+        if (writeDatarefValue !== "") {
+          xclient.sendCommand(writeDatarefValue);
+        } else {
+          xclient.sendCommand(
+            datarefMap[aircraftSelector.getSelectedAircraft()][dataref].value
+          );
+        }
+
+        return;
+      }
       const writeDatarefValue =
         datarefMap[aircraftSelector.getSelectedAircraft()][dataref]
           .writeValue || "";
       if (writeDatarefValue !== "") {
-        xclient.sendCommand(writeDatarefValue);
+        xclient.setDataRef(writeDatarefValue, value);
       } else {
-        xclient.sendCommand(
-          datarefMap[aircraftSelector.getSelectedAircraft()][dataref].value
+        xclient.setDataRef(
+          datarefMap[aircraftSelector.getSelectedAircraft()][dataref].value,
+          value
         );
       }
-
-      return;
-    }
-    const writeDatarefValue =
-      datarefMap[aircraftSelector.getSelectedAircraft()][dataref].writeValue ||
-      "";
-    if (writeDatarefValue !== "") {
-      xclient.setDataRef(writeDatarefValue, value);
-    } else {
-      xclient.setDataRef(
-        datarefMap[aircraftSelector.getSelectedAircraft()][dataref].value,
-        value
-      );
+    } catch (e) {
+      streamDeck.logger.error(`Error writing dataref ${dataref}: ${e}`);
     }
   }
 
   export function unsubscribeDataRef(dataref: string, deleteCallback = true) {
-    if (datarefMap[aircraftSelector.getSelectedAircraft()][dataref].isCommand) {
-      return;
-    }
-    const dataRefValue =
-      datarefMap[aircraftSelector.getSelectedAircraft()][dataref].value;
-    if (dataRefValue === undefined || dataRefValue === "NOTIMPLEMENTED") {
-      return;
-    }
-    xclient.requestDataRef(dataRefValue, 0);
-    if (deleteCallback) {
-      callbackDatabase[dataref] = (dataref: string, value: number) => {};
+    try {
+      if (
+        datarefMap[aircraftSelector.getSelectedAircraft()][dataref].isCommand
+      ) {
+        return;
+      }
+      const dataRefValue =
+        datarefMap[aircraftSelector.getSelectedAircraft()][dataref].value;
+      if (dataRefValue === undefined || dataRefValue === "NOTIMPLEMENTED") {
+        return;
+      }
+      xclient.requestDataRef(dataRefValue, 0);
+      if (deleteCallback) {
+        callbackDatabase[dataref] = (dataref: string, value: number) => {};
+      }
+    } catch (e) {
+      streamDeck.logger.error(`Error unsubscribing dataref ${dataref}: ${e}`);
     }
   }
 

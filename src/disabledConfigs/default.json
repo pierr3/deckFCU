@@ -43,17 +43,10 @@
 		"isCommand": true,
 		"value": "laminar/B738/autopilot/cmd_a_press"
 	},
-	"READ_ATHR": {
-		"isCommand": false,
-		"value": "sim/cockpit2/autopilot/autothrottle_enabled"
-	},
-	"WRITE_ATHR": {
+	"READ_WRITE_ATH": {
 		"isCommand": true,
-		"value": "sim/autopilot/autothrottle_arm"
-	},
-	"READ_APPR": {
-		"isCommand": false,
-		"value": "sim/cockpit2/autopilot/approach_status"
+		"value": "sim/cockpit2/autopilot/autothrottle_enabled",
+		"writeValue": "sim/autopilot/autothrottle_toggle"
 	},
 	"WRITE_APPR": {
 		"isCommand": true,
