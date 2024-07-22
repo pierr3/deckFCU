@@ -144,9 +144,5 @@
 	"WRITE_FLCH": {
 		"isCommand": true,
 		"value": "NOTIMPLEMENTED"
-	},
-	"READ_757_HACK_ALTIMETER_SETTING": {
-		"isCommand": false,
-		"value": "NOTIMPLEMENTED"
 	}
 }

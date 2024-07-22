@@ -15,7 +15,6 @@ import {
 } from "../sim/aircraftSelector";
 import { simDataProvider } from "../sim/simDataProvider";
 import { getDataRefOnOffValue } from "../helpers";
-import { get } from "http";
 
 const UPDATE_INTERVAL = 100; // Update interval in milliseconds
 let intervalId: NodeJS.Timeout;
@@ -116,18 +115,14 @@ export class QnhSetting extends SingletonAction<QnhSettings> {
       newVal += ev.payload.ticks * 0.01;
     }
 
-    if (
-      data.valueMultiplier &&
-      aircraftSelector.getSelectedAircraft() == SupportedAircraftType.FF757
-    ) {
-      newVal =
-        simDataProvider.getDatarefValue(
-          DatarefsType.READ_757_HACK_ALTIMETER_SETTING
-        ) +
-        ev.payload.ticks * (data.valueMultiplier || 1);
+    if (data.simulateClickDecrease && data.simulateClickIncrease) {
+      XPlaneComm.writeData(
+        DatarefsType.READ_WRITE_ALTIMETER_SETTING,
+        ev.payload.ticks
+      );
+    } else {
+      XPlaneComm.writeData(DatarefsType.READ_WRITE_ALTIMETER_SETTING, newVal);
     }
-
-    XPlaneComm.writeData(DatarefsType.READ_WRITE_ALTIMETER_SETTING, newVal);
   }
 }
 

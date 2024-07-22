@@ -181,13 +181,10 @@
 		"value": "1-sim/ng/baro/std/L"
 	},
 	"READ_WRITE_ALTIMETER_SETTING": {
-		"isCommand": false,
+		"isCommand": true,
 		"value": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot",
 		"writeValue": "1-sim/ng/baroSmallL/anim",
-		"valueMultiple": 5
-	},
-	"READ_757_HACK_ALTIMETER_SETTING": {
-		"isCommand": false,
-		"value": "1-sim/ng/baroSmallL/anim"
+		"simulateClickDecrease": "1-sim/command/gauges/baroRotary_left_rotary-",
+		"simulateClickIncrease": "1-sim/command/gauges/baroRotary_left_rotary+"
 	}
 }

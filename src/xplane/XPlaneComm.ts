@@ -59,10 +59,25 @@ export namespace XPlaneComm {
       if (
         datarefMap[aircraftSelector.getSelectedAircraft()][dataref].isCommand
       ) {
-        const writeDatarefValue =
-          datarefMap[aircraftSelector.getSelectedAircraft()][dataref]
-            .writeValue || "";
-        if (writeDatarefValue !== "") {
+        const dref =
+          datarefMap[aircraftSelector.getSelectedAircraft()][dataref];
+
+        const writeDatarefValue = dref.writeValue ?? "";
+        const simulateClickDecrease = dref.simulateClickDecrease ?? "";
+        const simulateClickIncrease = dref.simulateClickIncrease ?? "";
+
+        if (simulateClickDecrease !== "" && simulateClickIncrease !== "") {
+          if (value > 0) {
+            for (let i = 0; i < value; i++) {
+              xclient.sendCommand(simulateClickIncrease);
+            }
+          } else {
+            for (let i = 0; i < Math.abs(value); i++) {
+              xclient.sendCommand(simulateClickDecrease);
+            }
+          }
+          return;
+        } else if (writeDatarefValue !== "") {
           xclient.sendCommand(writeDatarefValue);
         } else {
           xclient.sendCommand(

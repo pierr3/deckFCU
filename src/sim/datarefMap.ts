@@ -48,7 +48,6 @@ export const DatarefsType = {
   READ_WRITE_IS_QNH: "READ_WRITE_IS_QNH",
   READ_WRITE_IS_STD: "READ_WRITE_IS_STD",
   READ_WRITE_ALTIMETER_SETTING: "READ_WRITE_ALTIMETER_SETTING",
-  READ_757_HACK_ALTIMETER_SETTING: "READ_757_HACK_ALTIMETER_SETTING",
 
   XPLANE_VERSION: "sim/version/xplane_internal_version",
 };
@@ -69,6 +68,8 @@ type DatarefData = {
   maxValue?: number;
   minValue?: number;
   valueMultiplier?: number;
+  simulateClickDecrease?: string;
+  simulateClickIncrease?: string;
 };
 
 export let datarefMap: DatarefMap = {
