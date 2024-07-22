@@ -455,5 +455,6 @@
 		"Version": "20",
 		"Debug": "enabled"
 	},
-	"UUID": "com.pierr3.deckfcu"
+	"UUID": "com.pierr3.deckfcu",
+	"Profiles": ["profiles/FCU 757", "profiles/FCU Airbus"]
 }
