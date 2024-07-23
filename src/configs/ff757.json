@@ -69,7 +69,7 @@
 	},
 	"READ_WRITE_APPR": {
 		"isCommand": true,
-		"value": "1-sim/AP/lamp/9",
+		"value": "1-sim/AP/lamp/11",
 		"writeValue": "1-sim/command/AP/appButton_button"
 	},
 	"READ_WRITE_LNAV": {
