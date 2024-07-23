@@ -7,7 +7,7 @@
 	},
 	"READ_WRITE_IS_MACH": {
 		"isCommand": true,
-		"value": "1-sim/command/AP/iasmach_button",
+		"value": "1-sim/AP/iasmach",
 		"writeValue": "1-sim/command/AP/iasmach_button"
 	},
 	"WRITE_ENABLE_IAS": {
@@ -48,20 +48,17 @@
 	"READ_WRITE_AP_ONE": {
 		"isCommand": true,
 		"value": "1-sim/AP/lamp/12",
-		"writeValue": "1-sim/command/AP/cmd_L_Button_button",
-		"onValue": 0.8
+		"writeValue": "1-sim/command/AP/cmd_L_Button_button"
 	},
 	"READ_WRITE_AP_TWO": {
 		"isCommand": true,
 		"value": "1-sim/AP/lamp/13",
-		"writeValue": "1-sim/command/AP/cmd_C_Button_button",
-		"onValue": 0.8
+		"writeValue": "1-sim/command/AP/cmd_C_Button_button"
 	},
 	"READ_WRITE_AP_THREE": {
 		"isCommand": true,
 		"value": "1-sim/AP/lamp/14",
-		"writeValue": "1-sim/command/AP/cmd_R_Button_button",
-		"onValue": 0.8
+		"writeValue": "1-sim/command/AP/cmd_R_Button_button"
 	},
 	"READ_WRITE_ATHR": {
 		"isCommand": true,
@@ -72,16 +69,16 @@
 	},
 	"READ_WRITE_APPR": {
 		"isCommand": true,
-		"value": "1-sim/AP/lamp/12",
+		"value": "1-sim/AP/lamp/9",
 		"writeValue": "1-sim/command/AP/appButton_button"
 	},
 	"READ_WRITE_LNAV": {
-		"isCommand": false,
+		"isCommand": true,
 		"value": "1-sim/AP/lamp/3",
 		"writeValue": "1-sim/command/AP/lnavButton_button"
 	},
 	"READ_WRITE_VNAV": {
-		"isCommand": false,
+		"isCommand": true,
 		"value": "1-sim/AP/lamp/4",
 		"writeValue": "1-sim/command/AP/vnavButton_button"
 	},

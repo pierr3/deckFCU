@@ -10,7 +10,7 @@ export const AirbusGenericSvgDial = `<svg width="100%" height="100%" viewBox="0 
     <g id="mach" transform="matrix(1,0,0,1,31.36,-5.55525)" visibility="{{show_type_two}}">
         <g transform="matrix(16,0,0,16,56.4256,23.7058)">
         </g>
-        <text x="16px" y="30px" style="font-family:'B612Mono-Bold', 'B612 Mono', monospace;font-weight:700;font-size:18px;fill:rgb(209, 183, 77);">{{value_type_one}}</text>
+        <text x="16px" y="30px" style="font-family:'B612Mono-Bold', 'B612 Mono', monospace;font-weight:700;font-size:18px;fill:rgb(209, 183, 77);">{{value_type_two}}</text>
     </g>
     <g id="inactive_dash" transform="matrix(1,0,0,1,9.53468,49.8578)" visibility="{{show_inactive}}">
         <g transform="matrix(72,0,0,72,140.498,23.7058)">
