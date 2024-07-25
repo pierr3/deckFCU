@@ -56,17 +56,16 @@ export namespace XPlaneComm {
 
   export function writeData(dataref: string, value: number = 0) {
     try {
-      if (
-        datarefMap[aircraftSelector.getSelectedAircraft()][dataref].isCommand
-      ) {
-        const dref =
-          datarefMap[aircraftSelector.getSelectedAircraft()][dataref];
-
-        const writeDatarefValue = dref.writeValue ?? "";
+      const dref = datarefMap[aircraftSelector.getSelectedAircraft()][dataref];
+      const writeDatarefValue = dref.writeValue ?? dref.value;
+      if (dref.isCommand) {
         const simulateClickDecrease = dref.simulateClickDecrease ?? "";
         const simulateClickIncrease = dref.simulateClickIncrease ?? "";
 
-        if (simulateClickDecrease !== "" && simulateClickIncrease !== "") {
+        if (
+          simulateClickDecrease.length > 0 &&
+          simulateClickIncrease.length > 0
+        ) {
           if (value > 0) {
             for (let i = 0; i < value; i++) {
               xclient.sendCommand(simulateClickIncrease);
@@ -79,24 +78,12 @@ export namespace XPlaneComm {
           return;
         } else if (writeDatarefValue !== "") {
           xclient.sendCommand(writeDatarefValue);
-        } else {
-          xclient.sendCommand(
-            datarefMap[aircraftSelector.getSelectedAircraft()][dataref].value
-          );
         }
 
         return;
-      }
-      const writeDatarefValue =
-        datarefMap[aircraftSelector.getSelectedAircraft()][dataref]
-          .writeValue || "";
-      if (writeDatarefValue !== "") {
+      } else if (writeDatarefValue !== "") {
         xclient.setDataRef(writeDatarefValue, value);
-      } else {
-        xclient.setDataRef(
-          datarefMap[aircraftSelector.getSelectedAircraft()][dataref].value,
-          value
-        );
+        return;
       }
     } catch (e) {
       streamDeck.logger.error(`Error writing dataref ${dataref}: ${e}`);
