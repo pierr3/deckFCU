@@ -14,7 +14,9 @@ import { simDataProvider } from "../sim/simDataProvider";
 
 @action({ UUID: "com.pierr3.deckfcu.aircraftselector" })
 export class AircraftSelectorAction extends SingletonAction<AircraftSelectorSetting> {
-  onWillAppear(ev: WillAppearEvent<AircraftSelectorSetting>): void | Promise<void> {
+  onWillAppear(
+    ev: WillAppearEvent<AircraftSelectorSetting>,
+  ): void | Promise<void> {
     ev.action.setSettings({
       currentAircraft: aircraftSelector.getSelectedAircraft(),
     });
@@ -36,6 +38,12 @@ export class AircraftSelectorAction extends SingletonAction<AircraftSelectorSett
     if (
       aircraftSelector.getSelectedAircraft() === SupportedAircraftType.TOLISS
     ) {
+      nextAircraft = SupportedAircraftType.ROTATE_MD80;
+    }
+    if (
+      aircraftSelector.getSelectedAircraft() ===
+      SupportedAircraftType.ROTATE_MD80
+    ) {
       nextAircraft = SupportedAircraftType.FF757;
     }
     // if (
@@ -50,7 +58,6 @@ export class AircraftSelectorAction extends SingletonAction<AircraftSelectorSett
     await ev.action.setSettings({ currentAircraft: nextAircraft });
   }
 }
-
 
 type AircraftSelectorSetting = {
   currentAircraft: string;

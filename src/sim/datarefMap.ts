@@ -3,6 +3,7 @@ import ff757Config from "../configs/ff757.json";
 // import defaultConfig from "../configs/default.json";
 // import zibo737Config from "../configs/zibo737.json";
 import tolissConfig from "../configs/tolissa321.json";
+import rotateConfig from "../configs/rotate_md80.json";
 
 export const DatarefsType = {
   // Dials
@@ -76,9 +77,11 @@ export let datarefMap: DatarefMap = {
   // [SupportedAircraftType.Default]:
   //   defaultConfig as DatarefMap[SupportedAircraftType],
   // [SupportedAircraftType.Zibo737]:
-    // zibo737Config as DatarefMap[SupportedAircraftType],
+  // zibo737Config as DatarefMap[SupportedAircraftType],
   [SupportedAircraftType.FF757]:
     ff757Config as DatarefMap[SupportedAircraftType],
   [SupportedAircraftType.TOLISS]:
     tolissConfig as DatarefMap[SupportedAircraftType],
+  [SupportedAircraftType.ROTATE_MD80]:
+    rotateConfig as DatarefMap[SupportedAircraftType],
 };

@@ -3,6 +3,7 @@ export enum SupportedAircraftType {
   // Zibo737 = "Zibo737",
   FF757 = "FF757",
   TOLISS = "TOLISS",
+  ROTATE_MD80 = "ROTATE_MD80",
   // ToLissAirbus
 }
 

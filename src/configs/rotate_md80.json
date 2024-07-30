@@ -1,0 +1,145 @@
+{
+  "READ_WRITE_IAS_MACH": {
+    "isCommand": false,
+    "value": "Rotate/md80/autopilot/speed_sel_knob"
+  },
+  "READ_WRITE_IS_MACH": {
+    "isCommand": true,
+    "value": "Rotate/md80/autopilot/spd_is_mach",
+    "writeValue": "Rotate/md80/autopilot/spd_mach_toggle"
+  },
+  "WRITE_ENABLE_IAS": {
+    "isCommand": true,
+    "value": "Rotate/md80/autopilot/spd_sel"
+  },
+  "READ_WRITE_HEADING": {
+    "isCommand": false,
+    "value": "Rotate/md80/autopilot/hdg_sel_deg_pilot"
+  },
+  "WRITE_HEADING_SELECT": {
+    "isCommand": true,
+    "value": "Rotate/md80/autopilot/hdg_sel_mode"
+  },
+  "READ_WRITE_ALTITUDE": {
+    "isCommand": false,
+    "value": "Rotate/md80/autopilot/alt_sel_ft"
+  },
+  "WRITE_ALTITUDE_SELECT": {
+    "isCommand": true,
+    "value": "Rotate/md80/autopilot/alt_hold_arm"
+  },
+  "READ_WRITE_VERTICAL_SPEED": {
+    "isCommand": true,
+    "value": "sim/cockpit2/autopilot/vvi_dial_fpm"
+  },
+  "WRITE_VERTICAL_SPEED_SELECT": {
+    "isCommand": true,
+    "value": "Rotate/md80/autopilot/v_speed_sel"
+  },
+  "READ_WRITE_AP_ONE": {
+    "isCommand": true,
+    "value": "Rotate/md80/autopilot/ap_toggle",
+    "writeValue": "Rotate/md80/autopilot/ap_toggle"
+  },
+  "READ_WRITE_AP_TWO": {
+    "isCommand": false,
+    "value": "NOTIMPLEMENTED"
+  },
+  "READ_WRITE_ATHR": {
+    "isCommand": false,
+    "value": "Rotate/md80/autopilot/at_switch",
+    "writeValue": "Rotate/md80/autopilot/at_switch"
+  },
+  "READ_WRITE_APPR": {
+    "isCommand": true,
+    "value": "sim/autopilot/approach",
+    "writeValue": "Rotate/md80/autopilot/ils_mode"
+  },
+  "READ_WRITE_LNAV": {
+    "isCommand": true,
+    "value": "sim/autopilot/NAV",
+    "writeValue": "Rotate/md80/autopilot/nav_mode"
+  },
+  "READ_WRITE_VNAV": {
+    "isCommand": true,
+    "value": "sim/autopilot/vnav",
+    "writeValue": "Rotate/md80/autopilot/vnav_sel"
+  },
+  "READ_WRITE_LOC": {
+    "isCommand": true,
+    "value": "sim/cockpit2/autopilot/hnav_armed",
+    "writeValue": "Rotate/md80/autopilot/vorloc_mode"
+  },
+  "READ_WRITE_FLCH": {
+    "isCommand": true,
+    "value": "Rotate/md80/autopilot/ias_mach_sel"
+  },
+  "READ_COM1_ACTIVE": {
+    "isCommand": false,
+    "value": "sim/cockpit2/radios/actuators/com1_frequency_hz_833"
+  },
+  "READ_WRITE_COM1_STANDBY": {
+    "isCommand": false,
+    "value": "sim/cockpit2/radios/actuators/com1_standby_frequency_hz_833"
+  },
+  "TOGGLE_COM1_STANDBY": {
+    "isCommand": true,
+    "value": "sim/radios/com1_standy_flip"
+  },
+  "TOGGLE_COM1_MONITOR": {
+    "isCommand": true,
+    "value": "sim/audio_panel/monitor_audio_com1"
+  },
+  "READ_WRITE_COM1_VOLUME": {
+    "isCommand": false,
+    "value": "sim/cockpit2/radios/actuators/audio_volume_com1"
+  },
+  "READ_COM2_ACTIVE": {
+    "isCommand": false,
+    "value": "sim/cockpit2/radios/actuators/com2_frequency_hz_833"
+  },
+  "READ_WRITE_COM2_STANDBY": {
+    "isCommand": false,
+    "value": "sim/cockpit2/radios/actuators/com2_standby_frequency_hz_833"
+  },
+  "TOGGLE_COM2_STANDBY": {
+    "isCommand": true,
+    "value": "sim/radios/com2_standy_flip"
+  },
+  "TOGGLE_COM2_MONITOR": {
+    "isCommand": true,
+    "value": "sim/audio_panel/monitor_audio_com2"
+  },
+  "READ_WRITE_COM2_VOLUME": {
+    "isCommand": false,
+    "value": "sim/cockpit2/radios/actuators/audio_volume_com2"
+  },
+  "READ_WRITE_HSI_RANGE": {
+    "isCommand": false,
+    "value": "Rotate/md80/instruments/nav_display_range",
+    "displayValueMap": {
+      "0": "10",
+      "1": "20",
+      "2": "40",
+      "3": "80",
+      "4": "160",
+      "5": "320"
+    }
+  },
+  "READ_WRITE_IS_QNH": {
+    "isCommand": false,
+    "value": "AirbusFBW/BaroUnitCapt"
+  },
+  "READ_WRITE_IS_STD": {
+    "isCommand": true,
+    "value": "AirbusFBW/BaroStdCapt"
+  },
+  "READ_WRITE_ALTIMETER_SETTING": {
+    "isCommand": false,
+    "value": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot"
+  },
+  "READ_WRITE_AP_THREE": {
+    "isCommand": false,
+    "value": "NOTIMPLEMENTED"
+  }
+}
