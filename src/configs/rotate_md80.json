@@ -1,7 +1,11 @@
 {
-  "READ_WRITE_IAS_MACH": {
+  "READ_WRITE_IAS": {
     "isCommand": false,
-    "value": "Rotate/md80/autopilot/speed_sel_knob"
+    "value": "Rotate/md80/autopilot/at_target_speed"
+  },
+  "READ_WRITE_MACH": {
+    "isCommand": false,
+    "value": "Rotate/md80/autopilot/at_target_mach"
   },
   "READ_WRITE_IS_MACH": {
     "isCommand": true,
@@ -29,8 +33,8 @@
     "value": "Rotate/md80/autopilot/alt_hold_arm"
   },
   "READ_WRITE_VERTICAL_SPEED": {
-    "isCommand": true,
-    "value": "sim/cockpit2/autopilot/vvi_dial_fpm"
+    "isCommand": false,
+    "value": "sim/cockpit/autopilot/vertical_velocity"
   },
   "WRITE_VERTICAL_SPEED_SELECT": {
     "isCommand": true,
@@ -141,5 +145,19 @@
   "READ_WRITE_AP_THREE": {
     "isCommand": false,
     "value": "NOTIMPLEMENTED"
+  },
+  "MD80_PCW_READOUT": {
+    "isCommand": false,
+    "value": "Rotate/md80/autopilot/pcw_readout"
+  },
+  "MD80_VNAV_MODE": {
+    "isCommand": false,
+    "value": "Rotate/md80/autopilot/vnav_mode"
+  },
+  "MD80_PCW_SPD_BUG": {
+    "isCommand": true,
+    "value": "Rotate/md80/instruments/airspeed_bug",
+    "simulateClickDecrease": "Rotate/md80/autopilot/pcw_more",
+    "simulateClickIncrease": "Rotate/md80/autopilot/pcw_less"
   }
 }

@@ -1,13 +1,14 @@
 import { SupportedAircraftType } from "./aircraftSelector";
 import ff757Config from "../configs/ff757.json";
-// import defaultConfig from "../configs/default.json";
+import defaultConfig from "../configs/default.json";
 // import zibo737Config from "../configs/zibo737.json";
 import tolissConfig from "../configs/tolissa321.json";
 import rotateConfig from "../configs/rotate_md80.json";
 
 export const DatarefsType = {
   // Dials
-  READ_WRITE_IAS_MACH: "READ_WRITE_IAS_MACH",
+  READ_WRITE_IAS: "READ_WRITE_IAS",
+  READ_WRITE_MACH: "READ_WRITE_MACH",
   READ_WRITE_IS_MACH: "READ_WRITE_IS_MACH",
   WRITE_ENABLE_IAS: "WRITE_ENABLE_IAS",
   READ_WRITE_HEADING: "READ_WRITE_HEADING",
@@ -50,7 +51,12 @@ export const DatarefsType = {
   READ_WRITE_IS_STD: "READ_WRITE_IS_STD",
   READ_WRITE_ALTIMETER_SETTING: "READ_WRITE_ALTIMETER_SETTING",
 
+  MD80_PCW_READOUT: "MD80_PCW_READOUT",
+  MD80_VNAV_MODE: "MD80_VNAV_MODE",
+  MD80_PCW_SPD_BUG: "MD80_PCW_SPD_BUG",
+
   XPLANE_VERSION: "sim/version/xplane_internal_version",
+  XPLANE_AIRCRAFT_AUTHOR: "sim/aircraft/view/acf_author[6]",
 };
 
 type DatarefMap = {
@@ -74,8 +80,8 @@ type DatarefData = {
 };
 
 export let datarefMap: DatarefMap = {
-  // [SupportedAircraftType.Default]:
-  //   defaultConfig as DatarefMap[SupportedAircraftType],
+  [SupportedAircraftType.Default]:
+    defaultConfig as DatarefMap[SupportedAircraftType],
   // [SupportedAircraftType.Zibo737]:
   // zibo737Config as DatarefMap[SupportedAircraftType],
   [SupportedAircraftType.FF757]:

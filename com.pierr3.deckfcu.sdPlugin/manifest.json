@@ -1,460 +1,425 @@
 {
-	"Name": "deckFCU",
-	"Version": "0.1.0",
-	"Author": "Pierre Ferran",
-	"URL": "https://github.com/pierr3/deckfcu",
-	"Actions": [
-		{
-			"Name": "Switch aircraft",
-			"UUID": "com.pierr3.deckfcu.aircraftselector",
-			"Icon": "imgs/actions/general/settings",
-			"Tooltip": "Toggles between aircraft types",
-			"Controllers": [
-				"Keypad"
-			],
-			"States": [
-				{
-					"Image": "imgs/actions/general/settings",
-					"TitleAlignment": "middle"
-				}
-			]
-		},
-		{
-			"Name": "Autopilot One",
-			"UUID": "com.pierr3.deckfcu.apone",
-			"Icon": "imgs/actions/ap/ap_inactive",
-			"Tooltip": "Toggles the Autopilot one",
-			"Controllers": [
-				"Keypad"
-			],
-			"States": [
-				{
-					"Image": "imgs/actions/ap/ap_inactive",
-					"ShowTitle": false
-				}
-			],
-			"PropertyInspectorPath": "pi/ap.html"
-		},
-		{
-			"Name": "Autopilot Two",
-			"UUID": "com.pierr3.deckfcu.aptwo",
-			"Icon": "imgs/actions/ap/ap_inactive",
-			"Tooltip": "Toggles the Autopilot two",
-			"Controllers": [
-				"Keypad"
-			],
-			"States": [
-				{
-					"Image": "imgs/actions/ap/ap_inactive",
-					"ShowTitle": false
-				}
-			],
-			"PropertyInspectorPath": "pi/ap.html"
-		},
-		{
-			"Name": "Autopilot Three",
-			"UUID": "com.pierr3.deckfcu.apthree",
-			"Icon": "imgs/actions/ap/ap_inactive",
-			"Tooltip": "Toggles the Autopilot Three",
-			"Controllers": [
-				"Keypad"
-			],
-			"States": [
-				{
-					"Image": "imgs/actions/ap/ap_inactive",
-					"ShowTitle": false
-				}
-			],
-			"PropertyInspectorPath": "pi/ap.html"
-		},
-		{
-			"Name": "Autothrottle",
-			"UUID": "com.pierr3.deckfcu.athr",
-			"Icon": "imgs/actions/ap/ap_inactive",
-			"Tooltip": "Toggles the autothrottle",
-			"Controllers": [
-				"Keypad"
-			],
-			"States": [
-				{
-					"Image": "imgs/actions/ap/ap_inactive",
-					"ShowTitle": false
-				}
-			],
-			"PropertyInspectorPath": "pi/ap.html"
-		},
-		{
-			"Name": "Approach Mode",
-			"UUID": "com.pierr3.deckfcu.appr",
-			"Icon": "imgs/actions/ap/ap_inactive",
-			"Tooltip": "Toggles the approach mode",
-			"Controllers": [
-				"Keypad"
-			],
-			"States": [
-				{
-					"Image": "imgs/actions/ap/ap_inactive",
-					"ShowTitle": false
-				}
-			],
-			"PropertyInspectorPath": "pi/ap.html"
-		},
-		{
-			"Name": "LNAV",
-			"UUID": "com.pierr3.deckfcu.lnav",
-			"Icon": "imgs/actions/ap/ap_inactive",
-			"Tooltip": "Toggles the LNAV mode",
-			"Controllers": [
-				"Keypad"
-			],
-			"States": [
-				{
-					"Image": "imgs/actions/ap/ap_inactive",
-					"ShowTitle": false
-				}
-			],
-			"PropertyInspectorPath": "pi/ap.html"
-		},
-		{
-			"Name": "VNAV",
-			"UUID": "com.pierr3.deckfcu.vnav",
-			"Icon": "imgs/actions/ap/ap_inactive",
-			"Tooltip": "Toggles the VNAV mode",
-			"Controllers": [
-				"Keypad"
-			],
-			"States": [
-				{
-					"Image": "imgs/actions/ap/ap_inactive",
-					"ShowTitle": false
-				}
-			],
-			"PropertyInspectorPath": "pi/ap.html"
-		},
-		{
-			"Name": "VORLOC",
-			"UUID": "com.pierr3.deckfcu.vorloc",
-			"Icon": "imgs/actions/ap/ap_inactive",
-			"Tooltip": "Toggles the VOR/LOC mode",
-			"Controllers": [
-				"Keypad"
-			],
-			"States": [
-				{
-					"Image": "imgs/actions/ap/ap_inactive",
-					"ShowTitle": false
-				}
-			],
-			"PropertyInspectorPath": "pi/ap.html"
-		},
-		{
-			"Name": "Speed Dial",
-			"UUID": "com.pierr3.deckfcu.speed",
-			"Icon": "imgs/actions/general/dial",
-			"States": [
-				{
-					"Image": "imgs/actions/general/dial",
-					"TitleAlignment": "middle"
-				}
-			],
-			"Tooltip": "Displays and changes the current airspeed/mach",
-			"Controllers": [
-				"Keypad",
-				"Encoder"
-			],
-			"Encoder": {
-				"layout": "layouts/fcu_dial.json",
-				"TriggerDescription": {
-					"Rotate": "Sets the desired speed",
-					"Push": "Activates IAS/Speed Intervene",
-					"Touch": "Toggles between IAS and MACH"
-				}
-			},
-			"PropertyInspectorPath": "pi/dial.html"
-		},
-		{
-			"Name": "Heading Dial",
-			"UUID": "com.pierr3.deckfcu.heading",
-			"Icon": "imgs/actions/general/dial",
-			"States": [
-				{
-					"Image": "imgs/actions/general/dial",
-					"TitleAlignment": "middle"
-				}
-			],
-			"Tooltip": "Displays and changes the current airspeed/mach",
-			"Controllers": [
-				"Keypad",
-				"Encoder"
-			],
-			"Encoder": {
-				"layout": "layouts/fcu_dial.json",
-				"TriggerDescription": {
-					"Rotate": "Sets the desired heading",
-					"Push": "Activates heading select mode",
-					"Touch": "Activates LNAV mode"
-				}
-			},
-			"PropertyInspectorPath": "pi/dial.html"
-		},
-		{
-			"Name": "Altitude Dial",
-			"UUID": "com.pierr3.deckfcu.altitude",
-			"Icon": "imgs/actions/general/dial",
-			"States": [
-				{
-					"Image": "imgs/actions/general/dial",
-					"TitleAlignment": "middle"
-				}
-			],
-			"Tooltip": "Displays and changes the current airspeed/mach",
-			"Controllers": [
-				"Keypad",
-				"Encoder"
-			],
-			"Encoder": {
-				"layout": "layouts/fcu_dial.json",
-				"TriggerDescription": {
-					"Rotate": "Sets desired altitude",
-					"Push": "Activates ALT SELECT",
-					"Touch": "Activates VNAV"
-				}
-			},
-			"PropertyInspectorPath": "pi/dial.html"
-		},
-		{
-			"Name": "Vertical Speed Dial",
-			"UUID": "com.pierr3.deckfcu.vs",
-			"Icon": "imgs/actions/general/dial",
-			"States": [
-				{
-					"Image": "imgs/actions/general/dial",
-					"TitleAlignment": "middle"
-				}
-			],
-			"Tooltip": "Displays and changes the current vertical speed",
-			"Controllers": [
-				"Keypad",
-				"Encoder"
-			],
-			"Encoder": {
-				"layout": "layouts/fcu_dial.json",
-				"TriggerDescription": {
-					"Rotate": "Sets the desired vertical speed",
-					"Push": "Activates vertical speed mode",
-					"Touch": "Activates Flight Level Change / OP Descent mode"
-				}
-			},
-			"PropertyInspectorPath": "pi/dial.html"
-		},
-		{
-			"Name": "COM 1 Active Dial",
-			"UUID": "com.pierr3.deckfcu.com1active",
-			"Icon": "imgs/actions/general/dial",
-			"States": [
-				{
-					"Image": "imgs/actions/general/dial",
-					"TitleAlignment": "middle"
-				}
-			],
-			"Tooltip": "Displays and changes active com1 frequency",
-			"Controllers": [
-				"Keypad",
-				"Encoder"
-			],
-			"Encoder": {
-				"layout": "layouts/fcu_dial.json",
-				"TriggerDescription": {
-					"Rotate": "Sets the com1 volume",
-					"Push": "Toggles monitoring com 1",
-					"Touch": "Does nothing"
-				}
-			},
-			"PropertyInspectorPath": "pi/dial.html"
-		},
-		{
-			"Name": "COM 1 Standby Dial",
-			"UUID": "com.pierr3.deckfcu.com1standby",
-			"Icon": "imgs/actions/general/dial",
-			"States": [
-				{
-					"Image": "imgs/actions/general/dial",
-					"TitleAlignment": "middle"
-				}
-			],
-			"Tooltip": "Displays and changes standby com1 frequency",
-			"Controllers": [
-				"Keypad",
-				"Encoder"
-			],
-			"Encoder": {
-				"layout": "layouts/fcu_dial.json",
-				"TriggerDescription": {
-					"Rotate": "Sets COM 1 standby",
-					"Push": "Toggles between whole numbers and decimals",
-					"Touch": "Toggle COM 1 active"
-				}
-			},
-			"PropertyInspectorPath": "pi/dial.html"
-		},
-		{
-			"Name": "COM 2 Active Dial",
-			"UUID": "com.pierr3.deckfcu.com2active",
-			"Icon": "imgs/actions/general/dial",
-			"States": [
-				{
-					"Image": "imgs/actions/general/dial",
-					"TitleAlignment": "middle"
-				}
-			],
-			"Tooltip": "Displays and changes active com2 frequency",
-			"Controllers": [
-				"Keypad",
-				"Encoder"
-			],
-			"Encoder": {
-				"TriggerDescription": {
-					"Rotate": "Sets the com2 volume",
-					"Push": "Toggles monitoring com2",
-					"Touch": "Does nothing"
-				},
-				"layout": "layouts/fcu_dial.json"
-			},
-			"PropertyInspectorPath": "pi/dial.html"
-		},
-		{
-			"Name": "COM 2 Standby Dial",
-			"UUID": "com.pierr3.deckfcu.com2standby",
-			"Icon": "imgs/actions/general/dial",
-			"States": [
-				{
-					"Image": "imgs/actions/general/dial",
-					"TitleAlignment": "middle"
-				}
-			],
-			"Tooltip": "Displays and changes standby com2 frequency",
-			"Controllers": [
-				"Keypad",
-				"Encoder"
-			],
-			"Encoder": {
-				"layout": "layouts/fcu_dial.json",
-				"TriggerDescription": {
-					"Rotate": "Sets the COM 2 standby frequency",
-					"Push": "Switches between changes the big numbers vs the decimals",
-					"Touch": "Toggles to COM 2 active"
-				}
-			},
-			"PropertyInspectorPath": "pi/dial.html"
-		},
-		{
-			"Name": "COM 1 Volume",
-			"UUID": "com.pierr3.deckfcu.com1volume",
-			"Icon": "imgs/actions/general/dial",
-			"States": [
-				{
-					"Image": "imgs/actions/general/dial",
-					"TitleAlignment": "middle"
-				}
-			],
-			"Tooltip": "Displays and changes com1 volume",
-			"Controllers": [
-				"Keypad",
-				"Encoder"
-			],
-			"Encoder": {
-				"layout": "layouts/fcu_dial.json"
-			}
-		},
-		{
-			"Name": "COM 2 Volume",
-			"UUID": "com.pierr3.deckfcu.com2volume",
-			"Icon": "imgs/actions/general/dial",
-			"States": [
-				{
-					"Image": "imgs/actions/general/dial",
-					"TitleAlignment": "middle"
-				}
-			],
-			"Tooltip": "Displays and changes com2 volume",
-			"Controllers": [
-				"Keypad",
-				"Encoder"
-			],
-			"Encoder": {
-				"layout": "layouts/fcu_dial.json"
-			}
-		},
-		{
-			"Name": "HSI Range",
-			"UUID": "com.pierr3.deckfcu.hsirange",
-			"Icon": "imgs/actions/general/dial",
-			"States": [
-				{
-					"Image": "imgs/actions/general/dial",
-					"TitleAlignment": "middle"
-				}
-			],
-			"Tooltip": "Changes the range of the main HSI (PFD) display",
-			"Controllers": [
-				"Keypad",
-				"Encoder"
-			],
-			"Encoder": {
-				"layout": "layouts/fcu_dial.json",
-				"TriggerDescription": {
-					"Rotate": "Sets the range on your PFD or HSI",
-					"Push": "Does nothing",
-					"Touch": "Does nothing"
-				}
-			}
-		},
-		{
-			"Name": "Altimeter Setting",
-			"UUID": "com.pierr3.deckfcu.qnh",
-			"Icon": "imgs/actions/general/dial",
-			"States": [
-				{
-					"Image": "imgs/actions/general/dial",
-					"TitleAlignment": "middle",
-					"ShowTitle": true,
-					"Title": "Default",
-					"FontStyle": "bold"
-				}
-			],
-			"Tooltip": "Changes the (left side) altimeter setting",
-			"Controllers": [
-				"Keypad",
-				"Encoder"
-			],
-			"Encoder": {
-				"layout": "layouts/fcu_dial.json"
-			}
-		}
-	],
-	"Category": "deckFCU",
-	"CategoryIcon": "imgs/plugin/category-icon",
-	"CodePath": "bin/plugin.js",
-	"Description": "XPlane Flight Control Unit for the SD+",
-	"Icon": "imgs/plugin/marketplace",
-	"SDKVersion": 2,
-	"Software": {
-		"MinimumVersion": "6.5"
-	},
-	"OS": [
-		{
-			"Platform": "mac",
-			"MinimumVersion": "10.15"
-		},
-		{
-			"Platform": "windows",
-			"MinimumVersion": "10"
-		}
-	],
-	"Nodejs": {
-		"Version": "20",
-		"Debug": "enabled"
-	},
-	"UUID": "com.pierr3.deckfcu",
-	"Profiles": ["profiles/FCU 757", "profiles/FCU Airbus"]
+  "Name": "deckFCU",
+  "Version": "0.1.0",
+  "Author": "Pierre Ferran",
+  "URL": "https://github.com/pierr3/deckfcu",
+  "Actions": [
+    {
+      "Name": "Switch aircraft",
+      "UUID": "com.pierr3.deckfcu.aircraftselector",
+      "Icon": "imgs/actions/general/settings",
+      "Tooltip": "Toggles between aircraft types",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "imgs/actions/general/settings",
+          "TitleAlignment": "middle"
+        }
+      ]
+    },
+    {
+      "Name": "Autopilot One",
+      "UUID": "com.pierr3.deckfcu.apone",
+      "Icon": "imgs/actions/ap/ap_inactive",
+      "Tooltip": "Toggles the Autopilot one",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "imgs/actions/ap/ap_inactive",
+          "ShowTitle": false
+        }
+      ],
+      "PropertyInspectorPath": "pi/ap.html"
+    },
+    {
+      "Name": "Autopilot Two",
+      "UUID": "com.pierr3.deckfcu.aptwo",
+      "Icon": "imgs/actions/ap/ap_inactive",
+      "Tooltip": "Toggles the Autopilot two",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "imgs/actions/ap/ap_inactive",
+          "ShowTitle": false
+        }
+      ],
+      "PropertyInspectorPath": "pi/ap.html"
+    },
+    {
+      "Name": "Autopilot Three",
+      "UUID": "com.pierr3.deckfcu.apthree",
+      "Icon": "imgs/actions/ap/ap_inactive",
+      "Tooltip": "Toggles the Autopilot Three",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "imgs/actions/ap/ap_inactive",
+          "ShowTitle": false
+        }
+      ],
+      "PropertyInspectorPath": "pi/ap.html"
+    },
+    {
+      "Name": "Autothrottle",
+      "UUID": "com.pierr3.deckfcu.athr",
+      "Icon": "imgs/actions/ap/ap_inactive",
+      "Tooltip": "Toggles the autothrottle",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "imgs/actions/ap/ap_inactive",
+          "ShowTitle": false
+        }
+      ],
+      "PropertyInspectorPath": "pi/ap.html"
+    },
+    {
+      "Name": "Approach Mode",
+      "UUID": "com.pierr3.deckfcu.appr",
+      "Icon": "imgs/actions/ap/ap_inactive",
+      "Tooltip": "Toggles the approach mode",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "imgs/actions/ap/ap_inactive",
+          "ShowTitle": false
+        }
+      ],
+      "PropertyInspectorPath": "pi/ap.html"
+    },
+    {
+      "Name": "LNAV",
+      "UUID": "com.pierr3.deckfcu.lnav",
+      "Icon": "imgs/actions/ap/ap_inactive",
+      "Tooltip": "Toggles the LNAV mode",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "imgs/actions/ap/ap_inactive",
+          "ShowTitle": false
+        }
+      ],
+      "PropertyInspectorPath": "pi/ap.html"
+    },
+    {
+      "Name": "VNAV",
+      "UUID": "com.pierr3.deckfcu.vnav",
+      "Icon": "imgs/actions/ap/ap_inactive",
+      "Tooltip": "Toggles the VNAV mode",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "imgs/actions/ap/ap_inactive",
+          "ShowTitle": false
+        }
+      ],
+      "PropertyInspectorPath": "pi/ap.html"
+    },
+    {
+      "Name": "VORLOC",
+      "UUID": "com.pierr3.deckfcu.vorloc",
+      "Icon": "imgs/actions/ap/ap_inactive",
+      "Tooltip": "Toggles the VOR/LOC mode",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "imgs/actions/ap/ap_inactive",
+          "ShowTitle": false
+        }
+      ],
+      "PropertyInspectorPath": "pi/ap.html"
+    },
+    {
+      "Name": "Speed Dial",
+      "UUID": "com.pierr3.deckfcu.speed",
+      "Icon": "imgs/actions/general/dial",
+      "States": [
+        {
+          "Image": "imgs/actions/general/dial",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "Tooltip": "Displays and changes the current airspeed/mach",
+      "Controllers": ["Keypad", "Encoder"],
+      "Encoder": {
+        "layout": "layouts/fcu_dial.json",
+        "TriggerDescription": {
+          "Rotate": "Sets the desired speed",
+          "Push": "Activates IAS/Speed Intervene",
+          "Touch": "Toggles between IAS and MACH"
+        }
+      },
+      "PropertyInspectorPath": "pi/dial.html"
+    },
+    {
+      "Name": "Heading Dial",
+      "UUID": "com.pierr3.deckfcu.heading",
+      "Icon": "imgs/actions/general/dial",
+      "States": [
+        {
+          "Image": "imgs/actions/general/dial",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "Tooltip": "Displays and changes the current airspeed/mach",
+      "Controllers": ["Keypad", "Encoder"],
+      "Encoder": {
+        "layout": "layouts/fcu_dial.json",
+        "TriggerDescription": {
+          "Rotate": "Sets the desired heading",
+          "Push": "Activates heading select mode",
+          "Touch": "Activates LNAV mode"
+        }
+      },
+      "PropertyInspectorPath": "pi/dial.html"
+    },
+    {
+      "Name": "Altitude Dial",
+      "UUID": "com.pierr3.deckfcu.altitude",
+      "Icon": "imgs/actions/general/dial",
+      "States": [
+        {
+          "Image": "imgs/actions/general/dial",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "Tooltip": "Displays and changes the current airspeed/mach",
+      "Controllers": ["Keypad", "Encoder"],
+      "Encoder": {
+        "layout": "layouts/fcu_dial.json",
+        "TriggerDescription": {
+          "Rotate": "Sets desired altitude",
+          "Push": "Activates ALT SELECT",
+          "Touch": "Activates VNAV"
+        }
+      },
+      "PropertyInspectorPath": "pi/dial.html"
+    },
+    {
+      "Name": "Vertical Speed Dial",
+      "UUID": "com.pierr3.deckfcu.vs",
+      "Icon": "imgs/actions/general/dial",
+      "States": [
+        {
+          "Image": "imgs/actions/general/dial",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "Tooltip": "Displays and changes the current vertical speed",
+      "Controllers": ["Keypad", "Encoder"],
+      "Encoder": {
+        "layout": "layouts/fcu_dial.json",
+        "TriggerDescription": {
+          "Rotate": "Sets the desired vertical speed",
+          "Push": "Activates vertical speed mode",
+          "Touch": "Activates Flight Level Change / OP Descent mode"
+        }
+      },
+      "PropertyInspectorPath": "pi/dial.html"
+    },
+    {
+      "Name": "COM 1 Active Dial",
+      "UUID": "com.pierr3.deckfcu.com1active",
+      "Icon": "imgs/actions/general/dial",
+      "States": [
+        {
+          "Image": "imgs/actions/general/dial",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "Tooltip": "Displays and changes active com1 frequency",
+      "Controllers": ["Keypad", "Encoder"],
+      "Encoder": {
+        "layout": "layouts/fcu_dial.json",
+        "TriggerDescription": {
+          "Rotate": "Sets the com1 volume",
+          "Push": "Toggles monitoring com 1",
+          "Touch": "Does nothing"
+        }
+      },
+      "PropertyInspectorPath": "pi/dial.html"
+    },
+    {
+      "Name": "COM 1 Standby Dial",
+      "UUID": "com.pierr3.deckfcu.com1standby",
+      "Icon": "imgs/actions/general/dial",
+      "States": [
+        {
+          "Image": "imgs/actions/general/dial",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "Tooltip": "Displays and changes standby com1 frequency",
+      "Controllers": ["Keypad", "Encoder"],
+      "Encoder": {
+        "layout": "layouts/fcu_dial.json",
+        "TriggerDescription": {
+          "Rotate": "Sets COM 1 standby",
+          "Push": "Toggles between whole numbers and decimals",
+          "Touch": "Toggle COM 1 active"
+        }
+      },
+      "PropertyInspectorPath": "pi/dial.html"
+    },
+    {
+      "Name": "COM 2 Active Dial",
+      "UUID": "com.pierr3.deckfcu.com2active",
+      "Icon": "imgs/actions/general/dial",
+      "States": [
+        {
+          "Image": "imgs/actions/general/dial",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "Tooltip": "Displays and changes active com2 frequency",
+      "Controllers": ["Keypad", "Encoder"],
+      "Encoder": {
+        "TriggerDescription": {
+          "Rotate": "Sets the com2 volume",
+          "Push": "Toggles monitoring com2",
+          "Touch": "Does nothing"
+        },
+        "layout": "layouts/fcu_dial.json"
+      },
+      "PropertyInspectorPath": "pi/dial.html"
+    },
+    {
+      "Name": "COM 2 Standby Dial",
+      "UUID": "com.pierr3.deckfcu.com2standby",
+      "Icon": "imgs/actions/general/dial",
+      "States": [
+        {
+          "Image": "imgs/actions/general/dial",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "Tooltip": "Displays and changes standby com2 frequency",
+      "Controllers": ["Keypad", "Encoder"],
+      "Encoder": {
+        "layout": "layouts/fcu_dial.json",
+        "TriggerDescription": {
+          "Rotate": "Sets the COM 2 standby frequency",
+          "Push": "Switches between changes the big numbers vs the decimals",
+          "Touch": "Toggles to COM 2 active"
+        }
+      },
+      "PropertyInspectorPath": "pi/dial.html"
+    },
+    {
+      "Name": "COM 1 Volume",
+      "UUID": "com.pierr3.deckfcu.com1volume",
+      "Icon": "imgs/actions/general/dial",
+      "States": [
+        {
+          "Image": "imgs/actions/general/dial",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "Tooltip": "Displays and changes com1 volume",
+      "Controllers": ["Keypad", "Encoder"],
+      "Encoder": {
+        "layout": "layouts/fcu_dial.json"
+      }
+    },
+    {
+      "Name": "COM 2 Volume",
+      "UUID": "com.pierr3.deckfcu.com2volume",
+      "Icon": "imgs/actions/general/dial",
+      "States": [
+        {
+          "Image": "imgs/actions/general/dial",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "Tooltip": "Displays and changes com2 volume",
+      "Controllers": ["Keypad", "Encoder"],
+      "Encoder": {
+        "layout": "layouts/fcu_dial.json"
+      }
+    },
+    {
+      "Name": "HSI Range",
+      "UUID": "com.pierr3.deckfcu.hsirange",
+      "Icon": "imgs/actions/general/dial",
+      "States": [
+        {
+          "Image": "imgs/actions/general/dial",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "Tooltip": "Changes the range of the main HSI (PFD) display",
+      "Controllers": ["Keypad", "Encoder"],
+      "Encoder": {
+        "layout": "layouts/fcu_dial.json",
+        "TriggerDescription": {
+          "Rotate": "Sets the range on your PFD or HSI",
+          "Push": "Does nothing",
+          "Touch": "Does nothing"
+        }
+      }
+    },
+    {
+      "Name": "Altimeter Setting",
+      "UUID": "com.pierr3.deckfcu.qnh",
+      "Icon": "imgs/actions/general/dial",
+      "States": [
+        {
+          "Image": "imgs/actions/general/dial",
+          "TitleAlignment": "middle",
+          "ShowTitle": true,
+          "Title": "Default",
+          "FontStyle": "bold"
+        }
+      ],
+      "Tooltip": "Changes the (left side) altimeter setting",
+      "Controllers": ["Keypad", "Encoder"],
+      "Encoder": {
+        "layout": "layouts/fcu_dial.json"
+      }
+    },
+    {
+      "Name": "M80 PCW Dial",
+      "UUID": "com.pierr3.deckfcu.md80_pcw",
+      "Icon": "imgs/actions/general/dial",
+      "States": [
+        {
+          "Image": "imgs/actions/general/dial",
+          "TitleAlignment": "middle",
+          "ShowTitle": true,
+          "Title": "Default",
+          "FontStyle": "bold"
+        }
+      ],
+      "Tooltip": "Changes the (left side) altimeter setting",
+      "Controllers": ["Keypad", "Encoder"],
+      "Encoder": {
+        "layout": "layouts/image_fcu_dial.json"
+      }
+    }
+  ],
+  "Category": "deckFCU",
+  "CategoryIcon": "imgs/plugin/category-icon",
+  "CodePath": "bin/plugin.js",
+  "Description": "XPlane Flight Control Unit for the SD+",
+  "Icon": "imgs/plugin/marketplace",
+  "SDKVersion": 2,
+  "Software": {
+    "MinimumVersion": "6.5"
+  },
+  "OS": [
+    {
+      "Platform": "mac",
+      "MinimumVersion": "10.15"
+    },
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Nodejs": {
+    "Version": "20",
+    "Debug": "enabled"
+  },
+  "UUID": "com.pierr3.deckfcu",
+  "Profiles": ["profiles/FCU 757", "profiles/FCU Airbus"]
 }

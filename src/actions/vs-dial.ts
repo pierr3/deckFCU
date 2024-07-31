@@ -21,7 +21,7 @@ let lastVerticalSpeed = 0;
 let shouldStopUpdating = false;
 let forceUpdate = false;
 
-let isAirbusStyle = false;
+let selectedStyle = "default";
 
 async function updateData(context: WillAppearEvent<DialWithStyleSettings>) {
   if (shouldStopUpdating) {
@@ -29,7 +29,7 @@ async function updateData(context: WillAppearEvent<DialWithStyleSettings>) {
   }
 
   const value = Math.round(
-    simDataProvider.getDatarefValue(DatarefsType.READ_WRITE_VERTICAL_SPEED)
+    simDataProvider.getDatarefValue(DatarefsType.READ_WRITE_VERTICAL_SPEED),
   );
 
   if (lastVerticalSpeed === value && !forceUpdate) {
@@ -39,19 +39,22 @@ async function updateData(context: WillAppearEvent<DialWithStyleSettings>) {
   lastVerticalSpeed = value;
   forceUpdate = false;
 
-  let stringValue = (value > 0 ? "+" : "") + value.toString().padStart(4, "0");
+  let stringValue =
+    (value > 0 ? "+" : "-") + Math.abs(value).toString().padStart(4, "0");
   if (value === 0) {
     stringValue = "+0000";
   }
 
-  if (isAirbusStyle) {
+  if (selectedStyle === "airbus" || selectedStyle === "md80") {
     const replacementMap = {
       main_value: stringValue,
     };
 
     const image = SVGHelper.getDialImageBase64(
-      SVGTypes.AirbusVSDial,
-      replacementMap
+      selectedStyle === "md80"
+        ? SVGTypes.MD80GenericDial
+        : SVGTypes.AirbusVSDial,
+      replacementMap,
     );
 
     context.action.setFeedback({
@@ -67,13 +70,16 @@ async function updateData(context: WillAppearEvent<DialWithStyleSettings>) {
 @action({ UUID: "com.pierr3.deckfcu.vs" })
 export class VerticalSpeedDial extends SingletonAction<DialWithStyleSettings> {
   onWillAppear(
-    ev: WillAppearEvent<DialWithStyleSettings>
+    ev: WillAppearEvent<DialWithStyleSettings>,
   ): void | Promise<void> {
     shouldStopUpdating = false;
     lastVerticalSpeed = -1;
     intervalId = setInterval(() => updateData(ev), UPDATE_INTERVAL);
-    if (ev.payload.settings.dialStyle === "airbus") {
-      isAirbusStyle = true;
+    if (
+      ev.payload.settings.dialStyle === "airbus" ||
+      ev.payload.settings.dialStyle === "md80"
+    ) {
+      selectedStyle = ev.payload.settings.dialStyle;
       ev.action.setFeedbackLayout("layouts/image_fcu_dial.json");
     }
 
@@ -85,13 +91,16 @@ export class VerticalSpeedDial extends SingletonAction<DialWithStyleSettings> {
   }
 
   onDidReceiveSettings(
-    ev: DidReceiveSettingsEvent<DialWithStyleSettings>
+    ev: DidReceiveSettingsEvent<DialWithStyleSettings>,
   ): Promise<void> | void {
-    if (ev.payload.settings.dialStyle === "airbus") {
-      isAirbusStyle = true;
+    if (
+      ev.payload.settings.dialStyle === "airbus" ||
+      ev.payload.settings.dialStyle === "md80"
+    ) {
+      selectedStyle = ev.payload.settings.dialStyle;
       ev.action.setFeedbackLayout("layouts/image_fcu_dial.json");
     } else {
-      isAirbusStyle = false;
+      selectedStyle = ev.payload.settings.dialStyle;
       ev.action.setFeedbackLayout("layouts/fcu_dial.json");
     }
 
@@ -99,7 +108,7 @@ export class VerticalSpeedDial extends SingletonAction<DialWithStyleSettings> {
   }
 
   onWillDisappear(
-    ev: WillDisappearEvent<DialWithStyleSettings>
+    ev: WillDisappearEvent<DialWithStyleSettings>,
   ): void | Promise<void> {
     shouldStopUpdating = true;
     clearInterval(intervalId);
@@ -117,10 +126,10 @@ export class VerticalSpeedDial extends SingletonAction<DialWithStyleSettings> {
   }
 
   async onDialRotate(
-    ev: DialRotateEvent<DialWithStyleSettings>
+    ev: DialRotateEvent<DialWithStyleSettings>,
   ): Promise<void> {
     let currentVs = simDataProvider.getDatarefValue(
-      DatarefsType.READ_WRITE_VERTICAL_SPEED
+      DatarefsType.READ_WRITE_VERTICAL_SPEED,
     );
     currentVs += ev.payload.ticks * 100;
     XPlaneComm.writeData(DatarefsType.READ_WRITE_VERTICAL_SPEED, currentVs);

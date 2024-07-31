@@ -23,6 +23,7 @@ let shouldStopUpdating = false;
 
 let forceUpdate = false;
 let isAirbusStyle = false;
+let isMD80Style = false;
 
 async function updateData(context: WillAppearEvent<DialWithStyleSettings>) {
   if (shouldStopUpdating) {
@@ -30,12 +31,12 @@ async function updateData(context: WillAppearEvent<DialWithStyleSettings>) {
   }
 
   const value = Math.round(
-    simDataProvider.getDatarefValue(DatarefsType.READ_WRITE_HEADING)
+    simDataProvider.getDatarefValue(DatarefsType.READ_WRITE_HEADING),
   );
 
-  const isLNAV = simDataProvider.getDatarefValue(
-    DatarefsType.READ_WRITE_LNAV
-  ) !== getDataRefOnOffValue(DatarefsType.READ_WRITE_LNAV).off;
+  const isLNAV =
+    simDataProvider.getDatarefValue(DatarefsType.READ_WRITE_LNAV) !==
+    getDataRefOnOffValue(DatarefsType.READ_WRITE_LNAV).off;
 
   if (lastHeading === value && lastLNAV === isLNAV && !forceUpdate) {
     return;
@@ -45,7 +46,7 @@ async function updateData(context: WillAppearEvent<DialWithStyleSettings>) {
   forceUpdate = false;
   lastLNAV = isLNAV;
 
-  if (isAirbusStyle) {
+  if (isAirbusStyle || isMD80Style) {
     const replacementMap = {
       show_type_one: "visible",
       show_type_two: "hidden",
@@ -54,12 +55,12 @@ async function updateData(context: WillAppearEvent<DialWithStyleSettings>) {
       show_inactive: "hidden",
       show_dot: lastLNAV ? "visible" : "hidden",
       show_main_value: "visible",
-      main_value: value.toString().padStart(3, "0")
+      main_value: value.toString().padStart(3, "0"),
     };
 
     const image = SVGHelper.getDialImageBase64(
-      SVGTypes.AirbusGenericDial,
-      replacementMap
+      isAirbusStyle ? SVGTypes.AirbusGenericDial : SVGTypes.MD80GenericDial,
+      replacementMap,
     );
 
     context.action.setFeedback({
@@ -75,13 +76,17 @@ async function updateData(context: WillAppearEvent<DialWithStyleSettings>) {
 @action({ UUID: "com.pierr3.deckfcu.heading" })
 export class HeadingDial extends SingletonAction<DialWithStyleSettings> {
   onWillAppear(
-    ev: WillAppearEvent<DialWithStyleSettings>
+    ev: WillAppearEvent<DialWithStyleSettings>,
   ): void | Promise<void> {
     shouldStopUpdating = false;
     lastHeading = -1;
     intervalId = setInterval(() => updateData(ev), UPDATE_INTERVAL);
-    if (ev.payload.settings.dialStyle === "airbus") {
-      isAirbusStyle = true;
+    if (
+      ev.payload.settings.dialStyle === "airbus" ||
+      ev.payload.settings.dialStyle === "md80"
+    ) {
+      isAirbusStyle = ev.payload.settings.dialStyle === "airbus";
+      isMD80Style = ev.payload.settings.dialStyle === "md80";
       ev.action.setFeedbackLayout("layouts/image_fcu_dial.json");
     }
 
@@ -93,10 +98,14 @@ export class HeadingDial extends SingletonAction<DialWithStyleSettings> {
   }
 
   onDidReceiveSettings(
-    ev: DidReceiveSettingsEvent<DialWithStyleSettings>
+    ev: DidReceiveSettingsEvent<DialWithStyleSettings>,
   ): Promise<void> | void {
-    if (ev.payload.settings.dialStyle === "airbus") {
-      isAirbusStyle = true;
+    if (
+      ev.payload.settings.dialStyle === "airbus" ||
+      ev.payload.settings.dialStyle === "md80"
+    ) {
+      isAirbusStyle = ev.payload.settings.dialStyle === "airbus";
+      isMD80Style = ev.payload.settings.dialStyle === "md80";
       ev.action.setFeedbackLayout("layouts/image_fcu_dial.json");
     } else {
       isAirbusStyle = false;
@@ -107,7 +116,7 @@ export class HeadingDial extends SingletonAction<DialWithStyleSettings> {
   }
 
   onWillDisappear(
-    ev: WillDisappearEvent<DialWithStyleSettings>
+    ev: WillDisappearEvent<DialWithStyleSettings>,
   ): void | Promise<void> {
     shouldStopUpdating = true;
     clearInterval(intervalId);
@@ -125,10 +134,10 @@ export class HeadingDial extends SingletonAction<DialWithStyleSettings> {
   }
 
   async onDialRotate(
-    ev: DialRotateEvent<DialWithStyleSettings>
+    ev: DialRotateEvent<DialWithStyleSettings>,
   ): Promise<void> {
     let currentHdg = simDataProvider.getDatarefValue(
-      DatarefsType.READ_WRITE_HEADING
+      DatarefsType.READ_WRITE_HEADING,
     );
     currentHdg = Math.round(currentHdg + ev.payload.ticks) % 360;
     if (currentHdg < 0) {

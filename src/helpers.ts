@@ -28,8 +28,21 @@ export type NullSettings = {};
 
 export type ApButtonWithStyleSettings = {
   buttonStyle: string;
-}
+};
 
 export type DialWithStyleSettings = {
   dialStyle: string;
-}
+};
+
+export const floatToAscii = (floatValue: number) => {
+  // Round the float to the nearest integer
+  const charCode = Math.round(floatValue);
+
+  // Convert the integer to an ASCII character if it falls within the valid ASCII range
+  if (charCode >= 0 && charCode <= 127) {
+    return String.fromCharCode(charCode);
+  } else {
+    // Return null or an empty string if the char code is not in the ASCII range
+    return null;
+  }
+};

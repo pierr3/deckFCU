@@ -1,187 +1,201 @@
 {
-	"READ_WRITE_IAS_MACH": {
-		"isCommand": false,
-		"value": "757Avionics/ap/spd_act",
-		"onValue": 0,
-		"offValue": 1
-	},
-	"READ_WRITE_IS_MACH": {
-		"isCommand": true,
-		"value": "1-sim/AP/iasmach",
-		"writeValue": "1-sim/command/AP/iasmach_button"
-	},
-	"WRITE_ENABLE_IAS": {
-		"isCommand": true,
-		"value": "1-sim/command/AP/spdConfButton_button",
-		"onValue": 0,
-		"offValue": 1
-	},
-	"READ_WRITE_HEADING": {
-		"isCommand": false,
-		"value": "757Avionics/ap/hdg_act",
-		"onValue": 0,
-		"offValue": 1
-	},
-	"WRITE_HEADING_SELECT": {
-		"isCommand": true,
-		"value": "1-sim/command/AP/hdgConfButton_button"
-	},
-	"READ_WRITE_ALTITUDE": {
-		"isCommand": false,
-		"value": "757Avionics/ap/alt_act",
-		"onValue": 0,
-		"offValue": 1
-	},
-	"WRITE_ALTITUDE_SELECT": {
-		"isCommand": true,
-		"value": "1-sim/command/AP/flchButton_button"
-	},
-	"READ_WRITE_VERTICAL_SPEED": {
-		"isCommand": false,
-		"value": "1-sim/AP/lamp/8",
-		"writeValue": "1-sim/command/AP/vvi$Button_button"
-	},
-	"WRITE_VERTICAL_SPEED_SELECT": {
-		"isCommand": true,
-		"value": "1-sim/command/AP/vviButton_button"
-	},
-	"READ_WRITE_AP_ONE": {
-		"isCommand": true,
-		"value": "1-sim/AP/lamp/12",
-		"writeValue": "1-sim/command/AP/cmd_L_Button_button"
-	},
-	"READ_WRITE_AP_TWO": {
-		"isCommand": true,
-		"value": "1-sim/AP/lamp/13",
-		"writeValue": "1-sim/command/AP/cmd_C_Button_button"
-	},
-	"READ_WRITE_AP_THREE": {
-		"isCommand": true,
-		"value": "1-sim/AP/lamp/14",
-		"writeValue": "1-sim/command/AP/cmd_R_Button_button"
-	},
-	"READ_WRITE_ATHR": {
-		"isCommand": true,
-		"value": "1-sim/AP/atSwitcher",
-		"writeValue": "1-sim/command/AP/atSwitcher_trigger",
-		"onValue": 0,
-		"offValue": 1
-	},
-	"READ_WRITE_APPR": {
-		"isCommand": true,
-		"value": "1-sim/AP/lamp/11",
-		"writeValue": "1-sim/command/AP/appButton_button"
-	},
-	"READ_WRITE_LNAV": {
-		"isCommand": true,
-		"value": "1-sim/AP/lamp/3",
-		"writeValue": "1-sim/command/AP/lnavButton_button"
-	},
-	"READ_WRITE_VNAV": {
-		"isCommand": true,
-		"value": "1-sim/AP/lamp/4",
-		"writeValue": "1-sim/command/AP/vnavButton_button"
-	},
-	"READ_WRITE_LOC": {
-		"isCommand": true,
-		"value": "1-sim/AP/lamp/10",
-		"writeValue": "1-sim/command/AP/locButton_button"
-	},
-	"READ_WRITE_FLCH": {
-		"isCommand": true,
-		"value": "1-sim/command/AP/flchButton_button",
-		"writeValue": "1-sim/command/AP/flchButton_button"
-	},
-	"READ_COM1_ACTIVE": {
-		"isCommand": false,
-		"value": "sim/cockpit2/radios/actuators/com1_frequency_hz_833",
-		"onValue": 0,
-		"offValue": 1
-	},
-	"READ_WRITE_COM1_STANDBY": {
-		"isCommand": false,
-		"value": "sim/cockpit2/radios/actuators/com1_standby_frequency_hz_833",
-		"onValue": 0,
-		"offValue": 1
-	},
-	"TOGGLE_COM1_STANDBY": {
-		"isCommand": true,
-		"value": "sim/radios/com1_standy_flip",
-		"onValue": 0,
-		"offValue": 1
-	},
-	"TOGGLE_COM1_MONITOR": {
-		"isCommand": true,
-		"value": "sim/audio_panel/monitor_audio_com1",
-		"onValue": 0,
-		"offValue": 1
-	},
-	"READ_WRITE_COM1_VOLUME": {
-		"isCommand": false,
-		"value": "sim/cockpit2/radios/actuators/audio_volume_com1",
-		"onValue": 0,
-		"offValue": 1
-	},
-	"READ_COM2_ACTIVE": {
-		"isCommand": false,
-		"value": "sim/cockpit2/radios/actuators/com2_frequency_hz_833",
-		"onValue": 0,
-		"offValue": 1
-	},
-	"READ_WRITE_COM2_STANDBY": {
-		"isCommand": false,
-		"value": "sim/cockpit2/radios/actuators/com2_standby_frequency_hz_833",
-		"onValue": 0,
-		"offValue": 1
-	},
-	"TOGGLE_COM2_STANDBY": {
-		"isCommand": true,
-		"value": "sim/radios/com2_standy_flip",
-		"onValue": 0,
-		"offValue": 1
-	},
-	"TOGGLE_COM2_MONITOR": {
-		"isCommand": true,
-		"value": "sim/audio_panel/monitor_audio_com2",
-		"onValue": 0,
-		"offValue": 1
-	},
-	"READ_WRITE_COM2_VOLUME": {
-		"isCommand": false,
-		"value": "sim/cockpit2/radios/actuators/audio_volume_com2",
-		"onValue": 0,
-		"offValue": 1
-	},
-	"READ_WRITE_HSI_RANGE": {
-		"isCommand": false,
-		"value": "1-sim/ndpanel/1/hsiRangeRotary",
-		"writeValue": "1-sim/ng/rangeL/anim",
-		"valueMultiplier": 5,
-		"displayValueMap": {
-			"0": "5",
-			"1": "10",
-			"2": "20",
-			"3": "40",
-			"4": "80",
-			"5": "160",
-			"6": "320"
-		}
-	},
-	"READ_WRITE_IS_QNH": {
-		"isCommand": false,
-		"value": "1-sim/ng/baroLargeL/anim",
-		"onValue": -1,
-		"offValue": 0
-	},
-	"READ_WRITE_IS_STD": {
-		"isCommand": false,
-		"value": "1-sim/ng/baro/std/L"
-	},
-	"READ_WRITE_ALTIMETER_SETTING": {
-		"isCommand": true,
-		"value": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot",
-		"writeValue": "1-sim/ng/baroSmallL/anim",
-		"simulateClickDecrease": "1-sim/command/gauges/baroRotary_left_rotary-",
-		"simulateClickIncrease": "1-sim/command/gauges/baroRotary_left_rotary+"
-	}
+  "READ_WRITE_IAS": {
+    "isCommand": false,
+    "value": "757Avionics/ap/spd_act"
+  },
+  "READ_WRITE_MACH": {
+    "isCommand": false,
+    "value": "757Avionics/ap/spd_act"
+  },
+  "READ_WRITE_IS_MACH": {
+    "isCommand": true,
+    "value": "1-sim/AP/iasmach",
+    "writeValue": "1-sim/command/AP/iasmach_button"
+  },
+  "WRITE_ENABLE_IAS": {
+    "isCommand": true,
+    "value": "1-sim/command/AP/spdConfButton_button",
+    "onValue": 0,
+    "offValue": 1
+  },
+  "READ_WRITE_HEADING": {
+    "isCommand": false,
+    "value": "757Avionics/ap/hdg_act",
+    "onValue": 0,
+    "offValue": 1
+  },
+  "WRITE_HEADING_SELECT": {
+    "isCommand": true,
+    "value": "1-sim/command/AP/hdgConfButton_button"
+  },
+  "READ_WRITE_ALTITUDE": {
+    "isCommand": false,
+    "value": "757Avionics/ap/alt_act",
+    "onValue": 0,
+    "offValue": 1
+  },
+  "WRITE_ALTITUDE_SELECT": {
+    "isCommand": true,
+    "value": "1-sim/command/AP/flchButton_button"
+  },
+  "READ_WRITE_VERTICAL_SPEED": {
+    "isCommand": false,
+    "value": "1-sim/AP/lamp/8",
+    "writeValue": "1-sim/command/AP/vvi$Button_button"
+  },
+  "WRITE_VERTICAL_SPEED_SELECT": {
+    "isCommand": true,
+    "value": "1-sim/command/AP/vviButton_button"
+  },
+  "READ_WRITE_AP_ONE": {
+    "isCommand": true,
+    "value": "1-sim/AP/lamp/12",
+    "writeValue": "1-sim/command/AP/cmd_L_Button_button"
+  },
+  "READ_WRITE_AP_TWO": {
+    "isCommand": true,
+    "value": "1-sim/AP/lamp/13",
+    "writeValue": "1-sim/command/AP/cmd_C_Button_button"
+  },
+  "READ_WRITE_AP_THREE": {
+    "isCommand": true,
+    "value": "1-sim/AP/lamp/14",
+    "writeValue": "1-sim/command/AP/cmd_R_Button_button"
+  },
+  "READ_WRITE_ATHR": {
+    "isCommand": true,
+    "value": "1-sim/AP/atSwitcher",
+    "writeValue": "1-sim/command/AP/atSwitcher_trigger",
+    "onValue": 0,
+    "offValue": 1
+  },
+  "READ_WRITE_APPR": {
+    "isCommand": true,
+    "value": "1-sim/AP/lamp/11",
+    "writeValue": "1-sim/command/AP/appButton_button"
+  },
+  "READ_WRITE_LNAV": {
+    "isCommand": true,
+    "value": "1-sim/AP/lamp/3",
+    "writeValue": "1-sim/command/AP/lnavButton_button"
+  },
+  "READ_WRITE_VNAV": {
+    "isCommand": true,
+    "value": "1-sim/AP/lamp/4",
+    "writeValue": "1-sim/command/AP/vnavButton_button"
+  },
+  "READ_WRITE_LOC": {
+    "isCommand": true,
+    "value": "1-sim/AP/lamp/10",
+    "writeValue": "1-sim/command/AP/locButton_button"
+  },
+  "READ_WRITE_FLCH": {
+    "isCommand": true,
+    "value": "1-sim/command/AP/flchButton_button",
+    "writeValue": "1-sim/command/AP/flchButton_button"
+  },
+  "READ_COM1_ACTIVE": {
+    "isCommand": false,
+    "value": "sim/cockpit2/radios/actuators/com1_frequency_hz_833",
+    "onValue": 0,
+    "offValue": 1
+  },
+  "READ_WRITE_COM1_STANDBY": {
+    "isCommand": false,
+    "value": "sim/cockpit2/radios/actuators/com1_standby_frequency_hz_833",
+    "onValue": 0,
+    "offValue": 1
+  },
+  "TOGGLE_COM1_STANDBY": {
+    "isCommand": true,
+    "value": "sim/radios/com1_standy_flip",
+    "onValue": 0,
+    "offValue": 1
+  },
+  "TOGGLE_COM1_MONITOR": {
+    "isCommand": true,
+    "value": "sim/audio_panel/monitor_audio_com1",
+    "onValue": 0,
+    "offValue": 1
+  },
+  "READ_WRITE_COM1_VOLUME": {
+    "isCommand": false,
+    "value": "sim/cockpit2/radios/actuators/audio_volume_com1",
+    "onValue": 0,
+    "offValue": 1
+  },
+  "READ_COM2_ACTIVE": {
+    "isCommand": false,
+    "value": "sim/cockpit2/radios/actuators/com2_frequency_hz_833",
+    "onValue": 0,
+    "offValue": 1
+  },
+  "READ_WRITE_COM2_STANDBY": {
+    "isCommand": false,
+    "value": "sim/cockpit2/radios/actuators/com2_standby_frequency_hz_833",
+    "onValue": 0,
+    "offValue": 1
+  },
+  "TOGGLE_COM2_STANDBY": {
+    "isCommand": true,
+    "value": "sim/radios/com2_standy_flip",
+    "onValue": 0,
+    "offValue": 1
+  },
+  "TOGGLE_COM2_MONITOR": {
+    "isCommand": true,
+    "value": "sim/audio_panel/monitor_audio_com2",
+    "onValue": 0,
+    "offValue": 1
+  },
+  "READ_WRITE_COM2_VOLUME": {
+    "isCommand": false,
+    "value": "sim/cockpit2/radios/actuators/audio_volume_com2",
+    "onValue": 0,
+    "offValue": 1
+  },
+  "READ_WRITE_HSI_RANGE": {
+    "isCommand": false,
+    "value": "1-sim/ndpanel/1/hsiRangeRotary",
+    "writeValue": "1-sim/ng/rangeL/anim",
+    "valueMultiplier": 5,
+    "displayValueMap": {
+      "0": "5",
+      "1": "10",
+      "2": "20",
+      "3": "40",
+      "4": "80",
+      "5": "160",
+      "6": "320"
+    }
+  },
+  "READ_WRITE_IS_QNH": {
+    "isCommand": false,
+    "value": "1-sim/ng/baroLargeL/anim",
+    "onValue": -1,
+    "offValue": 0
+  },
+  "READ_WRITE_IS_STD": {
+    "isCommand": false,
+    "value": "1-sim/ng/baro/std/L"
+  },
+  "READ_WRITE_ALTIMETER_SETTING": {
+    "isCommand": true,
+    "value": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot",
+    "writeValue": "1-sim/ng/baroSmallL/anim",
+    "simulateClickDecrease": "1-sim/command/gauges/baroRotary_left_rotary-",
+    "simulateClickIncrease": "1-sim/command/gauges/baroRotary_left_rotary+"
+  },
+  "MD80_PCW_READOUT": {
+    "isCommand": false,
+    "value": "NOTIMPLEMENTED"
+  },
+  "MD80_VNAV_MODE": {
+    "isCommand": false,
+    "value": "NOTIMPLEMENTED"
+  },
+  "MD80_PCW_SPD_BUG": {
+    "isCommand": false,
+    "value": "NOTIMPLEMENTED"
+  }
 }

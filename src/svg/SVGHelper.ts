@@ -6,7 +6,7 @@ import path from "path";
 
 import { createRequire } from "module";
 import streamDeck from "@elgato/streamdeck";
-import { AirbusAltDial, AirbusGenericSvgDial, AirbusVsDial } from "./airbus_dials";
+import { AirbusAltDial, GenericSvgDial, AirbusVsDial } from "./airbus_dials";
 export const nodeRequire = createRequire(import.meta.url);
 const { Resvg } = nodeRequire("@resvg/resvg-js");
 
@@ -16,6 +16,7 @@ export enum SVGTypes {
   AirbusGenericDial = "AirbusSpdDial",
   AirbusAltDial = "AirbusAltDial",
   AirbusVSDial = "AirbusVSDial",
+  MD80GenericDial = "MD80GenericDial",
 }
 
 export enum ButtonColors {
@@ -53,7 +54,7 @@ class SVGHelper {
     type: SVGTypes,
     text: string,
     fillColor: ButtonColors,
-    textColor: string = "255,255,255"
+    textColor: string = "255,255,255",
   ): string {
     let svg = "";
     switch (type) {
@@ -72,7 +73,7 @@ class SVGHelper {
     };
     const templateImage = Mustache.render(svg, view).replace(
       /(\r\n|\n|\r)/gm,
-      ""
+      "",
     );
     // const t = performance.now();
     const resvg = new Resvg(templateImage, this.getSvgOptions());
@@ -91,12 +92,13 @@ class SVGHelper {
 
   public getDialImageBase64(
     dialType: SVGTypes,
-    replacementMap: Record<string, string>
+    replacementMap: Record<string, string>,
   ) {
     let svg = "";
     switch (dialType) {
       case SVGTypes.AirbusGenericDial:
-        svg = AirbusGenericSvgDial;
+        svg = GenericSvgDial;
+        replacementMap["font_color"] = "rgb(209, 183, 77)";
         break;
       case SVGTypes.AirbusAltDial:
         svg = AirbusAltDial;
@@ -104,11 +106,15 @@ class SVGHelper {
       case SVGTypes.AirbusVSDial:
         svg = AirbusVsDial;
         break;
+      case SVGTypes.MD80GenericDial:
+        svg = GenericSvgDial;
+        replacementMap["font_color"] = "rgb(191, 59, 19)";
+        break;
     }
 
     const templateImage = Mustache.render(svg, replacementMap).replace(
       /(\r\n|\n|\r)/gm,
-      ""
+      "",
     );
 
     // const t = performance.now();

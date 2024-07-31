@@ -1,18 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+    <head lang="en">
+        <meta charset="utf-8" />
+        <script src="https://cdn.jsdelivr.net/gh/geekyeggo/sdpi-components@v2/dist/sdpi-components.js"></script>
+    </head>
 
-<head lang="en">
-    <meta charset="utf-8" />
-    <script src="https://cdn.jsdelivr.net/gh/geekyeggo/sdpi-components@v2/dist/sdpi-components.js"></script>
-</head>
-
-<body>
-    <sdpi-item label="FCU Style">
-        <sdpi-radio setting="dialStyle" default="airbus" columns="4" required>
-            <option value="default">Default</option>
-            <option value="airbus">Airbus</option>
-        </sdpi-radio>
-    </sdpi-item>
-</body>
-
+    <body>
+        <sdpi-item label="FCU Style">
+            <sdpi-radio
+                setting="dialStyle"
+                default="airbus"
+                columns="4"
+                required
+            >
+                <option value="default">Default</option>
+                <option value="airbus">Airbus</option>
+                <option value="md80">MD-80</option>
+            </sdpi-radio>
+        </sdpi-item>
+    </body>
 </html>

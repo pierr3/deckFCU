@@ -27,6 +27,7 @@ let shouldStopUpdating = false;
 
 let forceUpdate = false;
 let isAirbusStyle = false;
+let isMD80Style = false;
 
 async function updateData(context: WillAppearEvent<DialWithStyleSettings>) {
   if (shouldStopUpdating) {
@@ -68,6 +69,26 @@ async function updateData(context: WillAppearEvent<DialWithStyleSettings>) {
     context.action.setFeedback({
       data: `data:image/png;base64,${image}`,
     });
+  } else if (isMD80Style) {
+    const replacementMap = {
+      show_type_one: "visible",
+      show_type_two: "hidden",
+      value_type_one: "HDG",
+      value_type_two: "TRK",
+      show_inactive: "hidden",
+      show_dot: "hidden",
+      show_main_value: "visible",
+      main_value: (altitude * 100).toString().padStart(5, "="),
+    };
+
+    const image = SVGHelper.getDialImageBase64(
+      isAirbusStyle ? SVGTypes.AirbusGenericDial : SVGTypes.MD80GenericDial,
+      replacementMap,
+    );
+
+    context.action.setFeedback({
+      data: `data:image/png;base64,${image}`,
+    });
   } else {
     context.action.setFeedback({
       value: altitude.toString().padStart(5, "0"),
@@ -84,8 +105,12 @@ export class AltitudeDial extends SingletonAction<DialWithStyleSettings> {
     lastAltitude = -1;
     intervalId = setInterval(() => updateData(ev), UPDATE_INTERVAL);
 
-    if (ev.payload.settings.dialStyle === "airbus") {
-      isAirbusStyle = true;
+    if (
+      ev.payload.settings.dialStyle === "airbus" ||
+      ev.payload.settings.dialStyle === "md80"
+    ) {
+      isAirbusStyle = ev.payload.settings.dialStyle === "airbus";
+      isMD80Style = ev.payload.settings.dialStyle === "md80";
       ev.action.setFeedbackLayout("layouts/image_fcu_dial.json");
     }
 
@@ -99,8 +124,12 @@ export class AltitudeDial extends SingletonAction<DialWithStyleSettings> {
   onDidReceiveSettings(
     ev: DidReceiveSettingsEvent<DialWithStyleSettings>,
   ): Promise<void> | void {
-    if (ev.payload.settings.dialStyle === "airbus") {
-      isAirbusStyle = true;
+    if (
+      ev.payload.settings.dialStyle === "airbus" ||
+      ev.payload.settings.dialStyle === "md80"
+    ) {
+      isAirbusStyle = ev.payload.settings.dialStyle === "airbus";
+      isMD80Style = ev.payload.settings.dialStyle === "md80";
       ev.action.setFeedbackLayout("layouts/image_fcu_dial.json");
     } else {
       isAirbusStyle = false;
@@ -138,7 +167,7 @@ export class AltitudeDial extends SingletonAction<DialWithStyleSettings> {
       aircraftSelector.getSelectedAircraft() ===
       SupportedAircraftType.ROTATE_MD80
     ) {
-      currentAlt += ev.payload.ticks * 10;
+      currentAlt += ev.payload.ticks * 1;
     } else {
       currentAlt += ev.payload.ticks * 100;
     }
