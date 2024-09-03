@@ -23,7 +23,7 @@ export const GenericSvgDial = `<svg width="100%" height="100%" viewBox="0 0 200 
     <g id="active_speed" transform="matrix(1,0,0,1,22.3739,49.8578)" visibility="{{show_main_value}}">
         <g transform="matrix(72,0,0,72,128.717,23.7058)">
         </g>
-        <text x="14.826px" y="28.706px" style="font-family:'Digital-7 Mono';font-size:58px;fill:{{font_color}};">{{main_value}}</text>
+        <text x="0px" y="28.706px" style="font-family:'Digital-7 Mono';font-size:58px;fill:{{font_color}};">{{main_value}}</text>
     </g>
 </svg>`;
 

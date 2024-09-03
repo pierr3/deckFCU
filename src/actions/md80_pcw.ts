@@ -66,14 +66,19 @@ async function updateData(context: WillAppearEvent<NullSettings>) {
     stringValue = lastDisplayValue.toString().padStart(4, "0");
   }
 
-  if (lastDisplayValue === 0) {
-    stringValue = "+0000";
-  }
-
   let prefix = "V";
   if (!lastIsVSMode) {
     prefix = "S ";
   }
+
+  if (lastDisplayValue === 0) {
+    stringValue = "+0000";
+  }
+
+  if (lastDisplayValue === 0 && !lastIsVSMode) {
+    stringValue = "000";
+  }
+
 
   const replacementMap = {
     show_type_one: "visible",
